@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
         Button exitButton = findViewById(R.id.exitButton);
-        startButton.setOnClickListener(v -> {
+        exitButton.setOnClickListener(v -> {
             finish();
             System.exit(0);
         });
