@@ -13,8 +13,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(v -> {
+        Button startButton1 = findViewById(R.id.startButton);
+
+        startButton1.setOnClickListener(v -> {
             Intent game = new Intent(MainActivity.this, InitialConfiguration.class);
             startActivity(game);
             finish();
