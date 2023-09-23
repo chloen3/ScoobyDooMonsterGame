@@ -4,6 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    android:backgroundTint="#FFEB3B"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/welcomeBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/welcome" />
+
+    <TextView
+        android:id="@+id/gameName"
+        android:layout_width="557dp"
+        android:layout_height="64dp"
+        android:fontFamily="@font/akronim"
+        android:text="Scooby Doo: The Haunted Mansion"
+        android:textColor="#FFEB3B"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/welcomeBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/welcomeBackground"
+        app:layout_constraintVertical_bias="0.066" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="184dp"
+        android:layout_height="63dp"
+        android:backgroundTint="#FFEB3B"
+        android:text="Start"
+        android:textColor="#065DF4"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.889" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="184dp"
+        android:layout_height="63dp"
+        android:backgroundTint="#FFEB3B"
+        android:text="Exit"
+        android:textColor="#065DF4"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.89" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
