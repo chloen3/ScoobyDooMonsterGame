@@ -12,13 +12,16 @@ public class EndScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endscreen);
 
-        Button button = (Button) findViewById(R.id.finalLeaderboard);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent leaderboard = new Intent(getApplicationContext(), EndScreen.class);
-                startActivity(leaderboard);
-            }
+        Button leaderButton = findViewById(R.id.finalLeaderboard);
+        leaderButton.setOnClickListener(v -> {
+            Intent leaderboard = new Intent(getApplicationContext(), EndScreen.class);
+            startActivity(leaderboard);
+        });
+
+        Button restartButton = findViewById(R.id.playAgain);
+        restartButton.setOnClickListener(v -> {
+            Intent restart = new Intent(getApplicationContext(), EndScreen.class);
+            startActivity(restart);
         });
     }
 }
