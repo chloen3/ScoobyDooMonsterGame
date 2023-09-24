@@ -20,7 +20,7 @@ public class EndScreen extends AppCompatActivity {
 
         Button restartButton = findViewById(R.id.playAgain);
         restartButton.setOnClickListener(v -> {
-            Intent restart = new Intent(getApplicationContext(), EndScreen.class);
+            Intent restart = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(restart);
         });
     }
