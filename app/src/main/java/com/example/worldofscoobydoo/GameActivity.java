@@ -20,6 +20,8 @@ public class GameActivity extends AppCompatActivity {
 
     TextView nameReciever;
     TextView difficultyReciever;
+    String sprite;
+    ImageView spriteImg;
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,17 @@ public class GameActivity extends AppCompatActivity {
         difficultyReciever = findViewById(R.id.textView5);
         String diff = String.valueOf(difficulty * 100.0);
         difficultyReciever.setText(diff);
-
+        sprite = getIntent().getStringExtra("sprite");
+        spriteImg = findViewById(R.id.imageView);
+        if (sprite.equals("scooby")) {
+            spriteImg.setImageResource(R.drawable.scooby_png);
+        }
+        if (sprite.equals("daphne")) {
+            spriteImg.setImageResource(R.drawable.daphne_png);
+        }
+        if (sprite.equals("fred")) {
+            spriteImg.setImageResource(R.drawable.fred_png);
+        }
         Button exit_button = findViewById(R.id.endgame_Button);
 
         exit_button.setOnClickListener(v -> {

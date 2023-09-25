@@ -46,5 +46,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="253dp"
+        android:layout_height="186dp"
+        app:srcCompat="@drawable/daphne_png"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="141dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
