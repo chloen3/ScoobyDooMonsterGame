@@ -11,52 +11,47 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="356dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="1dp"
         android:text="Character"
         android:textColor="#FFEB3B"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintEnd_toEndOf="@+id/imageButton6"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginEnd="186dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="13dp"
         android:text="Difficulty"
         android:textColor="#FFEB3B"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/difficultyRadioGroup"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/difficultyRadioGroup" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="227dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="121dp"
         android:text="Name"
         android:textColor="#FFEB3B"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toStartOf="@+id/editTextText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="335dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="0dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="21dp"
         android:ems="10"
         android:inputType="text"
         android:text="Insert Name"
@@ -69,13 +64,16 @@
 
     <RadioGroup
         android:id="@+id/difficultyRadioGroup"
-        android:layout_width="126dp"
+        android:layout_width="0dp"
         android:layout_height="150dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginBottom="82dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/editTextText">
 
         <RadioButton
             android:id="@+id/radioEasy"
@@ -104,46 +102,57 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="222dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginEnd="369dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="38dp"
         android:text="Continue"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/difficultyRadioGroup" />
 
     <ImageButton
         android:id="@+id/imageButton5"
-        android:layout_width="135dp"
-        android:layout_height="142dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="23dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/difficultyRadioGroup"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:srcCompat="@drawable/daphne_png" />
 
     <ImageButton
         android:id="@+id/imageButton6"
-        android:layout_width="145dp"
-        android:layout_height="141dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="24dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/fred_png"
-        tools:layout_editor_absoluteX="393dp"
-        tools:layout_editor_absoluteY="175dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton7"
+        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:srcCompat="@drawable/fred_png" />
 
     <ImageButton
         android:id="@+id/imageButton7"
-        android:layout_width="138dp"
-        android:layout_height="143dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="22dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/scooby_png"
-        tools:layout_editor_absoluteX="557dp"
-        tools:layout_editor_absoluteY="174dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton6"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:srcCompat="@drawable/scooby_png" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
