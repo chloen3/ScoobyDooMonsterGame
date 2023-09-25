@@ -1,8 +1,10 @@
 package com.example.worldofscoobydoo;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,10 +28,22 @@ public class GameActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         nameReciever.setText(name);
         difficulty = getIntent().getDoubleExtra("difficulty", 1);
-        //difficultyReciever.setText(difficulty);
-//        gameView = findViewById(R.id.gameView);
-//        gameView.addView(playerView);
+        difficultyReciever = findViewById(R.id.textView5);
+        String diff = String.valueOf(difficulty * 100.0);
+        difficultyReciever.setText(diff);
+
+        Button exit_button = findViewById(R.id.endgame_Button);
+
+        exit_button.setOnClickListener(v -> {
+            Intent game = new Intent(GameActivity.this, EndScreen.class);
+            startActivity(game);
+            finish();
+        });
+
+
     }
+
+
 
 
 }
