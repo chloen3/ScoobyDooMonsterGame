@@ -1,21 +1,17 @@
 package com.example.worldofscoobydoo;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class InitialConfiguration extends AppCompatActivity {
-    String name;
-    String sprite;
+    private String name;
+    private String sprite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,47 +24,55 @@ public class InitialConfiguration extends AppCompatActivity {
 
         startBtn.setOnClickListener(v -> {
             name = nameInput.getText().toString();
+            boolean setDifficulty = false;
+            boolean setCharacter = false;
+            double difficulty = 1;
 
-            if (name.isEmpty() || name == null) {
-                nameInput.setError("Name cannot be empty or null");
-            } else {
 
+            RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
+            RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
+            switch (difficultyRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.radioEasy:
+                difficulty = 1;
+                setDifficulty = true;
+                break;
+            case R.id.radioMedium:
+                difficulty = 0.75;
+                setDifficulty = true;
+                break;
+            case R.id.radioHard:
+                difficulty = 0.5;
+                setDifficulty = true;
+                break;
+            default:
+            }
+
+
+            switch (spriteRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.Scooby:
+                sprite = "scooby";
+                setCharacter = true;
+                break;
+            case R.id.Daphne:
+                sprite = "daphne";
+                setCharacter = true;
+                break;
+            case R.id.Fred:
+                sprite = "fred";
+                setCharacter = true;
+                break;
+            default:
+            }
+
+
+            if (name == null || name.trim().isEmpty()) {
+                nameInput.setError("Name cannot be empty or null or white space");
                 //Set difficulty based on difficulty checked
-
-                RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
-                double difficulty = 1;
-
-                switch (difficultyRadioGroup.getCheckedRadioButtonId()) {
-                    case R.id.radioEasy:
-                        difficulty = 1;
-                        break;
-                    case R.id.radioMedium:
-                        difficulty = 0.75;
-                        break;
-                    case R.id.radioHard:
-                        difficulty = 0.5;
-                        break;
-                    default:
-                        difficulty = 1;
-                        break;
-                }
-
-                RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
-
-                switch (spriteRadioGroup.getCheckedRadioButtonId()) {
-                    case R.id.Scooby:
-                        sprite = "scooby";
-                        break;
-                    case R.id.Daphne:
-                        sprite = "daphne";
-                        break;
-                    case R.id.Fred:
-                        sprite = "fred";
-                        break;
-                    default:
-                        sprite = "scooby";
-                        break;
-                }
+            } else if (!setDifficulty) {
+                nameInput.setError("Choose a dfficulty");
+            } else if (!setCharacter) {
+                nameInput.setError("Choose a character");
+            } else {
                 Intent game = new Intent(InitialConfiguration.this, GameActivity.class);
                 game.putExtra("difficulty", difficulty);
                 game.putExtra("name", name);
@@ -76,6 +80,6 @@ public class InitialConfiguration extends AppCompatActivity {
                 startActivity(game);
                 finish();
             }
-       });
+        });
     }
 }
