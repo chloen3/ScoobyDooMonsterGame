@@ -29,8 +29,8 @@ public class InitialConfiguration extends AppCompatActivity {
         startBtn.setOnClickListener(v -> {
             name = nameInput.getText().toString();
 
-            if (name.isEmpty() || name == null) {
-                nameInput.setError("Name cannot be empty or null");
+            if (name == null || name.trim().isEmpty()) {
+                nameInput.setError("Name cannot be empty or null or white space");
             } else {
 
                 //Set difficulty based on difficulty checked
