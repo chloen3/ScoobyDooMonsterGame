@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/endScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,70 +10,89 @@
     android:outlineProvider="none"
     android:outlineSpotShadowColor="#00000000">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/endscreen" />
+
+    <EditText
+        android:id="@+id/finalGameStatus"
+        android:layout_width="672dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/akronim"
+        android:inputType="text"
+        android:text="@string/game_results"
+        android:textAlignment="center"
+        android:textColor="#FFEB3B"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/userStatus"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <EditText
+        android:id="@+id/userStatus"
+        android:layout_width="681dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:fontFamily="@font/akronim"
+        android:inputType="text"
+        android:text="@string/later_sprint_game_results"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#FFEB3B"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/finalLeaderboard"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/finalGameStatus" />
+
+    <Button
+        android:id="@+id/finalLeaderboard"
+        android:layout_width="229dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="9dp"
+        android:background="#FFEB3B"
+        android:backgroundTint="#FFEB3B"
+        android:fontFamily="@font/akronim"
         android:paddingLeft="20dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_margin = "20dp">
+        android:paddingBottom="10dp"
+        android:text="@string/leaderboard"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/playAgain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userStatus" />
 
-        <EditText
-            android:id="@+id/finalGameStatus"
-            android:layout_width="869dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/butcherman"
-            android:inputType="text"
-            android:text="@string/game_results"
-            android:textAlignment="center"
-            android:textSize="48sp"
-            android:layout_margin = "20dp"/>
-
-        <EditText
-            android:id="@+id/userStatus"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:ems="10"
-            android:fontFamily="@font/aubrey"
-            android:inputType="text"
-            android:text="@string/later_sprint_game_results"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="34sp" />
-
-        <Button
-            android:id="@+id/finalLeaderboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FFEB3B"
-            android:backgroundTint="#FFEB3B"
-            android:fontFamily="@font/aubrey"
-            android:text="@string/leaderboard"
-            android:textSize="24sp"
-            android:visibility="visible"
-            android:paddingTop = "10dp"
-            android:paddingBottom = "10dp"
-            android:paddingRight = "20dp"
-            android:paddingLeft = "20dp"
-            android:layout_margin = "10dp" />
-
-        <Button
-            android:id="@+id/playAgain"
-            android:layout_width="wrap_content"
-            android:layout_height="64dp"
-            android:background="#FFEB3B"
-            android:backgroundTint="#FFEB3B"
-            android:fontFamily="@font/aubrey"
-            android:text="@string/start_over"
-            android:textSize="24sp"
-            android:paddingTop = "10dp"
-            android:paddingBottom = "10dp"
-            android:paddingRight = "20dp"
-            android:paddingLeft = "20dp"
-            android:layout_margin = "10dp" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/playAgain"
+        android:layout_width="226dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="17dp"
+        android:background="#FFEB3B"
+        android:backgroundTint="#FFEB3B"
+        android:fontFamily="@font/akronim"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/start_over"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finalLeaderboard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
