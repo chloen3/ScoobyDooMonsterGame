@@ -28,47 +28,55 @@ public class InitialConfiguration extends AppCompatActivity {
 
         startBtn.setOnClickListener(v -> {
             name = nameInput.getText().toString();
+            boolean setDifficulty = false;
+            boolean setCharacter = false;
+            double difficulty = 1;
+
+
+            RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
+            RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
+            switch (difficultyRadioGroup.getCheckedRadioButtonId()) {
+                case R.id.radioEasy:
+                    difficulty = 1;
+                    setDifficulty = true;
+                    break;
+                case R.id.radioMedium:
+                    difficulty = 0.75;
+                    setDifficulty = true;
+                    break;
+                case R.id.radioHard:
+                    difficulty = 0.5;
+                    setDifficulty = true;
+                    break;
+            }
+
+
+            switch (spriteRadioGroup.getCheckedRadioButtonId()) {
+                case R.id.Scooby:
+                    sprite = "scooby";
+                    setCharacter = true;
+                    break;
+                case R.id.Daphne:
+                    sprite = "daphne";
+                    setCharacter = true;
+                    break;
+                case R.id.Fred:
+                    sprite = "fred";
+                    setCharacter = true;
+                    break;
+            }
+
 
             if (name == null || name.trim().isEmpty()) {
                 nameInput.setError("Name cannot be empty or null or white space");
-            } else {
-
                 //Set difficulty based on difficulty checked
+            } else if (!setDifficulty) {
+                nameInput.setError("Choose a dfficulty");
+            } else if (!setCharacter) {
+                nameInput.setError("Choose a character");
+            }
 
-                RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
-                double difficulty = 1;
-
-                switch (difficultyRadioGroup.getCheckedRadioButtonId()) {
-                    case R.id.radioEasy:
-                        difficulty = 1;
-                        break;
-                    case R.id.radioMedium:
-                        difficulty = 0.75;
-                        break;
-                    case R.id.radioHard:
-                        difficulty = 0.5;
-                        break;
-                    default:
-                        difficulty = 1;
-                        break;
-                }
-
-                RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
-
-                switch (spriteRadioGroup.getCheckedRadioButtonId()) {
-                    case R.id.Scooby:
-                        sprite = "scooby";
-                        break;
-                    case R.id.Daphne:
-                        sprite = "daphne";
-                        break;
-                    case R.id.Fred:
-                        sprite = "fred";
-                        break;
-                    default:
-                        sprite = "scooby";
-                        break;
-                }
+            else {
                 Intent game = new Intent(InitialConfiguration.this, GameActivity.class);
                 game.putExtra("difficulty", difficulty);
                 game.putExtra("name", name);

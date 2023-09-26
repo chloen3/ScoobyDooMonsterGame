@@ -164,6 +164,19 @@
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/fred_png" />
 
+    <ImageButton
+        android:id="@+id/Scooby"
+        android:layout_width="99dp"
+        android:layout_height="66dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="124dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/scooby_png" />
+
     <RadioGroup
         android:id="@+id/spriteRadio"
         android:layout_width="194dp"
@@ -202,18 +215,5 @@
             android:textSize="34sp" />
 
     </RadioGroup>
-
-    <ImageButton
-        android:id="@+id/Scooby"
-        android:layout_width="99dp"
-        android:layout_height="66dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="124dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/scooby_png" />
 
 </RelativeLayout>
