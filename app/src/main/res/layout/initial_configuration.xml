@@ -14,11 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="420dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginStart="455dp"
+        android:layout_marginTop="62dp"
+        android:fontFamily="@font/akronim"
         android:text="Character"
         android:textColor="#FFEB3B"
-        android:textSize="34sp" />
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="309dp"
+        tools:layout_editor_absoluteY="115dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -26,11 +29,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="86dp"
-        android:layout_marginBottom="298dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginBottom="243dp"
+        android:fontFamily="@font/akronim"
         android:text="Difficulty"
         android:textColor="#FFEB3B"
-        android:textSize="34sp" />
+        android:textSize="34sp"
+        tools:layout_editor_absoluteY="130dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -38,11 +43,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/akronim"
         android:text="Name"
         android:textColor="#FFEB3B"
-        android:textSize="34sp" />
+        android:textSize="34sp"
+        tools:layout_editor_absoluteY="55dp" />
 
     <EditText
         android:id="@+id/editTextText"
@@ -50,13 +57,16 @@
         android:layout_height="59dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
+        android:fontFamily="@font/akronim"
         android:inputType="text"
         android:text="Insert Name"
         android:textColor="#FFEB3B"
-        android:textSize="34sp" />
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="308dp"
+        tools:layout_editor_absoluteY="60dp" />
 
     <RadioGroup
         android:id="@+id/difficultyRadioGroup"
@@ -64,50 +74,61 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="74dp">
+        android:layout_marginStart="62dp"
+        android:layout_marginBottom="74dp"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="195dp">
 
         <RadioButton
             android:id="@+id/radioEasy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/akronim"
             android:text="Easy"
             android:textColor="#FFEB3B"
-            android:textSize="24sp" />
+            android:textSize="34sp" />
 
         <RadioButton
             android:id="@+id/radioMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/akronim"
             android:text="Medium"
             android:textColor="#FFEB3B"
-            android:textSize="24sp" />
+            android:textSize="34sp" />
 
         <RadioButton
             android:id="@+id/radioHard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/akronim"
             android:text="Hard"
             android:textColor="#FFEB3B"
-            android:textSize="24sp" />
+            android:textSize="34sp" />
     </RadioGroup>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="195dp"
-        android:layout_height="53dp"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="13dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="518dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FFEB3B"
         android:text="Continue"
-        android:textSize="20sp" />
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="220dp"
+        tools:layout_editor_absoluteY="341dp" />
 
     <ImageButton
         android:id="@+id/imageButton5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        tools:layout_editor_absoluteX="241dp"
+        tools:layout_editor_absoluteY="172dp" />
 
     <ImageButton
         android:id="@+id/imageButton6"
@@ -123,71 +144,74 @@
 
     <ImageButton
         android:id="@+id/Daphne"
-        android:layout_width="83dp"
-        android:layout_height="68dp"
+        android:layout_width="91dp"
+        android:layout_height="75dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="123dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="105dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/daphne_png" />
 
     <ImageButton
         android:id="@+id/Fred"
-        android:layout_width="100dp"
-        android:layout_height="66dp"
+        android:layout_width="105dp"
+        android:layout_height="68dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="121dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="35dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/fred_png" />
 
     <RadioGroup
         android:id="@+id/spriteRadio"
-        android:layout_width="195dp"
-        android:layout_height="238dp"
+        android:layout_width="194dp"
+        android:layout_height="179dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="364dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginBottom="61dp"
         android:orientation="vertical">
 
         <RadioButton
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="60dp"
             android:layout_centerHorizontal="true"
+            android:fontFamily="@font/akronim"
             android:text="Scooby"
             android:textColor="#FFEB3B"
-            android:textSize="24sp" />
+            android:textSize="34sp" />
 
         <RadioButton
             android:id="@+id/Daphne"
             android:layout_width="match_parent"
-            android:layout_height="79dp"
+            android:layout_height="58dp"
+            android:fontFamily="@font/akronim"
             android:text="Daphne"
             android:textColor="#FFEB3B"
-            android:textSize="24sp" />
+            android:textSize="34sp" />
 
         <RadioButton
             android:id="@+id/Fred"
             android:layout_width="match_parent"
-            android:layout_height="104dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/akronim"
             android:text="Fred"
             android:textColor="#FFEB3B"
-            android:textSize="24sp" />
+            android:textSize="34sp" />
 
     </RadioGroup>
 
     <ImageButton
         android:id="@+id/Scooby"
-        android:layout_width="101dp"
-        android:layout_height="69dp"
+        android:layout_width="99dp"
+        android:layout_height="66dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="107dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="124dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/scooby_png" />
