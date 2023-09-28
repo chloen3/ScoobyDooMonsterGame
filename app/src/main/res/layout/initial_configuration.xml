@@ -188,8 +188,9 @@
         android:orientation="vertical">
 
         <RadioButton
+            android:id="@+id/ScoobyBtn"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="58dp"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/akronim"
             android:text="Scooby"
@@ -197,7 +198,7 @@
             android:textSize="34sp" />
 
         <RadioButton
-            android:id="@+id/Daphne"
+            android:id="@+id/DaphneBtn"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:fontFamily="@font/akronim"
@@ -206,7 +207,7 @@
             android:textSize="34sp" />
 
         <RadioButton
-            android:id="@+id/Fred"
+            android:id="@+id/FredBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/akronim"

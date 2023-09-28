@@ -15,19 +15,17 @@ public class InitialConfiguration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
-        setContentView(R.layout.initial_configuration);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
+        getSupportActionBar().hide(); // removes top bar
+        setContentView(R.layout.initial_configuration); // sets to layout
 
-        Button startBtn = findViewById(R.id.button);
-        EditText nameInput = findViewById(R.id.editTextText);
+        Button startBtn = findViewById(R.id.button); // continue button
+        EditText nameInput = findViewById(R.id.editTextText); // Name Input
 
         startBtn.setOnClickListener(v -> {
-            name = nameInput.getText().toString();
             boolean setDifficulty = false;
             boolean setCharacter = false;
             double difficulty = 1;
-
 
             RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
             RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
@@ -49,29 +47,30 @@ public class InitialConfiguration extends AppCompatActivity {
 
 
             switch (spriteRadioGroup.getCheckedRadioButtonId()) {
-            case R.id.Scooby:
+            case R.id.ScoobyBtn:
                 sprite = "scooby";
                 setCharacter = true;
                 break;
-            case R.id.Daphne:
+            case R.id.DaphneBtn:
                 sprite = "daphne";
                 setCharacter = true;
                 break;
-            case R.id.Fred:
+            case R.id.FredBtn:
                 sprite = "fred";
                 setCharacter = true;
                 break;
             default:
             }
 
+            EditText input = findViewById(R.id.editTextText);
+            String inputName = input.getText().toString();
 
-            if (name == null || name.trim().isEmpty()) {
-                nameInput.setError("Name cannot be empty or null or white space");
-                //Set difficulty based on difficulty checked
+            if (inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0)) {
+                nameInput.setError("Please enter a name");
             } else if (!setDifficulty) {
-                nameInput.setError("Choose a dfficulty");
+                nameInput.setError("Choose a difficulty.");
             } else if (!setCharacter) {
-                nameInput.setError("Choose a character");
+                nameInput.setError("Choose a character.");
             } else {
                 Intent game = new Intent(InitialConfiguration.this, GameActivity.class);
                 game.putExtra("difficulty", difficulty);
