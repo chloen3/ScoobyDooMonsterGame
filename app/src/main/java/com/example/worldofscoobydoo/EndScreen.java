@@ -13,7 +13,7 @@ public class EndScreen extends AppCompatActivity {
 
         Button leaderButton = findViewById(R.id.finalLeaderboard);
         leaderButton.setOnClickListener(v -> {
-            Intent leaderboard = new Intent(getApplicationContext(), EndScreen.class);
+            Intent leaderboard = new Intent(getApplicationContext(), LeaderBoard.class);
             startActivity(leaderboard);
         });
 
