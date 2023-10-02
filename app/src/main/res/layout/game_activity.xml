@@ -27,7 +27,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="267dp"
         android:layout_marginBottom="3dp"
-        android:fontFamily="@font/akronim"
         android:text="Sprite"
         android:textColor="#FFEB3B"
         android:textSize="48sp"
@@ -69,7 +68,6 @@
         android:layout_height="52dp"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="38dp"
-        android:fontFamily="@font/akronim"
         android:text="Difficulty"
         android:textColor="#FFEB3B"
         android:textSize="48sp"
@@ -85,7 +83,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="27dp"
-        android:fontFamily="@font/akronim"
         android:text="Name"
         android:textColor="#FFEB3B"
         android:textSize="48sp"
@@ -93,6 +90,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="253dp"
+        android:layout_height="61dp"
+        android:text="Score"
+        android:textColor="#FFEB3B"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
