@@ -23,10 +23,11 @@
 
     <TextView
         android:id="@+id/gameName"
-        android:layout_width="557dp"
-        android:layout_height="64dp"
+        android:layout_width="241dp"
+        android:layout_height="51dp"
         android:fontFamily="@font/butcherman"
-        android:text="Scooby Doo: The Haunted Mansion"
+        android:text="Scooby Doo and"
+        android:textAlignment="center"
         android:textColor="#FFEB3B"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,21 +41,23 @@
         android:layout_width="184dp"
         android:layout_height="63dp"
         android:backgroundTint="#FFEB3B"
+        android:fontFamily="@font/butcherman"
         android:text="Start"
         android:textColor="#065DF4"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.889" />
+        app:layout_constraintVertical_bias="0.791" />
 
     <Button
         android:id="@+id/exitButton"
         android:layout_width="184dp"
         android:layout_height="63dp"
         android:backgroundTint="#FFEB3B"
+        android:fontFamily="@font/butcherman"
         android:text="Exit"
         android:textColor="#065DF4"
         android:textSize="16sp"
@@ -63,6 +66,24 @@
         app:layout_constraintHorizontal_bias="0.773"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.794" />
+
+    <EditText
+        android:id="@+id/editTextText3"
+        android:layout_width="436dp"
+        android:layout_height="76dp"
+        android:ems="10"
+        android:fontFamily="@font/butcherman"
+        android:inputType="text"
+        android:text="The Haunted Mansion"
+        android:textAlignment="center"
+        android:textColor="#FFEB3B"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@+id/welcomeBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameName"
+        app:layout_constraintVertical_bias="0.037" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

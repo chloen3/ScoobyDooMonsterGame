@@ -14,12 +14,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="455dp"
-        android:layout_marginTop="62dp"
-        android:fontFamily="@font/akronim"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="263dp"
+        android:layout_marginBottom="231dp"
+        android:fontFamily="@font/butcherman"
         android:text="Character"
         android:textColor="#FFEB3B"
-        android:textSize="34sp"
+        android:textSize="24sp"
         tools:layout_editor_absoluteX="309dp"
         tools:layout_editor_absoluteY="115dp" />
 
@@ -29,26 +33,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="99dp"
-        android:layout_marginBottom="243dp"
-        android:fontFamily="@font/akronim"
+        android:layout_marginStart="57dp"
+        android:layout_marginBottom="229dp"
+        android:fontFamily="@font/butcherman"
         android:text="Difficulty"
         android:textColor="#FFEB3B"
-        android:textSize="34sp"
+        android:textSize="24sp"
         tools:layout_editor_absoluteY="130dp" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="83dp"
+        android:layout_height="37dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/akronim"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="542dp"
+        android:layout_marginBottom="289dp"
+        android:fontFamily="@font/butcherman"
         android:text="Name"
         android:textColor="#FFEB3B"
-        android:textSize="34sp"
+        android:textSize="24sp"
         tools:layout_editor_absoluteY="55dp" />
 
     <EditText
@@ -57,14 +65,14 @@
         android:layout_height="59dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
-        android:fontFamily="@font/akronim"
+        android:fontFamily="@font/butcherman"
         android:inputType="text"
         android:text="Insert Name"
         android:textColor="#FFEB3B"
-        android:textSize="34sp"
+        android:textSize="24sp"
         tools:layout_editor_absoluteX="308dp"
         tools:layout_editor_absoluteY="60dp" />
 
@@ -81,41 +89,46 @@
 
         <RadioButton
             android:id="@+id/radioEasy"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/akronim"
+            android:fontFamily="@font/butcherman"
             android:text="Easy"
             android:textColor="#FFEB3B"
-            android:textSize="34sp" />
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/radioMedium"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/akronim"
+            android:fontFamily="@font/butcherman"
             android:text="Medium"
             android:textColor="#FFEB3B"
-            android:textSize="34sp" />
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/radioHard"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/akronim"
+            android:fontFamily="@font/butcherman"
             android:text="Hard"
             android:textColor="#FFEB3B"
-            android:textSize="34sp" />
+            android:textSize="24sp" />
     </RadioGroup>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="159dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="518dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="486dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FFEB3B"
+        android:fontFamily="@font/butcherman"
         android:text="Continue"
         android:textColor="#3F51B5"
         android:textSize="20sp"
@@ -144,12 +157,16 @@
 
     <ImageButton
         android:id="@+id/Daphne"
-        android:layout_width="91dp"
-        android:layout_height="75dp"
+        android:layout_width="93dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/Scooby"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="105dp"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="475dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="120dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/daphne_png" />
 
@@ -157,10 +174,12 @@
         android:id="@+id/Fred"
         android:layout_width="105dp"
         android:layout_height="68dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="476dp"
         android:layout_marginEnd="116dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="48dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/fred_png" />
 
@@ -168,11 +187,12 @@
         android:id="@+id/Scooby"
         android:layout_width="99dp"
         android:layout_height="66dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="124dp"
+        android:layout_marginStart="479dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="119dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/scooby_png" />
@@ -192,28 +212,28 @@
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/akronim"
+            android:fontFamily="@font/butcherman"
             android:text="Scooby"
             android:textColor="#FFEB3B"
-            android:textSize="34sp" />
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/DaphneBtn"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:fontFamily="@font/akronim"
+            android:fontFamily="@font/butcherman"
             android:text="Daphne"
             android:textColor="#FFEB3B"
-            android:textSize="34sp" />
+            android:textSize="24sp" />
 
         <RadioButton
             android:id="@+id/FredBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/akronim"
+            android:fontFamily="@font/butcherman"
             android:text="Fred"
             android:textColor="#FFEB3B"
-            android:textSize="34sp" />
+            android:textSize="24sp" />
 
     </RadioGroup>
 
