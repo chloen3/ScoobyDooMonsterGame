@@ -23,15 +23,15 @@
 
     <EditText
         android:id="@+id/finalGameStatus"
-        android:layout_width="678dp"
-        android:layout_height="116dp"
+        android:layout_width="674dp"
+        android:layout_height="76dp"
         android:layout_marginTop="7dp"
         android:fontFamily="@font/butcherman"
         android:inputType="text"
         android:text="@string/game_results"
         android:textAlignment="center"
         android:textColor="#FFEB3B"
-        android:textSize="48sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/userStatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"

@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
 
     // Helper method to update the score on the screen
     private void updateScore(int sc) {
-        scoreTextView.setText("Score: " + sc);
+        scoreTextView.setText(Integer.toString(sc));
     }
 }
 
