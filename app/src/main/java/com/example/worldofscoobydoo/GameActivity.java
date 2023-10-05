@@ -47,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         updateScore(score); // Update the initial score on the screen
 
-        // Define the score updater Runnable
+        //Define the score updater Runnable
         Runnable scoreUpdater = new Runnable() {
             @Override
             public void run() {
@@ -63,7 +63,7 @@ public class GameActivity extends AppCompatActivity {
             }
         };
 
-        // Start updating the score
+        //Start updating the score
         handler.postDelayed(scoreUpdater, 1000);
 
         Button exitButton = findViewById(R.id.endgame_Button);
@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
 
     // Helper method to update the score on the screen
     private void updateScore(int sc) {
-        scoreTextView.setText(Integer.toString(sc));
+        scoreTextView.setText(String.valueOf(sc));
     }
 }
 
