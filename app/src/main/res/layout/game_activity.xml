@@ -70,10 +70,11 @@
 
     <TextView
         android:id="@+id/scoreTextView"
-        android:layout_width="92dp"
-        android:layout_height="52dp"
+        android:layout_width="107dp"
+        android:layout_height="50dp"
         android:fontFamily="@font/butcherman"
-        android:text="Score"
+        android:inputType="number"
+        android:text=""
         android:textColor="#FFEB3B"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,8 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.025"
-        tools:visibility="visible"
-        />
+        tools:visibility="visible" />
 
     <EditText
         android:id="@+id/health_title"
