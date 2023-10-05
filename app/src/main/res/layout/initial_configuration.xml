@@ -43,15 +43,15 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#FFEB3B"
         android:fontFamily="@font/butcherman"
-        android:text="Insert Name"
+        android:hint="Insert Name"
         android:textColor="#FFEB3B"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintHorizontal_bias="0.361"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/welcomeBackground"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/textView2"
