@@ -5,19 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
-        app:srcCompat="@drawable/endscreen"
-        android:scaleType="centerCrop" />
-
     <EditText
         android:id="@+id/editTextText2"
         android:layout_width="320dp"
@@ -36,22 +23,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.062" />
 
-    <ScrollView
-        android:id="@+id/historyOfScores"
-        android:layout_width="684dp"
-        android:layout_height="193dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextText2"
-        app:layout_constraintVertical_bias="0.467">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    <TextView
+        android:id="@+id/leaderboard"
+        android:layout_width="606dp"
+        android:layout_height="155dp"
+        android:text="Leaderboard"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="103dp" />
 
     <Button
         android:id="@+id/backButton"

@@ -2,12 +2,14 @@ package com.example.worldofscoobydoo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 public class GameActivity extends AppCompatActivity {
 
@@ -71,6 +73,15 @@ public class GameActivity extends AppCompatActivity {
             // Stop the score updater when exiting the game
             handler.removeCallbacks(scoreUpdater);
             Intent game = new Intent(GameActivity.this, EndScreen.class);
+//            SharedPreferences pref = getSharedPreferences("PREFS", 0);
+//            SharedPreferences.Editor editor = pref.edit();
+            game.putExtra("lastScore", score);
+//            editor.putInt("lastScore", score);
+            String namePass = name;
+            game.putExtra("player", namePass);
+//            editor.putString("player", namePass);
+//            editor.apply();
+
             startActivity(game);
             finish();
         });
