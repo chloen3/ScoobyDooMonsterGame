@@ -73,17 +73,14 @@ public class GameActivity extends AppCompatActivity {
             // Stop the score updater when exiting the game
             handler.removeCallbacks(scoreUpdater);
             Intent game = new Intent(GameActivity.this, EndScreen.class);
-            SharedPreferences pref = getSharedPreferences("PREFS", 0);
-            SharedPreferences.Editor editor = pref.edit();
+//            SharedPreferences pref = getSharedPreferences("PREFS", 0);
+//            SharedPreferences.Editor editor = pref.edit();
+            game.putExtra("lastScore", score);
 //            editor.putInt("lastScore", score);
-            String namePass;
-            if (name == null) {
-                namePass = "null";
-            } else {
-                namePass = "5";
-            }
-            editor.putString("player", namePass);
-            editor.apply();
+            String namePass = name;
+            game.putExtra("player", namePass);
+//            editor.putString("player", namePass);
+//            editor.apply();
 
             startActivity(game);
             finish();

@@ -3,6 +3,7 @@ package com.example.worldofscoobydoo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
@@ -24,8 +25,11 @@ public class MainActivity extends AppCompatActivity {
         Button exitButton = findViewById(R.id.exitButton);
 
         exitButton.setOnClickListener(x -> {
+            SharedPreferences pref = getSharedPreferences("PREFS", 0);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.apply();
             this.finishAffinity();
-
         });
 
     }
