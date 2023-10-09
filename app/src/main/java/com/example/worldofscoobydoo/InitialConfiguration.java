@@ -64,6 +64,7 @@ public class InitialConfiguration extends AppCompatActivity {
 
             EditText input = findViewById(R.id.editTextText);
             String inputName = input.getText().toString();
+            name = inputName;
 
             if (inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0)) {
                 nameInput.setError("Please enter a name");
