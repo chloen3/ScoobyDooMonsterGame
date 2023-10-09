@@ -35,6 +35,12 @@ public class LeaderBoard extends AppCompatActivity {
         player1 = pref.getString("player1", "DEFAULT1 ");
         player2 = pref.getString("player2", "DEFAULT2 ");
         player3 = pref.getString("player3", "DEFAULT3 ");
+
+
+//        UNCOMMENT THIS , RUN ONCE TO HARD RESET LEADERBOARD, THEN RE COMMENT
+//        THIS IS FOR TESTING PURPOSES
+//        ALSO MAKE 2 MORE PLAYERS THANK U
+
 //        lastScore = getIntent().getIntExtra("lastScore", 0);
 //        player = getIntent().getStringExtra("player");
 //        best1 = 0;

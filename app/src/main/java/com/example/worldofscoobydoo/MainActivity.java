@@ -25,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
         Button exitButton = findViewById(R.id.exitButton);
 
         exitButton.setOnClickListener(x -> {
-            SharedPreferences pref = getSharedPreferences("PREFS", 0);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.clear();
-            editor.apply();
             this.finishAffinity();
         });
 
