@@ -41,14 +41,12 @@ public class LeaderBoard extends AppCompatActivity {
 //        THIS IS FOR TESTING PURPOSES
 //        ALSO MAKE 2 MORE PLAYERS THANK U
 
-//        lastScore = getIntent().getIntExtra("lastScore", 0);
-//        player = getIntent().getStringExtra("player");
-//        best1 = 0;
-//        best2 = 0;
-//        best3 = 0;
-//        player1 = "DEFAULT1";
-//        player2 = "DEFAULT2";
-//        player3 = "DEFAULT3";
+        best1 = 0;
+        best2 = 0;
+        best3 = 0;
+        player1 = "DEFAULT1";
+        player2 = "DEFAULT2";
+        player3 = "DEFAULT3";
 
         if (lastScore > best3) {
             best3 = lastScore;
