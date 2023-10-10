@@ -49,17 +49,6 @@ public class LeaderBoard extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
         time = sdf.format(new Date());
 
-//        UNCOMMENT THIS , RUN ONCE TO HARD RESET LEADERBOARD, THEN RE COMMENT
-//        THIS IS FOR TESTING PURPOSES
-//        ALSO MAKE 2 MORE PLAYERS THANK U
-
-        best1 = 0;
-        best2 = 0;
-        best3 = 0;
-        player1 = "DEFAULT1";
-        player2 = "DEFAULT2";
-        player3 = "DEFAULT3";
-
         if (lastScore > best5) {
             best5 = lastScore;
             player5 = player;
