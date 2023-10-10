@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.worldofscoobydoo.R;
 
 
 public class GameActivity extends AppCompatActivity {

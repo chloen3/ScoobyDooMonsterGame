@@ -1,7 +1,4 @@
-package com.example.worldofscoobydoo;
-
-import android.content.Context;
-import android.view.View;
+package com.example.worldofscoobydoo.model;
 
 public class Player {
 

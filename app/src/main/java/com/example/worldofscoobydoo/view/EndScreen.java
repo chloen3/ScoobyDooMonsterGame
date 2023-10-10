@@ -1,10 +1,12 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.worldofscoobydoo.R;
 
 public class EndScreen extends AppCompatActivity {
 
