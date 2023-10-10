@@ -32,4 +32,52 @@ public class PlayerTest {
         String name = "Ronit";
         assertTrue(InitialConfiguration.nameIsValid(name));
     }
+
+    @Test
+    public void characterIsFred() {
+        String sprite = "fred";
+        assertTrue(InitialConfiguration.characterIsValid(sprite));
+    }
+
+    @Test
+    public void characterIsDaphne() {
+        String sprite = "daphne";
+        assertTrue(InitialConfiguration.characterIsValid(sprite));
+    }
+
+    @Test
+    public void characterIsScooby() {
+        String sprite = "scooby";
+        assertTrue(InitialConfiguration.characterIsValid(sprite));
+    }
+
+    @Test
+    public void characterIsntValid() {
+        String sprite = "ronit";
+        assertFalse(InitialConfiguration.characterIsValid(sprite));
+    }
+
+      @Test
+      public void difficultyIsValidOne() {
+          int difficulty = 1;
+          assertTrue(InitialConfiguration.difficultyIsValid(difficulty));
+      }
+
+    @Test
+    public void difficultyIsValidTwo() {
+        double difficulty = 0.75;
+        assertTrue(InitialConfiguration.difficultyIsValid(difficulty));
+    }
+
+    @Test
+    public void difficultyIsValidThree() {
+        double difficulty = 0.5;
+        assertTrue(InitialConfiguration.difficultyIsValid(difficulty));
+    }
+    @Test
+    public void difficultyIsNotValid() {
+        double difficulty = 0.3;
+        assertFalse(InitialConfiguration.difficultyIsValid(difficulty));
+    }
+
 }
