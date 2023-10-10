@@ -26,7 +26,6 @@ public class InitialConfiguration extends AppCompatActivity {
 
         startBtn.setOnClickListener(v -> {
             boolean setDifficulty = false;
-            boolean setCharacter = false;
             double difficulty = 1;
 
             RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
@@ -47,19 +46,15 @@ public class InitialConfiguration extends AppCompatActivity {
             default:
             }
 
-
             switch (spriteRadioGroup.getCheckedRadioButtonId()) {
             case R.id.ScoobyBtn:
                 sprite = "scooby";
-                setCharacter = true;
                 break;
             case R.id.DaphneBtn:
                 sprite = "daphne";
-                setCharacter = true;
                 break;
             case R.id.FredBtn:
                 sprite = "fred";
-                setCharacter = true;
                 break;
             default:
             }
@@ -72,7 +67,7 @@ public class InitialConfiguration extends AppCompatActivity {
                 nameInput.setError("Please enter a name");
             } else if (!setDifficulty) {
                 nameInput.setError("Choose a difficulty.");
-            } else if (!setCharacter) {
+            } else if (!characterIsValid(sprite)) {
                 nameInput.setError("Choose a character.");
             } else {
                 Intent game = new Intent(InitialConfiguration.this, GameActivity.class);
@@ -86,6 +81,22 @@ public class InitialConfiguration extends AppCompatActivity {
     }
     public static boolean nameIsValid(String inputName) {
         if (inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean difficultyIsValid(double difficulty) {
+        if (!(difficulty == 1 || difficulty == 0.75 || difficulty == 0.5)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean characterIsValid(String sprite) {
+        if (!(sprite == "scooby" || sprite == "daphne" || sprite == "fred")) {
             return false;
         } else {
             return true;
