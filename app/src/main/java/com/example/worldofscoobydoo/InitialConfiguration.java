@@ -66,7 +66,7 @@ public class InitialConfiguration extends AppCompatActivity {
             String inputName = input.getText().toString();
             name = inputName;
 
-            if (inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0)) {
+            if (!nameIsValid(inputName)) {
                 nameInput.setError("Please enter a name");
             } else if (!setDifficulty) {
                 nameInput.setError("Choose a difficulty.");
@@ -81,5 +81,12 @@ public class InitialConfiguration extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public static boolean nameIsValid(String inputName) {
+        if (inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
