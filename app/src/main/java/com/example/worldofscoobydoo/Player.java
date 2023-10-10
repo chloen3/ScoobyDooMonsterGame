@@ -8,18 +8,15 @@ public class Player {
     private String name;
     private double difficulty;
     private String sprite;
-    private static Player player;
-    private Player(String name, double difficulty, String sprite) {
-        this.name = name;
-        this.difficulty = difficulty;
-        this.sprite = sprite;
-    }
-    private Player() {
-        this( "Default_Player", 1.0, "scooby");
-    }
+    private volatile static Player player;
+    private Player(){};
     public static Player getPlayer() {
         if (player == null) {
-            player = new Player();
+            synchronized(Player.class) {
+                if (player == null) {
+                    player = new Player();
+                }
+            }
         }
         return player;
     }
