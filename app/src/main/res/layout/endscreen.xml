@@ -25,6 +25,7 @@
         android:id="@+id/finalGameStatus"
         android:layout_width="674dp"
         android:layout_height="76dp"
+        android:background="@null"
         android:layout_marginTop="7dp"
         android:fontFamily="@font/butcherman"
         android:inputType="text"
@@ -43,6 +44,7 @@
         android:layout_width="675dp"
         android:layout_height="68dp"
         android:layout_marginBottom="18dp"
+        android:background="@null"
         android:ems="10"
         android:fontFamily="@font/butcherman"
         android:inputType="text"
@@ -53,6 +55,7 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/finalLeaderboard"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/finalGameStatus" />
 

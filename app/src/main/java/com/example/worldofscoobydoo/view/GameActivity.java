@@ -1,7 +1,8 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
@@ -16,6 +17,9 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+
+import com.example.worldofscoobydoo.R;
+
 
 public class GameActivity extends AppCompatActivity {
 
@@ -56,7 +60,7 @@ public class GameActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         updateScore(score); // Update the initial score on the screen
 
-        // Define the score updater Runnable
+        //Define the score updater Runnable
         Runnable scoreUpdater = new Runnable() {
             @Override
             public void run() {
@@ -72,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
             }
         };
 
-        // Start updating the score
+        //Start updating the score
         handler.postDelayed(scoreUpdater, 1000);
 
         Button exitButton = findViewById(R.id.endgame_Button);
@@ -80,6 +84,13 @@ public class GameActivity extends AppCompatActivity {
             // Stop the score updater when exiting the game
             handler.removeCallbacks(scoreUpdater);
             Intent game = new Intent(GameActivity.this, EndScreen.class);
+            SharedPreferences pref = getSharedPreferences("PREFS", 0);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putInt("lastScore", score);
+            String namePass = name;
+            editor.putString("player", namePass);
+            editor.apply();
+
             startActivity(game);
             finish();
         });
@@ -87,7 +98,7 @@ public class GameActivity extends AppCompatActivity {
 
     // Helper method to update the score on the screen
     private void updateScore(int sc) {
-        scoreTextView.setText(Integer.toString(sc));
+        scoreTextView.setText(String.valueOf(sc));
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 
 import android.view.SurfaceView;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.view.MotionEvent;
+
+import com.example.worldofscoobydoo.Background;
 
 import java.util.ArrayList;
 import java.util.List;

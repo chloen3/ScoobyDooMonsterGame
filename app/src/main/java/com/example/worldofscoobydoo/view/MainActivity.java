@@ -1,11 +1,12 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.view.View;
+
+import com.example.worldofscoobydoo.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +23,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button exitButton = findViewById(R.id.exitButton);
-
         exitButton.setOnClickListener(x -> {
             this.finishAffinity();
-
         });
-
     }
 }
