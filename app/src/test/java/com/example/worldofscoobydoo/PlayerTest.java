@@ -22,14 +22,14 @@ public class PlayerTest {
         String name = null;
         assertFalse(InitialConfiguration.nameIsValid(name));
     }
-//    @Test
-//    public void nameIsEmpty() {
-//        String name = " ";
-//        assertFalse(InitialConfiguration.nameIsValid(name));
-//    }
-//    @Test
-//    public void nameIsValid() {
-//        String name = "Ronit";
-//        assertTrue(InitialConfiguration.nameIsValid(name));
-//    }
+    @Test
+    public void nameIsEmpty() {
+        String name = " ";
+        assertFalse(InitialConfiguration.nameIsValid(name));
+    }
+    @Test
+    public void nameIsValid() {
+        String name = "Ronit";
+        assertTrue(InitialConfiguration.nameIsValid(name));
+    }
 }
