@@ -75,10 +75,8 @@ public class GameActivity extends AppCompatActivity {
             Intent game = new Intent(GameActivity.this, EndScreen.class);
             SharedPreferences pref = getSharedPreferences("PREFS", 0);
             SharedPreferences.Editor editor = pref.edit();
-            game.putExtra("lastScore", score);
             editor.putInt("lastScore", score);
             String namePass = name;
-            game.putExtra("player", namePass);
             editor.putString("player", namePass);
             editor.apply();
 
