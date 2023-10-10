@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.worldofscoobydoo.R;
 
 public class InitialConfiguration extends AppCompatActivity {
     private String name;

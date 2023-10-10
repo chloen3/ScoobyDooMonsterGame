@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -6,6 +6,9 @@ import android.widget.TextView;
 import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.view.EndScreen;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
