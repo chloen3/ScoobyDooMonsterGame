@@ -32,12 +32,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
 
-        //MyGame myGame = new MyGame();
-        //myGame.create(); // Initialize the game
-
-        //AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        //initialize(myGame, config);
-
         name = getIntent().getStringExtra("name");
         difficulty = getIntent().getDoubleExtra("difficulty", 1);
         sprite = getIntent().getStringExtra("sprite");
