@@ -24,7 +24,12 @@ public class GameActivity extends AppCompatActivity {
     private double difficulty;
     private String sprite;
     private int score = 100;
-    public TextView scoreTextView;
+
+    public TextView getScoreTextView() {
+        return scoreTextView;
+    }
+
+    private TextView scoreTextView;
     private Handler handler = new Handler();
 
 
