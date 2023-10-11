@@ -14,6 +14,14 @@ import com.example.worldofscoobydoo.R;
 public class InitialConfiguration extends AppCompatActivity {
     private String name;
     private String sprite;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +56,22 @@ public class InitialConfiguration extends AppCompatActivity {
 
             switch (spriteRadioGroup.getCheckedRadioButtonId()) {
             case R.id.ScoobyBtn:
-                sprite = "scooby";
+                setSprite("scooby");
                 break;
             case R.id.DaphneBtn:
-                sprite = "daphne";
+                setSprite("daphne");
                 break;
             case R.id.FredBtn:
-                sprite = "fred";
+                setSprite("fred");
                 break;
             default:
             }
 
             EditText input = findViewById(R.id.editTextText);
             String inputName = input.getText().toString();
-            name = inputName;
+            setName(inputName);
 
-            if (!nameIsValid(inputName)) {
+            if (nameIsValid(name)) {
                 nameInput.setError("Please enter a name");
             } else if (!setDifficulty) {
                 nameInput.setError("Choose a difficulty.");
@@ -88,6 +96,6 @@ public class InitialConfiguration extends AppCompatActivity {
     }
 
     public static boolean characterIsValid(String sprite) {
-        return !(sprite == "scooby" || sprite == "daphne" || sprite == "fred");
+        return sprite == "scooby" || sprite == "daphne" || sprite == "fred";
     }
 }
