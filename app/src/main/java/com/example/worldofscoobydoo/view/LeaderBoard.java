@@ -19,6 +19,11 @@ import java.util.Date;
 
 public class LeaderBoard extends AppCompatActivity {
     private int lastScore;
+
+    public int getLastScore() {
+        return lastScore;
+    }
+
     private int score1;
     private int score2;
     private int score3;
@@ -117,7 +122,17 @@ public class LeaderBoard extends AppCompatActivity {
         return val1 >= val2 && val2 >= val3 && val3 >= val4 && val4 >= val5;
     }
 
-    public static boolean correctLengthBoard(LeaderboardModel model) {
-        return model.getSize() == 5;
+    public static boolean isCurrentScore(LeaderboardModel leaderboard) {
+        LeaderboardEntry[] entries = leaderboard.getEntries();
+        boolean result = false;
+        for (int i = 0; i < entries.length; i++) {
+            if (entries[i].getPlayerName() != null && entries[i].getScore() != 0 &&
+                    entries[i].getDate() != null) {
+                result = true;
+            } else {
+                result = false;
+            }
+        }
+        return result;
     }
 }

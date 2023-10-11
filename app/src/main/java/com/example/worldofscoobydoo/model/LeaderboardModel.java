@@ -2,6 +2,11 @@ package com.example.worldofscoobydoo.model;
 
 public class LeaderboardModel {
     private static volatile LeaderboardModel instance;
+
+    public void setEntries(LeaderboardEntry[] entries) {
+        this.entries = entries;
+    }
+
     private LeaderboardEntry[] entries = new LeaderboardEntry[5];
 
     private LeaderboardModel() { };
