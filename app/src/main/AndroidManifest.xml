@@ -30,6 +30,14 @@
 
         <activity android:name=".view.LeaderBoard" android:parentActivityName=".view.MainActivity"></activity>
 
+<!--        <activity android:name=".model.LeaderboardEntry" android:parentActivityName=".view.MainActivity"></activity>-->
+
+<!--        <activity android:name=".model.LeaderboardModel" android:parentActivityName=".view.MainActivity"></activity>-->
+
+        <activity android:name=".view.LeaderboardAdapter" android:parentActivityName=".view.MainActivity"></activity>
+
+<!--        <activity android:name=".viewModel.LeaderboardViewModel" android:parentActivityName=".view.MainActivity"></activity>-->
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
