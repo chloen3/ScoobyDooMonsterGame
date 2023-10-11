@@ -140,8 +140,8 @@ public class LeaderBoard extends AppCompatActivity {
             if (entries[i] == null) {
                 return false;
             } else {
-                if (entries[i].getPlayerName() != null && entries[i].getScore() != 0 &&
-                        entries[i].getDate() != null) {
+                if (entries[i].getPlayerName() != null && entries[i].getScore() != 0
+                        && entries[i].getDate() != null) {
                     result = true;
                 } else {
                     result = false;

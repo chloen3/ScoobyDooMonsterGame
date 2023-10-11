@@ -1,6 +1,5 @@
 package com.example.worldofscoobydoo.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.badlogic.gdx.Screen;
 import com.example.worldofscoobydoo.R;
 
 public class Screen3 extends AppCompatActivity {
@@ -20,7 +18,7 @@ public class Screen3 extends AppCompatActivity {
     private double difficulty;
     private String sprite;
     private int score;
-    public TextView scoreTextView;
+    private TextView scoreTextView;
     private Handler handler = new Handler();
 
     protected void onCreate(Bundle savedInstanceState) {

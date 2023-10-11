@@ -1,8 +1,6 @@
 package com.example.worldofscoobydoo.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
@@ -11,13 +9,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.badlogic.gdx.Screen;
 import com.example.worldofscoobydoo.R;
 
 public class Screen2 extends AppCompatActivity {
 
     private int score;
-    public TextView scoreTextView;
+    private TextView scoreTextView;
     private Handler handler = new Handler();
 
     protected void onCreate(Bundle savedInstanceState) {
