@@ -10,8 +10,17 @@ import com.example.worldofscoobydoo.R;
 
 public class EndScreen extends AppCompatActivity {
 
-    EditText lastScore;
-    int prevScore;
+    private EditText lastScore;
+    private int prevScore;
+
+    public EditText getLastScore() {
+        return lastScore;
+    }
+
+    public int getPrevScore() {
+        return prevScore;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

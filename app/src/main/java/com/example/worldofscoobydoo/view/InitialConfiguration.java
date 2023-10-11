@@ -80,26 +80,14 @@ public class InitialConfiguration extends AppCompatActivity {
         });
     }
     public static boolean nameIsValid(String inputName) {
-        if (inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0)) {
-            return false;
-        } else {
-            return true;
-        }
+        return inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0);
     }
 
     public static boolean difficultyIsValid(double difficulty) {
-        if (!(difficulty == 1 || difficulty == 0.75 || difficulty == 0.5)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(difficulty == 1 || difficulty == 0.75 || difficulty == 0.5);
     }
 
     public static boolean characterIsValid(String sprite) {
-        if (!(sprite == "scooby" || sprite == "daphne" || sprite == "fred")) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(sprite == "scooby" || sprite == "daphne" || sprite == "fred");
     }
 }
