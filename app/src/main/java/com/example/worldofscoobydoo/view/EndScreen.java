@@ -29,7 +29,7 @@ public class EndScreen extends AppCompatActivity {
         lastScore = findViewById(R.id.userStatus);
         SharedPreferences pref = getSharedPreferences("PREFS", 0);
         prevScore = pref.getInt("lastScore", 0);
-        lastScore.setText("Previous Score: " + prevScore);
+        lastScore.setText("Your Score: " + prevScore);
         Button leaderButton = findViewById(R.id.finalLeaderboard);
         leaderButton.setOnClickListener(v -> {
             Intent leaderboard = new Intent(getApplicationContext(), LeaderBoard.class);
