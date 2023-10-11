@@ -71,9 +71,10 @@ public class InitialConfiguration extends AppCompatActivity {
             String inputName = input.getText().toString();
             setName(inputName);
 
-            if (nameIsValid(name)) {
-                nameInput.setError("Please enter a name");
-            } else if (!setDifficulty) {
+            //if (nameIsValid(name)) {
+                //nameInput.setError("Please enter a name");
+            //} else
+                if (!setDifficulty) {
                 nameInput.setError("Choose a difficulty.");
             } else if (!characterIsValid(sprite)) {
                 nameInput.setError("Choose a character.");
