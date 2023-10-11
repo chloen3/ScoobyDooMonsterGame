@@ -13,12 +13,7 @@ public class LeaderboardTest {
     @Test
     public void decreaseOrder() {
         LeaderboardEntry[] entries = instance.getEntries();
-        int val1 = entries[0].getScore();
-        int val2 = entries[1].getScore();
-        int val3 = entries[2].getScore();
-        int val4 = entries[3].getScore();
-        int val5 = entries[4].getScore();
-        assertFalse(LeaderBoard.orderIsValid(val1, val2, val3, val4, val5));
+        assertFalse(LeaderBoard.orderIsValid(instance));
     }
     @Test
     public void entryValues() {
