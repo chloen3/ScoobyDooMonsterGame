@@ -38,6 +38,11 @@
 
 <!--        <activity android:name=".viewModel.LeaderboardViewModel" android:parentActivityName=".view.MainActivity"></activity>-->
 
+        <activity android:name=".view.Screen2" android:parentActivityName=".view.MainActivity"></activity>
+
+        <activity android:name=".view.Screen3" android:parentActivityName=".view.MainActivity"></activity>
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
