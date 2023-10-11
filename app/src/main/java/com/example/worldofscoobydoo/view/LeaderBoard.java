@@ -118,19 +118,34 @@ public class LeaderBoard extends AppCompatActivity {
         });
     }
 
-    public static boolean orderIsValid(int val1, int val2, int val3, int val4, int val5) {
-        return val1 >= val2 && val2 >= val3 && val3 >= val4 && val4 >= val5;
+    public static boolean orderIsValid(LeaderboardModel leader) {
+        LeaderboardEntry[] entries = leader.getEntries();
+        boolean result = false;
+        for (int i = 1; i < entries.length; i++) {
+            if (!(entries[i - 1] == null)) {
+                if (entries[i - 1].getScore() >= entries[i].getScore()) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            }
+        }
+        return result;
     }
 
     public static boolean isCurrentScore(LeaderboardModel leaderboard) {
         LeaderboardEntry[] entries = leaderboard.getEntries();
         boolean result = false;
         for (int i = 0; i < entries.length; i++) {
-            if (entries[i].getPlayerName() != null && entries[i].getScore() != 0 &&
-                    entries[i].getDate() != null) {
-                result = true;
+            if (entries[i] == null) {
+                return false;
             } else {
-                result = false;
+                if (entries[i].getPlayerName() != null && entries[i].getScore() != 0 &&
+                        entries[i].getDate() != null) {
+                    result = true;
+                } else {
+                    result = false;
+                }
             }
         }
         return result;
