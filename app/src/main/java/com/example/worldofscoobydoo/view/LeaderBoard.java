@@ -7,23 +7,26 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 import com.example.worldofscoobydoo.model.LeaderboardModel;
-import com.example.worldofscoobydoo.view.EndScreen;
 import com.example.worldofscoobydoo.viewModel.LeaderboardViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LeaderBoard extends AppCompatActivity {
-    int lastScore, score1, score2, score3, score4, score5;
-    String player;
-    String time;
-    LeaderboardViewModel leaderboardViewModel;
+    private int lastScore;
+    private int score1;
+    private int score2;
+    private int score3;
+    private int score4;
+    private int score5;
+    private String player;
+    private String time;
+    private LeaderboardViewModel leaderboardViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,7 @@ public class LeaderBoard extends AppCompatActivity {
         LeaderboardEntry best3 = entries[3];
         LeaderboardEntry best4 = entries[4];
 
-        if(lastScore > best0.getScore()) {
+        if (lastScore > best0.getScore()) {
             entries[0] = latestEntry;
             entries[1] = best0;
             entries[2] = best1;
@@ -88,8 +91,8 @@ public class LeaderBoard extends AppCompatActivity {
             entries[4] = latestEntry;
         }
 
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        LeaderboardAdapter leaderboardAdapter = new LeaderboardAdapter(entries); // Create your adapter
+        // recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LeaderboardAdapter leaderboardAdapter = new LeaderboardAdapter(entries);
         recyclerView.setAdapter(leaderboardAdapter);
 
         int[] scores = new int[5];
@@ -103,144 +106,6 @@ public class LeaderBoard extends AppCompatActivity {
         score3 = scores[2];
         score4 = scores[3];
         score5 = scores[4];
-
-
-////
-////        leaderBoard = (TextView) findViewById(R.id.leaderboard);
-////        currentScore = (TextView) findViewById(R.id.currentScore);
-////
-//
-////        best1 = first.getScore();
-////        best2 = second.getScore();
-////        best3 = third.getScore();
-////        best4 = fourth.getScore();
-////        best5 = fifth.getScore();
-//
-//
-////        player1 = first.getPlayerName();
-////        player2 = second.getPlayerName();
-////        player3 = third.getPlayerName();
-////        player4 = fourth.getPlayerName();
-////        player5 = fifth.getPlayerName();
-////
-//
-////        time1 = first.getDate();
-////        time2 = second.getDate();
-////        time3 = third.getDate();
-////        time4 = fourth.getDate();
-////        time5 = fifth.getDate();
-//
-//
-////
-//        newEntry = new LeaderboardEntry(player, lastScore, time);
-//        leaderboardViewModel.editLeaderboardEntry(newEntry);
-//        leaderboardViewModel.getLeaderboardEntries().observe(this, leaderboardEntries -> {
-//            // Update the adapter with new data
-//            leaderboardAdapter.submitList(leaderboardEntries);
-//        });
-//        leaderboardAdapter.notifyItemChanged(index);
-////        if (lastScore > best5) {
-////            best5 = lastScore;
-////            player5 = player;
-////            time5 = time;
-////            fifth = new LeaderboardEntry(player, lastScore, time);
-////        }
-////
-////        if (lastScore > best4) {
-////            int temp = best4;
-////            best4 = lastScore;
-////            best5 = temp;
-////            String temp2 = player4;
-////            player4 = player;
-////            player5 = temp2;
-////            String temp3 = time4;
-////            time4 = time;
-////            time5 = temp3;
-//////            SharedPreferences.Editor editor = pref.edit();
-//////            editor.putInt("best4", best4);
-//////            editor.putInt("best5", best5);
-//////            editor.putString("player4", player4);
-//////            editor.putString("player5", player5);
-//////            editor.putString("time4", time4);
-//////            editor.putString("time5", time5);
-//////            editor.apply();
-////            fifth = new LeaderboardEntry(player5, best5, time5);
-////            fourth = new LeaderboardEntry(player4, best4, time4);
-////        }
-////
-////        if (lastScore > best3) {
-////            int temp = best3;
-////            best3 = lastScore;
-////            best4 = temp;
-////            String temp2 = player3;
-////            player3 = player;
-////            player4 = temp2;
-////            String temp3 = time3;
-////            time3 = time;
-////            time4 = temp3;
-//////            SharedPreferences.Editor editor = pref.edit();
-//////            editor.putInt("best3", best3);
-//////            editor.putInt("best4", best4);
-//////            editor.putString("player3", player3);
-//////            editor.putString("player4", player4);
-//////            editor.putString("time3", time3);
-//////            editor.putString("time4", time4);
-//////            editor.apply();
-////            fourth = new LeaderboardEntry(player4, best4, time4);
-////            third = new LeaderboardEntry(player3, best3, time3);
-////        }
-////
-////        if (lastScore > best2) {
-////            int temp = best2;
-////            best2 = lastScore;
-////            best3 = temp;
-////            String temp2 = player2;
-////            player2 = player;
-////            player3 = temp2;
-////            String temp3 = time2;
-////            time2 = time;
-////            time3 = temp3;
-//////            SharedPreferences.Editor editor = pref.edit();
-//////            editor.putInt("best2", best2);
-//////            editor.putInt("best3", best3);
-//////            editor.putString("player2", player2);
-//////            editor.putString("player3", player3);
-//////            editor.putString("time2", time2);
-//////            editor.putString("time3", time3);
-//////            editor.apply();
-////            second = new LeaderboardEntry(player2, best2, time2);
-////            third = new LeaderboardEntry(player3, best3, time3);
-////        }
-////
-////        if (lastScore > best1) {
-////            int temp = best1;
-////            best1 = lastScore;
-////            best2 = temp;
-////            String temp2 = player1;
-////            player1 = player;
-////            player2 = temp2;
-////            String temp3 = time1;
-////            time1 = time;
-////            time2 = temp3;
-//////            SharedPreferences.Editor editor = pref.edit();
-//////            editor.putInt("best1", best1);
-//////            editor.putInt("best2", best2);
-//////            editor.putString("player1", player1);
-//////            editor.putString("player2", player2);
-//////            editor.putString("time1", time1);
-//////            editor.putString("time2", time2);
-//////            editor.apply();
-////            first = new LeaderboardEntry(player1, best1, time1);
-////            second = new LeaderboardEntry(player2, best2, time2);
-////        }
-//
-////        leaderBoard.setText(player1 + ",       " + best1 + ",      "  + time1 + "\n" +
-////                player2 + ",       " + best2 + ",       " + time2 + "\n" +
-////                player3 + ",       " + best3 + ",       " + time3 + "\n" +
-////                player4 + ",       " + best4 + ",       " + time4 + "\n" +
-////                player5 + ",       " + best5 + ",       " + time5 + "\n");
-        // currentScore.setText("YOUR SCORE: " + "\n" + lastScore + "\n" + time);
-
         Button back = findViewById(R.id.backButton);
         back.setOnClickListener(v -> {
             Intent leaderboard = new Intent(getApplicationContext(), EndScreen.class);
@@ -248,19 +113,11 @@ public class LeaderBoard extends AppCompatActivity {
         });
     }
 
-    public static boolean orderIsValid(int val1, int val2, int val3, int val4, int val5){
-        if (val1 >= val2 && val2 >= val3 && val3 >= val4 && val4 >= val5) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean orderIsValid(int val1, int val2, int val3, int val4, int val5) {
+        return val1 >= val2 && val2 >= val3 && val3 >= val4 && val4 >= val5;
     }
 
     public static boolean correctLengthBoard(LeaderboardModel model) {
-        if (model.getSize() == 5) {
-            return true;
-        } else {
-            return false;
-        }
+        return model.getSize() == 5;
     }
 }

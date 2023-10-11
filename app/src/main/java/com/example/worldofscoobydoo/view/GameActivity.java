@@ -9,14 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import com.example.worldofscoobydoo.R;
 
@@ -27,7 +19,12 @@ public class GameActivity extends AppCompatActivity {
     private double difficulty;
     private String sprite;
     private int score = 100;
-    public TextView scoreTextView;
+
+    public TextView getScoreTextView() {
+        return scoreTextView;
+    }
+
+    private TextView scoreTextView;
     private Handler handler = new Handler();
 
 
