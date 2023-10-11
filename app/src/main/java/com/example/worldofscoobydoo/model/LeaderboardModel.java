@@ -20,4 +20,5 @@ public class LeaderboardModel {
         public LeaderboardEntry[] getEntries() {
             return entries;
         }
+        public int getSize() {return 5;}
 }

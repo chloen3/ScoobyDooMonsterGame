@@ -22,4 +22,7 @@ public class LeaderboardViewModel extends ViewModel {
     public LeaderboardEntry[] getLeaderboardEntries() {
         return leaderboardEntriesList;
     }
+    public int getSize (LeaderboardEntry model){
+        return leaderboard.getSize();
+    }
 }

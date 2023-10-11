@@ -20,10 +20,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LeaderBoard extends AppCompatActivity {
-    TextView leaderBoard, currentScore;
-    int lastScore, best1, best2, best3, best4, best5;
-    String player, player1, player2, player3, player4, player5;
-    String time, time1, time2, time3, time4, time5;
+    int lastScore, score1, score2, score3, score4, score5;
+    String player;
+    String time;
+    LeaderboardViewModel leaderboardViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,10 @@ public class LeaderBoard extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
         time = sdf.format(new Date());
 
-        LeaderboardViewModel leaderboardViewModel = new ViewModelProvider(this).get(LeaderboardViewModel.class);
+        TextView currentTracker = findViewById(R.id.currentScore);
+        currentTracker.setText(player + "       " + lastScore + "\n" + time);
+
+        leaderboardViewModel = new ViewModelProvider(this).get(LeaderboardViewModel.class);
         LeaderboardEntry[] entries = leaderboardViewModel.getLeaderboardEntries();
         LeaderboardEntry latestEntry = new LeaderboardEntry(player, lastScore, time);
 
@@ -88,6 +91,19 @@ public class LeaderBoard extends AppCompatActivity {
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         LeaderboardAdapter leaderboardAdapter = new LeaderboardAdapter(entries); // Create your adapter
         recyclerView.setAdapter(leaderboardAdapter);
+
+        int[] scores = new int[5];
+        for (int i = 0; i < entries.length; i++) {
+            LeaderboardEntry curr = entries[i];
+            int num = curr.getScore();
+            scores[i] = num;
+        }
+        score1 = scores[0];
+        score2 = scores[1];
+        score3 = scores[2];
+        score4 = scores[3];
+        score5 = scores[4];
+
 
 ////
 ////        leaderBoard = (TextView) findViewById(R.id.leaderboard);
@@ -223,12 +239,28 @@ public class LeaderBoard extends AppCompatActivity {
 ////                player3 + ",       " + best3 + ",       " + time3 + "\n" +
 ////                player4 + ",       " + best4 + ",       " + time4 + "\n" +
 ////                player5 + ",       " + best5 + ",       " + time5 + "\n");
-////        currentScore.setText("YOUR SCORE: " + "\n" + lastScore + "\n" + time);
+        // currentScore.setText("YOUR SCORE: " + "\n" + lastScore + "\n" + time);
 
         Button back = findViewById(R.id.backButton);
         back.setOnClickListener(v -> {
             Intent leaderboard = new Intent(getApplicationContext(), EndScreen.class);
             startActivity(leaderboard);
         });
+    }
+
+    public static boolean orderIsValid(int val1, int val2, int val3, int val4, int val5){
+        if (val1 >= val2 && val2 >= val3 && val3 >= val4 && val4 >= val5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean correctLengthBoard(LeaderboardModel model) {
+        if (model.getSize() == 5) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
