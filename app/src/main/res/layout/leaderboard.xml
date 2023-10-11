@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/leaderboardBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/endscreen" />
-
     <TextView
         android:id="@+id/editTextText2"
         android:layout_width="229dp"
@@ -51,25 +40,6 @@
         app:layout_constraintVertical_bias="0.943" />
 
     <TextView
-        android:id="@+id/leaderboard"
-        android:layout_width="386dp"
-        android:layout_height="192dp"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/butcherman"
-        android:lineSpacingExtra="10dp"
-        android:text="Leaderboard"
-        android:textAlignment="center"
-        android:textColor="#FFEB3B"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/leaderboardBackground"
-        app:layout_constraintHorizontal_bias="0.946"
-        app:layout_constraintStart_toStartOf="@+id/leaderboardBackground"
-        app:layout_constraintTop_toTopOf="@+id/leaderboardBackground"
-        app:layout_constraintVertical_bias="0.733" />
-
-    <TextView
         android:id="@+id/currentScore"
         android:layout_width="225dp"
         android:layout_height="112dp"
@@ -78,27 +48,39 @@
         android:textAlignment="center"
         android:textColor="#FFEB3B"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/leaderboardBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
-        app:layout_constraintStart_toStartOf="@+id/leaderboardBackground"
-        app:layout_constraintTop_toTopOf="@+id/leaderboardBackground"
-        app:layout_constraintVertical_bias="0.433" />
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="95dp" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
         android:fontFamily="@font/butcherman"
         android:text="Current"
         android:textAlignment="center"
         android:textColor="#FFEB3B"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/leaderboardBackground"
-        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintVertical_bias="0.024" />
+
+    <!-- activity_leaderboard.xml -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_leaderboard"
+        android:layout_width="268dp"
+        android:layout_height="305dp"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.595"
+        tools:itemCount="5"
+        tools:listitem="@layout/leaderboard_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
