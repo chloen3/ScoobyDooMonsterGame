@@ -73,8 +73,7 @@ public class InitialConfiguration extends AppCompatActivity {
 
             if (!nameIsValid(name)) {
                 nameInput.setError("Please enter a name");
-            } else
-                if (!setDifficulty) {
+            } else if (!setDifficulty) {
                 nameInput.setError("Choose a difficulty.");
             } else if (!characterIsValid(sprite)) {
                 nameInput.setError("Choose a character.");
