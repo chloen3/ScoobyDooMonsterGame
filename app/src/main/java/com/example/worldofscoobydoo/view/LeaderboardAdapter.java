@@ -32,7 +32,6 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         holder.playerNameTextView.setText(entry.getPlayerName());
         holder.scoreTextView.setText(String.valueOf(entry.getScore()));
         holder.dateTextView.setText(String.valueOf(entry.getDate()));
-        System.out.println("BindViewHolder");
     }
 
     @Override

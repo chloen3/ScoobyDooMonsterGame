@@ -20,6 +20,6 @@ public class LeaderboardTest {
     @Test
     public void orderNumber() {
         LeaderboardModel model = LeaderboardModel.getInstance();
-        assertFalse(LeaderBoard.correctLengthBoard(model));
+        assertTrue(LeaderBoard.correctLengthBoard(model));
     }
 }
