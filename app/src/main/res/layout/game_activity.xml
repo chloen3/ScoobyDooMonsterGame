@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/gameactivity" />
+        app:srcCompat="@drawable/room1" />
 
     <EditText
         android:id="@+id/score_title"
