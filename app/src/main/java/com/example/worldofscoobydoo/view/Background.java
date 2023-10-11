@@ -1,8 +1,10 @@
-package com.example.worldofscoobydoo;
+package com.example.worldofscoobydoo.view;
 
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+
+import com.example.worldofscoobydoo.R;
 
 
 public class Background {
