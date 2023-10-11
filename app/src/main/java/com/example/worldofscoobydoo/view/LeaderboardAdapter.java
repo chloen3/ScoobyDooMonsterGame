@@ -11,9 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
     private LeaderboardEntry[] entries;
@@ -24,7 +21,8 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboard_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboard_item,
+                parent, false);
         return new ViewHolder(view);
     }
 
@@ -34,7 +32,6 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         holder.playerNameTextView.setText(entry.getPlayerName());
         holder.scoreTextView.setText(String.valueOf(entry.getScore()));
         holder.dateTextView.setText(String.valueOf(entry.getDate()));
-        System.out.println("BindViewHolder");
     }
 
     @Override
@@ -43,9 +40,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView playerNameTextView;
-        TextView scoreTextView;
-        TextView dateTextView;
+        private TextView playerNameTextView;
+        private TextView scoreTextView;
+        private TextView dateTextView;
 
         ViewHolder(View itemView) {
             super(itemView);

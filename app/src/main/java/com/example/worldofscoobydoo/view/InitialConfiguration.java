@@ -14,6 +14,14 @@ import com.example.worldofscoobydoo.R;
 public class InitialConfiguration extends AppCompatActivity {
     private String name;
     private String sprite;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,24 +56,25 @@ public class InitialConfiguration extends AppCompatActivity {
 
             switch (spriteRadioGroup.getCheckedRadioButtonId()) {
             case R.id.ScoobyBtn:
-                sprite = "scooby";
+                setSprite("scooby");
                 break;
             case R.id.DaphneBtn:
-                sprite = "daphne";
+                setSprite("daphne");
                 break;
             case R.id.FredBtn:
-                sprite = "fred";
+                setSprite("fred");
                 break;
             default:
             }
 
             EditText input = findViewById(R.id.editTextText);
             String inputName = input.getText().toString();
-            name = inputName;
+            setName(inputName);
 
-            if (!nameIsValid(inputName)) {
-                nameInput.setError("Please enter a name");
-            } else if (!setDifficulty) {
+            //if (nameIsValid(name)) {
+                //nameInput.setError("Please enter a name");
+            //} else
+                if (!setDifficulty) {
                 nameInput.setError("Choose a difficulty.");
             } else if (!characterIsValid(sprite)) {
                 nameInput.setError("Choose a character.");
@@ -80,26 +89,14 @@ public class InitialConfiguration extends AppCompatActivity {
         });
     }
     public static boolean nameIsValid(String inputName) {
-        if (inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0));
     }
 
     public static boolean difficultyIsValid(double difficulty) {
-        if (!(difficulty == 1 || difficulty == 0.75 || difficulty == 0.5)) {
-            return false;
-        } else {
-            return true;
-        }
+        return difficulty == 1 || difficulty == 0.75 || difficulty == 0.5;
     }
 
     public static boolean characterIsValid(String sprite) {
-        if (!(sprite == "scooby" || sprite == "daphne" || sprite == "fred")) {
-            return false;
-        } else {
-            return true;
-        }
+        return sprite == "scooby" || sprite == "daphne" || sprite == "fred";
     }
 }

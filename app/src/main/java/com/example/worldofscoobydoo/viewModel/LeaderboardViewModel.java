@@ -1,9 +1,6 @@
 package com.example.worldofscoobydoo.viewModel;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import java.util.List;
 
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 import com.example.worldofscoobydoo.model.LeaderboardModel;
@@ -21,5 +18,8 @@ public class LeaderboardViewModel extends ViewModel {
 
     public LeaderboardEntry[] getLeaderboardEntries() {
         return leaderboardEntriesList;
+    }
+    public int getSize(LeaderboardEntry model) {
+        return leaderboard.getSize();
     }
 }

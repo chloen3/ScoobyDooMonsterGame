@@ -1,7 +1,5 @@
 package com.example.worldofscoobydoo.model;
 
-import java.util.UUID;
-
 public class LeaderboardEntry {
     private String playerName;
     private int score;

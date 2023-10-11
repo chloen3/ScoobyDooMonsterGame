@@ -10,8 +10,17 @@ import com.example.worldofscoobydoo.R;
 
 public class EndScreen extends AppCompatActivity {
 
-    EditText lastScore;
-    int prevScore;
+    private EditText lastScore;
+    private int prevScore;
+
+    public EditText getLastScore() {
+        return lastScore;
+    }
+
+    public int getPrevScore() {
+        return prevScore;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +29,7 @@ public class EndScreen extends AppCompatActivity {
         lastScore = findViewById(R.id.userStatus);
         SharedPreferences pref = getSharedPreferences("PREFS", 0);
         prevScore = pref.getInt("lastScore", 0);
-        lastScore.setText("Previous Score: " + prevScore);
+        lastScore.setText("Your Score: " + prevScore);
         Button leaderButton = findViewById(R.id.finalLeaderboard);
         leaderButton.setOnClickListener(v -> {
             Intent leaderboard = new Intent(getApplicationContext(), LeaderBoard.class);

@@ -1,23 +1,28 @@
 package com.example.worldofscoobydoo.model;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LeaderboardModel {
-        private static LeaderboardModel instance;
-        private LeaderboardEntry[] entries;
+    private static volatile LeaderboardModel instance;
 
-        private LeaderboardModel() {
-            entries = new LeaderboardEntry[5];
-        }
+    public void setEntries(LeaderboardEntry[] entries) {
+        this.entries = entries;
+    }
 
-        public static LeaderboardModel getInstance() {
-            if (instance == null) {
-                instance = new LeaderboardModel();
-            }
-            return instance;
-        }
+    private LeaderboardEntry[] entries = new LeaderboardEntry[5];
 
-        public LeaderboardEntry[] getEntries() {
-            return entries;
+    private LeaderboardModel() { };
+
+    public static LeaderboardModel getInstance() {
+        if (instance == null) {
+            instance = new LeaderboardModel();
         }
+        return instance;
+    }
+
+    public LeaderboardEntry[] getEntries() {
+        return entries;
+    }
+
+    public int getSize() {
+        return 5;
+    }
 }
