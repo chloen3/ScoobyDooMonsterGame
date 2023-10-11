@@ -88,11 +88,11 @@ public class InitialConfiguration extends AppCompatActivity {
         });
     }
     public static boolean nameIsValid(String inputName) {
-        return inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0);
+        return !(inputName == null || inputName.isEmpty() || (inputName.trim().length() == 0));
     }
 
     public static boolean difficultyIsValid(double difficulty) {
-        return !(difficulty == 1 || difficulty == 0.75 || difficulty == 0.5);
+        return difficulty == 1 || difficulty == 0.75 || difficulty == 0.5;
     }
 
     public static boolean characterIsValid(String sprite) {
