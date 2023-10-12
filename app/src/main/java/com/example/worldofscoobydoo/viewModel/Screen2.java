@@ -1,48 +1,39 @@
-package com.example.worldofscoobydoo.view;
+package com.example.worldofscoobydoo.viewModel;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.worldofscoobydoo.R;
 
+public class Screen2 extends AppCompatActivity {
 
-public class GameActivity extends AppCompatActivity {
-
-    private String name;
-    private double difficulty;
-    private String sprite;
-    private int score = 100;
-
-    public TextView getScoreTextView() {
-        return scoreTextView;
-    }
-
+    private int score;
     private TextView scoreTextView;
     private Handler handler = new Handler();
 
-
-    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game_activity);
+        setContentView(R.layout.screen2);
 
-        name = getIntent().getStringExtra("name");
-        difficulty = getIntent().getDoubleExtra("difficulty", 1);
-        sprite = getIntent().getStringExtra("sprite");
+        String name = getIntent().getStringExtra("name");
+        double difficulty = getIntent().getDoubleExtra("difficulty", 1);
+        String sprite = getIntent().getStringExtra("sprite");
+        score = getIntent().getIntExtra("score", 100);
 
-        TextView nameReceiver = findViewById(R.id.textView4);
+        TextView nameReceiver = findViewById(R.id.textView_2);
         nameReceiver.setText(name);
 
-        TextView difficultyReciever = findViewById(R.id.health_status);
+        TextView difficultyReceiver = findViewById(R.id.health_status_2);
         String diff = String.valueOf(difficulty * 100.0);
-        difficultyReciever.setText(diff);
+        difficultyReceiver.setText(diff);
 
-        ImageView spriteImg = findViewById(R.id.imageView);
+        ImageView spriteImg = findViewById(R.id.imageView_2);
         if ("scooby".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.scooby_png);
         } else if ("daphne".equals(sprite)) {
@@ -52,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         // Initialize the score TextView
-        scoreTextView = findViewById(R.id.scoreTextView);
+        scoreTextView = findViewById(R.id.scoreTextView_2);
         updateScore(score); // Update the initial score on the screen
 
         //Define the score updater Runnable
@@ -65,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
                     handler.postDelayed(this, 1000); // Repeat every 1 second
                 } else {
                     // Handle game over scenario here
-                    Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                    Intent intent = new Intent(Screen2.this, EndScreen.class);
                     startActivity(intent);
                 }
             }
@@ -74,9 +65,9 @@ public class GameActivity extends AppCompatActivity {
         //Start updating the score
         handler.postDelayed(scoreUpdater, 1000);
 
-        Button moveScreen2 = findViewById(R.id.move_screen2_Button);
+        Button moveScreen2 = findViewById(R.id.move_Screen3_Button);
         moveScreen2.setOnClickListener(v -> {
-            Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
+            Intent nextScreen = new Intent(Screen2.this, Screen3.class);
             nextScreen.putExtra("difficulty", difficulty);
             nextScreen.putExtra("name", name);
             nextScreen.putExtra("sprite", sprite);
@@ -85,11 +76,8 @@ public class GameActivity extends AppCompatActivity {
         });
 
     }
-
-    // Helper method to update the score on the screen
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
     }
 }
-
 

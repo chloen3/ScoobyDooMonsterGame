@@ -3,7 +3,7 @@ package com.example.worldofscoobydoo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import com.example.worldofscoobydoo.view.InitialConfiguration;
+import com.example.worldofscoobydoo.viewModel.InitialConfiguration;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
