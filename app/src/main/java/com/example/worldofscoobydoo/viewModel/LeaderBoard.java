@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo.view;
+package com.example.worldofscoobydoo.viewModel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 import com.example.worldofscoobydoo.model.LeaderboardModel;
-import com.example.worldofscoobydoo.viewModel.LeaderboardViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

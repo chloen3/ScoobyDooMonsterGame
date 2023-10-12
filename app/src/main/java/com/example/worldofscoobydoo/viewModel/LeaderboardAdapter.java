@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo.view;
+package com.example.worldofscoobydoo.viewModel;
 
 import android.view.LayoutInflater;
 import android.view.View;
