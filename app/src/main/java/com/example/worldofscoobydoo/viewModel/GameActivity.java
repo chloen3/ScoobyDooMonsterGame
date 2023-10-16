@@ -4,11 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Player;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -23,13 +27,19 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private TextView scoreTextView;
+    private Player instance;
     private Handler handler = new Handler();
+    private float x;
+    private float y;
+    private float prevx;
+    private float prevy;
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
+        instance = Player.getPlayer();
 
         name = getIntent().getStringExtra("name");
         difficulty = getIntent().getDoubleExtra("difficulty", 1);
@@ -50,6 +60,39 @@ public class GameActivity extends AppCompatActivity {
         } else if ("fred".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.fred_png);
         }
+
+        View user = findViewById(android.R.id.content);
+        user.setFocusable(true);
+        user.setFocusableInTouchMode(true);
+        user.requestFocus();
+        user.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int key, KeyEvent event) {
+                prevx = 0;
+                prevy = 0;
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch (key) {
+                        case KeyEvent.KEYCODE_DPAD_UP:
+                            prevy -= 10;
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_DOWN:
+                            prevy += 10;
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_LEFT:
+                            prevx -= 10;
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_RIGHT:
+                            prevx += 10;
+                            break;
+                    }
+                    x = spriteImg.getX() + prevx;
+                    y = spriteImg.getY() + prevy;
+                    spriteImg.setX(x);
+                    spriteImg.setY(y);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreTextView);
