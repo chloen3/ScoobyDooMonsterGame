@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +30,8 @@ public class Screen3 extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
+        getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.screen3);
 
         name = getIntent().getStringExtra("name");
@@ -63,16 +66,16 @@ public class Screen3 extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            prevy -= 10;
+                            prevy -= 50;
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            prevy += 10;
+                            prevy += 50;
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-                            prevx -= 10;
+                            prevx -= 50;
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
-                            prevx += 10;
+                            prevx += 50;
                             break;
                     }
                     x = spriteImg.getX() + prevx;
