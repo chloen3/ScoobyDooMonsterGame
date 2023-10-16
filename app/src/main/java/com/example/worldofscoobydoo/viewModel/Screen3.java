@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +22,10 @@ public class Screen3 extends AppCompatActivity {
     private int score;
     private TextView scoreTextView;
     private Handler handler = new Handler();
+    private float x;
+    private float y;
+    private int prevx;
+    private int prevy;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,39 @@ public class Screen3 extends AppCompatActivity {
         } else if ("fred".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.fred_png);
         }
+
+        View user = findViewById(android.R.id.content);
+        user.setFocusable(true);
+        user.setFocusableInTouchMode(true);
+        user.requestFocus();
+        user.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int key, KeyEvent event) {
+                prevx = 0;
+                prevy = 0;
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch (key) {
+                        case KeyEvent.KEYCODE_DPAD_UP:
+                            prevy -= 10;
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_DOWN:
+                            prevy += 10;
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_LEFT:
+                            prevx -= 10;
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_RIGHT:
+                            prevx += 10;
+                            break;
+                    }
+                    x = spriteImg.getX() + prevx;
+                    y = spriteImg.getY() + prevy;
+                    spriteImg.setX(x);
+                    spriteImg.setY(y);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreTextView_3);
