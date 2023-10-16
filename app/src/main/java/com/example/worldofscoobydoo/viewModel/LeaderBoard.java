@@ -1,6 +1,7 @@
 package com.example.worldofscoobydoo.viewModel;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.SharedPreferences;
@@ -35,6 +36,8 @@ public class LeaderBoard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
+        getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.leaderboard);
 
         SharedPreferences pref = getSharedPreferences("PREFS", 0);
