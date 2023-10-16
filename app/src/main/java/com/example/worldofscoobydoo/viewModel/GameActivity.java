@@ -75,16 +75,16 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            prevy -= 50;
+                            prevy -= 80;
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            prevy += 50;
+                            prevy += 80;
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-                            prevx -= 50;
+                            prevx -= 80;
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
-                            prevx += 50;
+                            prevx += 80;
                             break;
                     }
                     x = spriteImg.getX() + prevx;
