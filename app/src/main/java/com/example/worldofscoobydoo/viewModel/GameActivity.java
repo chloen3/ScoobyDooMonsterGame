@@ -36,9 +36,14 @@ public class GameActivity extends AppCompatActivity {
     private float prevy;
     private int screenWidth, screenHeight;
 
+    private String strategy;
+
+    private MovementStrategy movementStrategy;
+
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
@@ -48,6 +53,15 @@ public class GameActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         difficulty = getIntent().getDoubleExtra("difficulty", 1);
         sprite = getIntent().getStringExtra("sprite");
+        strategy = getIntent().getStringExtra("strategy");
+
+        if (strategy.equals("easy")) {
+            movementStrategy = new MovementFast();
+        } else if (strategy.equals("medium")) {
+            movementStrategy = new MovementMedium();
+        } else {
+            movementStrategy = new MovementSlow();
+        }
 
         TextView nameReceiver = findViewById(R.id.textView4);
         nameReceiver.setText(name);
@@ -83,16 +97,16 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            prevy -= 80;
+                            movementStrategy.moveUp(spriteImg, screenHeight);
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            prevy += 80;
+                            movementStrategy.moveDown(spriteImg);
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-                            prevx -= 80;
+                            movementStrategy.moveLeft(spriteImg);
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
-                            prevx += 80;
+                            movementStrategy.moveRight(spriteImg, screenWidth);
                             break;
                     }
                     x = spriteImg.getX() + prevx;
