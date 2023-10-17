@@ -53,7 +53,6 @@ public class GameActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         difficulty = getIntent().getDoubleExtra("difficulty", 1);
         sprite = getIntent().getStringExtra("sprite");
-        strategy = getIntent().getStringExtra("strategy");
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow();
@@ -92,8 +91,6 @@ public class GameActivity extends AppCompatActivity {
         user.requestFocus();
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
-                prevx = 0;
-                prevy = 0;
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
@@ -109,12 +106,6 @@ public class GameActivity extends AppCompatActivity {
                             movementStrategy.moveRight(spriteImg, screenWidth);
                             break;
                     }
-                    x = spriteImg.getX() + prevx;
-                    y = spriteImg.getY() + prevy;
-                    x = Math.max(80, Math.min(x, screenWidth - prevx - 80));
-                    y = Math.max(80, Math.min(y, screenHeight - prevy - 160));
-                    spriteImg.setX(x);
-                    spriteImg.setY(y);
                     return true;
                 }
                 return false;
