@@ -24,6 +24,7 @@ public class Screen2 extends AppCompatActivity {
     private int prevx;
     private int prevy;
     private int screenWidth, screenHeight;
+    private MovementStrategy movementStrategy;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,14 @@ public class Screen2 extends AppCompatActivity {
         double difficulty = getIntent().getDoubleExtra("difficulty", 1);
         String sprite = getIntent().getStringExtra("sprite");
         score = getIntent().getIntExtra("score", 100);
+
+        if (difficulty == .5) {
+            movementStrategy = new MovementSlow();
+        } else if (difficulty == .75) {
+            movementStrategy = new MovementMedium();
+        } else {
+            movementStrategy = new MovementFast();
+        }
 
         TextView nameReceiver = findViewById(R.id.textView_2);
         nameReceiver.setText(name);
@@ -65,29 +74,21 @@ public class Screen2 extends AppCompatActivity {
         user.requestFocus();
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
-                prevx = 0;
-                prevy = 0;
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            prevy -= 80;
+                            movementStrategy.moveUp(spriteImg);
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            prevy += 80;
+                            movementStrategy.moveDown(spriteImg, screenHeight);
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-                            prevx -= 80;
+                            movementStrategy.moveLeft(spriteImg);
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
-                            prevx += 80;
+                            movementStrategy.moveRight(spriteImg, screenWidth);
                             break;
                     }
-                    x = spriteImg.getX() + prevx;
-                    y = spriteImg.getY() + prevy;
-                    x = Math.max(80, Math.min(x, screenWidth - prevx - 80));
-                    y = Math.max(80, Math.min(y, screenHeight - prevy - 160));
-                    spriteImg.setX(x);
-                    spriteImg.setY(y);
                     return true;
                 }
                 return false;
