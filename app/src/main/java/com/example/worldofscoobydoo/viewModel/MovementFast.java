@@ -25,6 +25,6 @@ public class MovementFast implements MovementStrategy {
     @Override
     public void moveDown(ImageView spriteImg, int screenHeight) {
         // Implement fast movement downward
-        spriteImg.setY(Math.min(spriteImg.getY() + 80, screenHeight - 160));
+        spriteImg.setY(Math.min(spriteImg.getY() + 80, screenHeight - 240));
     }
 }

@@ -25,6 +25,6 @@ public class MovementMedium implements MovementStrategy {
     @Override
     public void moveDown(ImageView spriteImg, int screenHeight) {
         // Implement fast movement downward
-        spriteImg.setY(Math.min(spriteImg.getY() + 60, screenHeight - 160));
+        spriteImg.setY(Math.min(spriteImg.getY() + 60, screenHeight - 240));
     }
 }
