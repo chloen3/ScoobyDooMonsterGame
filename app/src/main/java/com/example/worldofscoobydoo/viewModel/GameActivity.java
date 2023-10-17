@@ -92,18 +92,36 @@ public class GameActivity extends AppCompatActivity {
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    float futureX;
+                    float futureY;
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            movementStrategy.moveUp(spriteImg);
+                            futureX = spriteImg.getX();
+                            futureY = spriteImg.getY() - 80;
+                            if (!checkCollision_GOING_UP(futureX, futureY)){
+                                movementStrategy.moveUp(spriteImg);
+                            }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            movementStrategy.moveDown(spriteImg, screenHeight);
+                            futureX = spriteImg.getX();
+                            futureY = spriteImg.getY() + 80;
+                            if (!checkCollision_GOING_DOWN(futureX, futureY)) {
+                                movementStrategy.moveDown(spriteImg, screenHeight);
+                            }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-                            movementStrategy.moveLeft(spriteImg);
+                            futureX = spriteImg.getX() - 80;
+                            futureY = spriteImg.getY();
+                            if(!checkCollision_GOING_LEFT(futureX, futureY)){
+                                movementStrategy.moveLeft(spriteImg);
+                            }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
-                            movementStrategy.moveRight(spriteImg, screenWidth);
+                            futureX = spriteImg.getX() + 80;
+                            futureY = spriteImg.getY();
+                            if(!checkCollision_GOING_RIGHT(futureX, futureY)){
+                                movementStrategy.moveRight(spriteImg, screenWidth);
+                            }
                             break;
                     }
                     return true;
@@ -151,6 +169,80 @@ public class GameActivity extends AppCompatActivity {
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
     }
-}
+
+    // check for collisions
+    // return true if collision detected false otherwise
+    public boolean checkCollision_GOING_RIGHT(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView);
+        float playerX =  x;
+        float playerY =  y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ImageView collisionBox = findViewById(R.id.collisionBox);
+        float objX = collisionBox.getX();
+        float objY = collisionBox.getY();
+        int objWidth = collisionBox.getWidth();
+        int objHeight = collisionBox.getHeight();
+        //check for collision
+        if ((playerX + playerWidth >= objX) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
+            return true;
+        }
+        return false;
+    }
+    public boolean checkCollision_GOING_LEFT(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView);
+        float playerX =  x;
+        float playerY =  y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ImageView collisionBox = findViewById(R.id.collisionBox);
+        float objX = collisionBox.getX();
+        float objY = collisionBox.getY();
+        int objWidth = collisionBox.getWidth();
+        int objHeight = collisionBox.getHeight();
+
+        if ((playerX <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkCollision_GOING_DOWN(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView);
+        float playerX =  x;
+        float playerY =  y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ImageView collisionBox = findViewById(R.id.collisionBox);
+        float objX = collisionBox.getX();
+        float objY = collisionBox.getY();
+        int objWidth = collisionBox.getWidth();
+        int objHeight = collisionBox.getHeight();
+        if ((playerY + playerHeight >= objY) && (playerX + playerWidth >= objX) && (playerX <= objX + objWidth)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkCollision_GOING_UP(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView);
+        float playerX =  x;
+        float playerY =  y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ImageView collisionBox = findViewById(R.id.collisionBox);
+        float objX = collisionBox.getX();
+        float objY = collisionBox.getY();
+        int objWidth = collisionBox.getWidth();
+        int objHeight = collisionBox.getHeight();
+
+        if ((playerY <= objY + objHeight) && (playerX + playerWidth >= objX) && (playerX <= objX + objWidth)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    }
 
 
