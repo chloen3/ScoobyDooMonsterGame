@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
     private float y;
     private float prevx;
     private float prevy;
+    private int screenWidth, screenHeight;
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -64,6 +65,9 @@ public class GameActivity extends AppCompatActivity {
             spriteImg.setImageResource(R.drawable.fred_png);
         }
 
+        screenWidth = getResources().getDisplayMetrics().widthPixels;
+        screenHeight = getResources().getDisplayMetrics().heightPixels;
+
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
         user.setFocusableInTouchMode(true);
@@ -89,6 +93,8 @@ public class GameActivity extends AppCompatActivity {
                     }
                     x = spriteImg.getX() + prevx;
                     y = spriteImg.getY() + prevy;
+                    x = Math.max(80, Math.min(x, screenWidth - prevx - 80));
+                    y = Math.max(80, Math.min(y, screenHeight - prevy - 160));
                     spriteImg.setX(x);
                     spriteImg.setY(y);
                     return true;
