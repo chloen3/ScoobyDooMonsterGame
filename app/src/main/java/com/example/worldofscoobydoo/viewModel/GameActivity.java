@@ -63,6 +63,10 @@ public class GameActivity extends AppCompatActivity {
             spriteImg.setImageResource(R.drawable.daphne_png);
         } else if ("fred".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.fred_png);
+        } else if ("velma".equals(sprite)) {
+            spriteImg.setImageResource(R.drawable.velma_png);
+        } else if ("shaggy".equals(sprite)) {
+            spriteImg.setImageResource(R.drawable.shaggy_png);
         }
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;

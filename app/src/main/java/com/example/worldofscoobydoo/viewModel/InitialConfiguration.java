@@ -33,40 +33,45 @@ public class InitialConfiguration extends AppCompatActivity {
         EditText nameInput = findViewById(R.id.editTextText); // Name Input
 
         startBtn.setOnClickListener(v -> {
-            boolean setDifficulty = false;
-            double difficulty = 1;
+                    boolean setDifficulty = false;
+                    double difficulty = 1;
 
-            RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
-            RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
-            switch (difficultyRadioGroup.getCheckedRadioButtonId()) {
-            case R.id.radioEasy:
-                difficulty = 1;
-                setDifficulty = true;
-                break;
-            case R.id.radioMedium:
-                difficulty = 0.75;
-                setDifficulty = true;
-                break;
-            case R.id.radioHard:
-                difficulty = 0.5;
-                setDifficulty = true;
-                break;
-            default:
-            }
+                    RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
+                    RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
+                    switch (difficultyRadioGroup.getCheckedRadioButtonId()) {
+                        case R.id.radioEasy:
+                            difficulty = 1;
+                            setDifficulty = true;
+                            break;
+                        case R.id.radioMedium:
+                            difficulty = 0.75;
+                            setDifficulty = true;
+                            break;
+                        case R.id.radioHard:
+                            difficulty = 0.5;
+                            setDifficulty = true;
+                            break;
+                        default:
+                    }
 
-            switch (spriteRadioGroup.getCheckedRadioButtonId()) {
-            case R.id.ScoobyBtn:
-                setSprite("scooby");
-                break;
-            case R.id.DaphneBtn:
-                setSprite("daphne");
-                break;
-            case R.id.FredBtn:
-                setSprite("fred");
-                break;
-            default:
-            }
-
+                    switch (spriteRadioGroup.getCheckedRadioButtonId()) {
+                        case R.id.ScoobyBtn:
+                            setSprite("scooby");
+                            break;
+                        case R.id.DaphneBtn:
+                            setSprite("daphne");
+                            break;
+                        case R.id.FredBtn:
+                            setSprite("fred");
+                            break;
+                        case R.id.VelmaBtn:
+                            setSprite("velma");
+                            break;
+                        case R.id.ShaggyBtn:
+                            setSprite("shaggy");
+                            break;
+                        default:
+                    }
             EditText input = findViewById(R.id.editTextText);
             String inputName = input.getText().toString();
             setName(inputName);
@@ -96,6 +101,6 @@ public class InitialConfiguration extends AppCompatActivity {
     }
 
     public static boolean characterIsValid(String sprite) {
-        return sprite == "scooby" || sprite == "daphne" || sprite == "fred";
+        return sprite == "scooby" || sprite == "daphne" || sprite == "fred" || sprite == "velma"|| sprite == "shaggy";
     }
 }
