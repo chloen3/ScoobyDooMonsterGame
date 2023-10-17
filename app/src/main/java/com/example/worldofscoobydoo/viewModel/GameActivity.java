@@ -55,12 +55,12 @@ public class GameActivity extends AppCompatActivity {
         sprite = getIntent().getStringExtra("sprite");
         strategy = getIntent().getStringExtra("strategy");
 
-        if (strategy.equals("easy")) {
-            movementStrategy = new MovementFast();
-        } else if (strategy.equals("medium")) {
+        if (difficulty == .5) {
+            movementStrategy = new MovementSlow();
+        } else if (difficulty == .75) {
             movementStrategy = new MovementMedium();
         } else {
-            movementStrategy = new MovementSlow();
+            movementStrategy = new MovementFast();
         }
 
         TextView nameReceiver = findViewById(R.id.textView4);
@@ -97,10 +97,10 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            movementStrategy.moveUp(spriteImg, screenHeight);
+                            movementStrategy.moveUp(spriteImg);
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            movementStrategy.moveDown(spriteImg);
+                            movementStrategy.moveDown(spriteImg, screenHeight);
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
                             movementStrategy.moveLeft(spriteImg);
