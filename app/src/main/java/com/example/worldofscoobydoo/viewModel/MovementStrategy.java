@@ -4,7 +4,7 @@ import android.widget.ImageView;
 public interface MovementStrategy {
     void moveRight(ImageView spriteImg, int screenWidth);
     void moveLeft(ImageView spriteImg);
-    void moveUp(ImageView spriteImg, int screenHeight);
-    void moveDown(ImageView spriteImg);
+    void moveUp(ImageView spriteImg);
+    void moveDown(ImageView spriteImg, int screenHeight);
 }
 

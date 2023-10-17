@@ -38,22 +38,18 @@ public class InitialConfiguration extends AppCompatActivity {
 
             RadioGroup spriteRadioGroup = findViewById(R.id.spriteRadio);
             RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
-            String strategy = null;
             switch (difficultyRadioGroup.getCheckedRadioButtonId()) {
                 case R.id.radioEasy:
                     difficulty = 1;
                     setDifficulty = true;
-                    strategy = "fast";
                     break;
                 case R.id.radioMedium:
                     difficulty = 0.75;
                     setDifficulty = true;
-                    strategy = "medium";
                     break;
                 case R.id.radioHard:
                     difficulty = 0.5;
                     setDifficulty = true;
-                    strategy = "slow";
                     break;
                 default:
             }
@@ -92,7 +88,6 @@ public class InitialConfiguration extends AppCompatActivity {
                 game.putExtra("difficulty", difficulty);
                 game.putExtra("name", name);
                 game.putExtra("sprite", sprite);
-                game.putExtra("strategy", strategy);
                 startActivity(game);
                 finish();
             }
