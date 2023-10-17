@@ -98,28 +98,28 @@ public class GameActivity extends AppCompatActivity {
                         case KeyEvent.KEYCODE_DPAD_UP:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
-                            if (!checkCollision_GOING_UP(futureX, futureY)){
+                            if (!checkCollision(futureX, futureY)){
                                 movementStrategy.moveUp(spriteImg);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() + 80;
-                            if (!checkCollision_GOING_DOWN(futureX, futureY)) {
+                            if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
                             futureX = spriteImg.getX() - 80;
                             futureY = spriteImg.getY();
-                            if(!checkCollision_GOING_LEFT(futureX, futureY)){
+                            if(!checkCollision(futureX, futureY)){
                                 movementStrategy.moveLeft(spriteImg);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
                             futureX = spriteImg.getX() + 80;
                             futureY = spriteImg.getY();
-                            if(!checkCollision_GOING_RIGHT(futureX, futureY)){
+                            if(!checkCollision(futureX, futureY)){
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                             }
                             break;
@@ -172,7 +172,7 @@ public class GameActivity extends AppCompatActivity {
 
     // check for collisions
     // return true if collision detected false otherwise
-    public boolean checkCollision_GOING_RIGHT(float x, float y) {
+    public boolean checkCollision(float x, float y) {
         ImageView spriteImg = findViewById(R.id.imageView);
         float playerX =  x;
         float playerY =  y;
@@ -184,65 +184,11 @@ public class GameActivity extends AppCompatActivity {
         int objWidth = collisionBox.getWidth();
         int objHeight = collisionBox.getHeight();
         //check for collision
-        if ((playerX + playerWidth >= objX) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
+        if ((playerX + playerWidth >= objX) && (playerX + playerWidth <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
             return true;
         }
         return false;
     }
-    public boolean checkCollision_GOING_LEFT(float x, float y) {
-        ImageView spriteImg = findViewById(R.id.imageView);
-        float playerX =  x;
-        float playerY =  y;
-        float playerWidth = spriteImg.getWidth();
-        float playerHeight = spriteImg.getHeight();
-        ImageView collisionBox = findViewById(R.id.collisionBox);
-        float objX = collisionBox.getX();
-        float objY = collisionBox.getY();
-        int objWidth = collisionBox.getWidth();
-        int objHeight = collisionBox.getHeight();
-
-        if ((playerX <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean checkCollision_GOING_DOWN(float x, float y) {
-        ImageView spriteImg = findViewById(R.id.imageView);
-        float playerX =  x;
-        float playerY =  y;
-        float playerWidth = spriteImg.getWidth();
-        float playerHeight = spriteImg.getHeight();
-        ImageView collisionBox = findViewById(R.id.collisionBox);
-        float objX = collisionBox.getX();
-        float objY = collisionBox.getY();
-        int objWidth = collisionBox.getWidth();
-        int objHeight = collisionBox.getHeight();
-        if ((playerY + playerHeight >= objY) && (playerX + playerWidth >= objX) && (playerX <= objX + objWidth)){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean checkCollision_GOING_UP(float x, float y) {
-        ImageView spriteImg = findViewById(R.id.imageView);
-        float playerX =  x;
-        float playerY =  y;
-        float playerWidth = spriteImg.getWidth();
-        float playerHeight = spriteImg.getHeight();
-        ImageView collisionBox = findViewById(R.id.collisionBox);
-        float objX = collisionBox.getX();
-        float objY = collisionBox.getY();
-        int objWidth = collisionBox.getWidth();
-        int objHeight = collisionBox.getHeight();
-
-        if ((playerY <= objY + objHeight) && (playerX + playerWidth >= objX) && (playerX <= objX + objWidth)) {
-            return true;
-        }
-        return false;
-    }
-
-
     }
 
 
