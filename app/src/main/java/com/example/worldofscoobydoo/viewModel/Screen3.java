@@ -27,6 +27,7 @@ public class Screen3 extends AppCompatActivity {
     private float y;
     private int prevx;
     private int prevy;
+    private int screenWidth, screenHeight;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,9 @@ public class Screen3 extends AppCompatActivity {
             spriteImg.setImageResource(R.drawable.fred_png);
         }
 
+        screenWidth = getResources().getDisplayMetrics().widthPixels;
+        screenHeight = getResources().getDisplayMetrics().heightPixels;
+
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
         user.setFocusableInTouchMode(true);
@@ -66,20 +70,22 @@ public class Screen3 extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            prevy -= 50;
+                            prevy -= 80;
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            prevy += 50;
+                            prevy += 80;
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-                            prevx -= 50;
+                            prevx -= 80;
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
-                            prevx += 50;
+                            prevx += 80;
                             break;
                     }
                     x = spriteImg.getX() + prevx;
                     y = spriteImg.getY() + prevy;
+                    x = Math.max(80, Math.min(x, screenWidth - prevx - 80));
+                    y = Math.max(80, Math.min(y, screenHeight - prevy - 160));
                     spriteImg.setX(x);
                     spriteImg.setY(y);
                     return true;
@@ -87,6 +93,7 @@ public class Screen3 extends AppCompatActivity {
                 return false;
             }
         });
+
 
         // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreTextView_3);
