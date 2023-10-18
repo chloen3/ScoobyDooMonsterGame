@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 import com.example.worldofscoobydoo.model.LeaderboardModel;
+import com.example.worldofscoobydoo.model.Player;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +33,7 @@ public class LeaderBoard extends AppCompatActivity {
     private String player;
     private String time;
     private LeaderboardViewModel leaderboardViewModel;
+    private Player instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class LeaderBoard extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.leaderboard);
+        instance = Player.getPlayer();
 
         SharedPreferences pref = getSharedPreferences("PREFS", 0);
         lastScore = pref.getInt("lastScore", 0);
@@ -48,11 +51,11 @@ public class LeaderBoard extends AppCompatActivity {
         time = sdf.format(new Date());
 
         TextView currentTracker = findViewById(R.id.currentScore);
-        currentTracker.setText(player + "       " + lastScore + "\n" + time);
+        currentTracker.setText(player + "       " + instance.getScore() + "\n" + time);
 
         leaderboardViewModel = new ViewModelProvider(this).get(LeaderboardViewModel.class);
         LeaderboardEntry[] entries = leaderboardViewModel.getLeaderboardEntries();
-        LeaderboardEntry latestEntry = new LeaderboardEntry(player, lastScore, time);
+        LeaderboardEntry latestEntry = new LeaderboardEntry(player, instance.getScore(), time);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_leaderboard);
         if (entries[0] == null) {

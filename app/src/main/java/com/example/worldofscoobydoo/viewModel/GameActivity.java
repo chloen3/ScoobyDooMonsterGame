@@ -143,6 +143,7 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     // Handle game over scenario here
                     Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                    instance.setScore(0);
                     startActivity(intent);
                 }
             }

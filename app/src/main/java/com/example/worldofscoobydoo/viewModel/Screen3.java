@@ -133,6 +133,7 @@ public class Screen3 extends AppCompatActivity {
                 } else {
                     // Handle game over scenario here
                     Intent intent = new Intent(Screen3.this, EndScreen.class);
+                    player.setScore(0);
                     startActivity(intent);
                 }
             }
@@ -147,7 +148,7 @@ public class Screen3 extends AppCompatActivity {
             player.setScore(score);
             SharedPreferences pref = getSharedPreferences("PREFS", 0);
             SharedPreferences.Editor editor = pref.edit();
-            editor.putInt("lastScore", score);
+            editor.putInt("lastScore", player.getScore());
             String namePass = name;
             editor.putString("player", namePass);
             editor.apply();

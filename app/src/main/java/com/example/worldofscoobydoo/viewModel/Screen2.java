@@ -129,6 +129,7 @@ public class Screen2 extends AppCompatActivity {
                 } else {
                     // Handle game over scenario here
                     Intent intent = new Intent(Screen2.this, EndScreen.class);
+                    player.setScore(0);
                     startActivity(intent);
                 }
             }
