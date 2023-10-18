@@ -13,18 +13,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Player;
 
 import java.util.ArrayList;
 
 public class Screen2 extends AppCompatActivity {
 
     private int score;
+    private Player player;
     private TextView scoreTextView;
     private Handler handler = new Handler();
-    private float x;
-    private float y;
-    private int prevx;
-    private int prevy;
     private int screenWidth, screenHeight;
     private MovementStrategy movementStrategy;
 
@@ -33,11 +31,12 @@ public class Screen2 extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.screen2);
+        player = Player.getPlayer();
 
-        String name = getIntent().getStringExtra("name");
-        double difficulty = getIntent().getDoubleExtra("difficulty", 1);
-        String sprite = getIntent().getStringExtra("sprite");
-        score = getIntent().getIntExtra("score", 100);
+        String name = player.getName();
+        double difficulty = player.getDifficulty();
+        String sprite = player.getSprite();
+        score = player.getScore();
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow();
@@ -141,10 +140,7 @@ public class Screen2 extends AppCompatActivity {
         Button moveScreen2 = findViewById(R.id.move_Screen3_Button);
         moveScreen2.setOnClickListener(v -> {
             Intent nextScreen = new Intent(Screen2.this, Screen3.class);
-            nextScreen.putExtra("difficulty", difficulty);
-            nextScreen.putExtra("name", name);
-            nextScreen.putExtra("sprite", sprite);
-            nextScreen.putExtra("score", score);
+            player.setScore(score);
             startActivity(nextScreen);
         });
 

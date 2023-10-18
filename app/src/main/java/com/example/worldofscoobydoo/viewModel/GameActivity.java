@@ -32,10 +32,6 @@ public class GameActivity extends AppCompatActivity {
     private TextView scoreTextView;
     private Player instance;
     private Handler handler = new Handler();
-    private float x;
-    private float y;
-    private float prevx;
-    private float prevy;
     private int screenWidth, screenHeight;
     private String strategy;
     private MovementStrategy movementStrategy;
@@ -44,17 +40,17 @@ public class GameActivity extends AppCompatActivity {
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
-        setContentView(R.layout.game_activity);
-        instance = Player.getPlayer();
+        setContentView(R.layout.game_activity); // sets layout
+        instance = Player.getPlayer(); // gets Player Instance
 
-        name = getIntent().getStringExtra("name");
-        difficulty = getIntent().getDoubleExtra("difficulty", 1);
-        sprite = getIntent().getStringExtra("sprite");
+        name = instance.getName();
+        difficulty = instance.getDifficulty();
+        sprite = instance.getSprite();
 
+        // implements movement strategy pattern
         if (difficulty == .5) {
             movementStrategy = new MovementSlow();
         } else if (difficulty == .75) {
@@ -69,6 +65,7 @@ public class GameActivity extends AppCompatActivity {
         TextView difficultyReciever = findViewById(R.id.health_status);
         String diff = String.valueOf(difficulty * 100.0);
         difficultyReciever.setText(diff);
+        instance.setHealth(diff);
 
         ImageView spriteImg = findViewById(R.id.imageView);
         if ("scooby".equals(sprite)) {
@@ -85,7 +82,6 @@ public class GameActivity extends AppCompatActivity {
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
-
 
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
@@ -158,10 +154,7 @@ public class GameActivity extends AppCompatActivity {
         Button moveScreen2 = findViewById(R.id.move_screen2_Button);
         moveScreen2.setOnClickListener(v -> {
             Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
-            nextScreen.putExtra("difficulty", difficulty);
-            nextScreen.putExtra("name", name);
-            nextScreen.putExtra("sprite", sprite);
-            nextScreen.putExtra("score", score);
+            instance.setScore(score);
             startActivity(nextScreen);
         });
 
