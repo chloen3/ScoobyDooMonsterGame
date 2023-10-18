@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Player;
 
+import java.util.ArrayList;
+
 
 public class GameActivity extends AppCompatActivity {
 
@@ -35,10 +37,9 @@ public class GameActivity extends AppCompatActivity {
     private float prevx;
     private float prevy;
     private int screenWidth, screenHeight;
-
     private String strategy;
-
     private MovementStrategy movementStrategy;
+    private ArrayList<ImageView> collisionsList;
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -84,6 +85,7 @@ public class GameActivity extends AppCompatActivity {
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
+
 
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
@@ -178,17 +180,27 @@ public class GameActivity extends AppCompatActivity {
         float playerY =  y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
-        ImageView collisionBox = findViewById(R.id.collisionBox);
-        float objX = collisionBox.getX();
-        float objY = collisionBox.getY();
-        int objWidth = collisionBox.getWidth();
-        int objHeight = collisionBox.getHeight();
-        //check for collision
-        if ((playerX + playerWidth >= objX) && (playerX + playerWidth <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
-            return true;
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.collisionBox);
+        ImageView cb2 = findViewById(R.id.collisionBox2);
+        ImageView cb3 = findViewById(R.id.collisionBox3);
+        ImageView cb4 = findViewById(R.id.collisionBox4);
+        collisionsList.add(cb);
+        collisionsList.add(cb2);
+        collisionsList.add(cb3);
+        collisionsList.add(cb4);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            //check for collision
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
+                return true;
+            }
         }
         return false;
     }
-    }
+}
 
 
