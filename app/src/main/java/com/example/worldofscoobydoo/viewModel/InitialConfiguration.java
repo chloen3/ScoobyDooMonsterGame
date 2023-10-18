@@ -10,10 +10,12 @@ import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Player;
 
 public class InitialConfiguration extends AppCompatActivity {
     private String name;
     private String sprite;
+    private Player player;
     public void setName(String name) {
         this.name = name;
     }
@@ -24,7 +26,7 @@ public class InitialConfiguration extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);  // starts it all
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.initial_configuration); // sets to layout
@@ -32,6 +34,9 @@ public class InitialConfiguration extends AppCompatActivity {
         Button startBtn = findViewById(R.id.button); // continue button
         EditText nameInput = findViewById(R.id.editTextText); // Name Input
 
+        player = Player.getPlayer(); // gets Singleton instance
+
+        // Sets Difficulty
         startBtn.setOnClickListener(v -> {
             boolean setDifficulty = false;
             double difficulty = 1;
@@ -54,7 +59,7 @@ public class InitialConfiguration extends AppCompatActivity {
                 default:
             }
 
-
+            // Set Sprite
             switch (spriteRadioGroup.getCheckedRadioButtonId()) {
                 case R.id.ScoobyBtn:
                     setSprite("scooby");
@@ -73,6 +78,7 @@ public class InitialConfiguration extends AppCompatActivity {
                     break;
                 default:
             }
+
             EditText input = findViewById(R.id.editTextText);
             String inputName = input.getText().toString();
             setName(inputName);
@@ -85,9 +91,9 @@ public class InitialConfiguration extends AppCompatActivity {
                 nameInput.setError("Choose a character.");
             } else {
                 Intent game = new Intent(InitialConfiguration.this, GameActivity.class);
-                game.putExtra("difficulty", difficulty);
-                game.putExtra("name", name);
-                game.putExtra("sprite", sprite);
+                player.setDifficulty(difficulty);
+                player.setName(inputName);
+                player.setSprite(sprite);
                 startActivity(game);
                 finish();
             }

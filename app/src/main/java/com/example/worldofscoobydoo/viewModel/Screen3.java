@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Player;
 
 import java.util.ArrayList;
 
@@ -25,23 +26,21 @@ public class Screen3 extends AppCompatActivity {
     private int score;
     private TextView scoreTextView;
     private Handler handler = new Handler();
-    private float x;
-    private float y;
-    private int prevx;
-    private int prevy;
     private int screenWidth, screenHeight;
     private MovementStrategy movementStrategy;
+    private Player player;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.screen3);
+        player = Player.getPlayer();
 
-        name = getIntent().getStringExtra("name");
-        difficulty = getIntent().getDoubleExtra("difficulty", 1);
-        sprite = getIntent().getStringExtra("sprite");
-        score = getIntent().getIntExtra("score", 100);
+        name = player.getName();
+        difficulty = player.getDifficulty();
+        sprite = player.getSprite();
+        score = player.getScore();
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow();
@@ -134,6 +133,7 @@ public class Screen3 extends AppCompatActivity {
                 } else {
                     // Handle game over scenario here
                     Intent intent = new Intent(Screen3.this, EndScreen.class);
+                    player.setScore(0);
                     startActivity(intent);
                 }
             }
@@ -145,13 +145,13 @@ public class Screen3 extends AppCompatActivity {
         Button exitButton = findViewById(R.id.endgame_Button);
         exitButton.setOnClickListener(v -> {
             Intent intent = new Intent(Screen3.this, EndScreen.class);
+            player.setScore(score);
             SharedPreferences pref = getSharedPreferences("PREFS", 0);
             SharedPreferences.Editor editor = pref.edit();
-            editor.putInt("lastScore", score);
+            editor.putInt("lastScore", player.getScore());
             String namePass = name;
             editor.putString("player", namePass);
             editor.apply();
-
             startActivity(intent);
         });
 

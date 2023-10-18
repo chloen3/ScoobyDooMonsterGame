@@ -6,12 +6,21 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Player;
 
-public class EndScreen extends AppCompatActivity {
+public class EndScreen extends AppCompatActivity implements Observer {
 
     private EditText lastScore;
+    private Player player;
+
+    public void setFinalGameStatus(TextView finalGameStatus) {
+        this.finalGameStatus = finalGameStatus;
+    }
+
+    private TextView finalGameStatus;
     private int prevScore;
 
     public EditText getLastScore() {
@@ -29,10 +38,12 @@ public class EndScreen extends AppCompatActivity {
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.endscreen);
 
+        notifyObservers();
+
         lastScore = findViewById(R.id.userStatus);
         SharedPreferences pref = getSharedPreferences("PREFS", 0);
         prevScore = pref.getInt("lastScore", 0);
-        lastScore.setText("Your Score: " + prevScore);
+        lastScore.setText("Your Score: " + player.getScore());
         Button leaderButton = findViewById(R.id.finalLeaderboard);
         leaderButton.setOnClickListener(v -> {
             Intent leaderboard = new Intent(getApplicationContext(), LeaderBoard.class);
@@ -44,5 +55,19 @@ public class EndScreen extends AppCompatActivity {
             Intent restart = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(restart);
         });
+    }
+
+    @Override
+    public void notifyObservers() {
+        player = Player.getPlayer();
+        int score = player.getScore();
+        setFinalGameStatus(findViewById(R.id.finalGameStatus));
+        if (score > 0) {
+            finalGameStatus.setText("You Win!");
+        } else {
+            finalGameStatus.setText("You Lose!");
+        }
+
+
     }
 }
