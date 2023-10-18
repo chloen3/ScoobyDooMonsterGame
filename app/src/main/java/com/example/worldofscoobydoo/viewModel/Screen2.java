@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.worldofscoobydoo.R;
 
+import java.util.ArrayList;
+
 public class Screen2 extends AppCompatActivity {
 
     private int score;
@@ -75,18 +77,36 @@ public class Screen2 extends AppCompatActivity {
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    float futureX;
+                    float futureY;
                     switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
-                            movementStrategy.moveUp(spriteImg);
+                            futureX = spriteImg.getX();
+                            futureY = spriteImg.getY() - 80;
+                            if (!checkCollision(futureX, futureY)){
+                                movementStrategy.moveUp(spriteImg);
+                            }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
-                            movementStrategy.moveDown(spriteImg, screenHeight);
+                            futureX = spriteImg.getX();
+                            futureY = spriteImg.getY() + 80;
+                            if (!checkCollision(futureX, futureY)) {
+                                movementStrategy.moveDown(spriteImg, screenHeight);
+                            }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
-                            movementStrategy.moveLeft(spriteImg);
+                            futureX = spriteImg.getX() - 80;
+                            futureY = spriteImg.getY();
+                            if(!checkCollision(futureX, futureY)){
+                                movementStrategy.moveLeft(spriteImg);
+                            }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
-                            movementStrategy.moveRight(spriteImg, screenWidth);
+                            futureX = spriteImg.getX() + 80;
+                            futureY = spriteImg.getY();
+                            if(!checkCollision(futureX, futureY)){
+                                movementStrategy.moveRight(spriteImg, screenWidth);
+                            }
                             break;
                     }
                     return true;
@@ -131,6 +151,40 @@ public class Screen2 extends AppCompatActivity {
     }
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
+    }
+
+    // check for collisions
+    // return true if collision detected false otherwise
+    public boolean checkCollision(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_2);
+        float playerX =  x;
+        float playerY =  y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.BorderC1);
+        ImageView cb2 = findViewById(R.id.BorderC2);
+        ImageView cb3 = findViewById(R.id.BorderC3);
+        ImageView cb4 = findViewById(R.id.BorderC4);
+        ImageView cb5 = findViewById(R.id.BorderC5);
+        ImageView cb6 = findViewById(R.id.BorderC6);
+        collisionsList.add(cb);
+        collisionsList.add(cb2);
+        collisionsList.add(cb3);
+        collisionsList.add(cb4);
+        collisionsList.add(cb5);
+        collisionsList.add(cb6);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            //check for collision
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
+                return true;
+            }
+        }
+        return false;
     }
 }
 
