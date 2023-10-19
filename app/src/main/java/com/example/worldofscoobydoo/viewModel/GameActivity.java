@@ -30,6 +30,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private TextView scoreTextView;
+
+    public Player getInstance() {
+        return instance;
+    }
+
     private Player instance;
     private Handler handler = new Handler();
     private int screenWidth, screenHeight;
@@ -92,11 +97,11 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     float futureX;
                     float futureY;
-                    switch (key) {
+                    switch(key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
-                            if (!checkCollision(futureX, futureY)){
+                            if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveUp(spriteImg);
                             }
                             break;
@@ -110,14 +115,14 @@ public class GameActivity extends AppCompatActivity {
                         case KeyEvent.KEYCODE_DPAD_LEFT:
                             futureX = spriteImg.getX() - 80;
                             futureY = spriteImg.getY();
-                            if(!checkCollision(futureX, futureY)){
+                            if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveLeft(spriteImg);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
                             futureX = spriteImg.getX() + 80;
                             futureY = spriteImg.getY();
-                            if(!checkCollision(futureX, futureY)){
+                            if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                             }
                             break;
@@ -189,11 +194,25 @@ public class GameActivity extends AppCompatActivity {
             int objWidth = collisionBox.getWidth();
             int objHeight = collisionBox.getHeight();
             //check for collision
-            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static boolean healthValid(Player instance) {
+        instance = Player.getPlayer();
+        if (instance.getHealth() == null) {
+            return false;
+        } else {
+            if (Integer.parseInt(instance.getHealth()) >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }
 

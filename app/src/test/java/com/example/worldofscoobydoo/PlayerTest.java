@@ -3,6 +3,8 @@ package com.example.worldofscoobydoo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.example.worldofscoobydoo.model.Player;
+import com.example.worldofscoobydoo.viewModel.GameActivity;
 import com.example.worldofscoobydoo.viewModel.InitialConfiguration;
 
 /**
@@ -77,6 +79,12 @@ public class PlayerTest {
     public void difficultyIsNotValid() {
         double difficulty = 0.3;
         assertFalse(InitialConfiguration.difficultyIsValid(difficulty));
+    }
+
+    @Test
+    public void healthIsSet() {
+        Player player = Player.getPlayer();
+        assertFalse(GameActivity.healthValid(player));
     }
 
 }
