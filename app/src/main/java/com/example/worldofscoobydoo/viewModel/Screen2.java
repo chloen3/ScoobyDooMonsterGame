@@ -115,6 +115,11 @@ public class Screen2 extends AppCompatActivity {
                             }
                             break;
                     }
+                    if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+                        Intent nextScreen = new Intent(Screen2.this, Screen3.class);
+                        player.setScore(score);
+                        startActivity(nextScreen);
+                    }
                     return true;
                 }
                 return false;
@@ -144,14 +149,6 @@ public class Screen2 extends AppCompatActivity {
 
         //Start updating the score
         handler.postDelayed(scoreUpdater, 1000);
-
-        Button moveScreen2 = findViewById(R.id.move_Screen3_Button);
-        moveScreen2.setOnClickListener(v -> {
-            Intent nextScreen = new Intent(Screen2.this, Screen3.class);
-            player.setScore(score);
-            startActivity(nextScreen);
-        });
-
     }
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
@@ -187,6 +184,25 @@ public class Screen2 extends AppCompatActivity {
             if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
                 return true;
             }
+        }
+        return false;
+    }
+    public boolean checkExit(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_2);
+        float playerX =  x;
+        float playerY =  y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ImageView exit_screen1 = findViewById(R.id.exit_screen2);
+
+        float objX = exit_screen1.getX();
+        float objY = exit_screen1.getY();
+        int objWidth = exit_screen1.getWidth();
+        int objHeight = exit_screen1.getHeight();
+        //check for collision
+        if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+            return true;
         }
         return false;
     }

@@ -119,6 +119,17 @@ public class Screen3 extends AppCompatActivity {
                             }
                             break;
                     }
+                    if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+                        Intent intent = new Intent(Screen3.this, EndScreen.class);
+                        player.setScore(score);
+                        SharedPreferences pref = getSharedPreferences("PREFS", 0);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putInt("lastScore", player.getScore());
+                        String namePass = name;
+                        editor.putString("player", namePass);
+                        editor.apply();
+                        startActivity(intent);
+                    }
                     return true;
                 }
                 return false;
@@ -148,20 +159,6 @@ public class Screen3 extends AppCompatActivity {
 
         //Start updating the score
         handler.postDelayed(scoreUpdater, 1000);
-
-        Button exitButton = findViewById(R.id.endgame_Button);
-        exitButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Screen3.this, EndScreen.class);
-            player.setScore(score);
-            SharedPreferences pref = getSharedPreferences("PREFS", 0);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putInt("lastScore", player.getScore());
-            String namePass = name;
-            editor.putString("player", namePass);
-            editor.apply();
-            startActivity(intent);
-        });
-
     }
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
@@ -196,4 +193,24 @@ public class Screen3 extends AppCompatActivity {
         }
         return false;
     }
+    public boolean checkExit(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_3);
+        float playerX =  x;
+        float playerY =  y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ImageView exit_screen1 = findViewById(R.id.exit_screen3);
+
+        float objX = exit_screen1.getX();
+        float objY = exit_screen1.getY();
+        int objWidth = exit_screen1.getWidth();
+        int objHeight = exit_screen1.getHeight();
+        //check for collision
+        if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+            return true;
+        }
+        return false;
+    }
+
 }
