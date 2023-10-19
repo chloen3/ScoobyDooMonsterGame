@@ -29,6 +29,8 @@ public class Screen3 extends AppCompatActivity {
     private int screenWidth, screenHeight;
     private MovementStrategy movementStrategy;
     private Player player;
+    private Renderer renderer;
+    private MovementObservable movementObservable;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,11 @@ public class Screen3 extends AppCompatActivity {
         } else if ("shaggy".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.shaggy_png);
         }
+        movementObservable = new MovementObservable();
+        // Create a renderer
+        renderer = new Renderer(spriteImg);
+        // Adds sprite image as a observer
+        movementObservable.addObserver(renderer);
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;

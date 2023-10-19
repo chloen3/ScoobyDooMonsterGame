@@ -36,6 +36,8 @@ public class GameActivity extends AppCompatActivity {
     private String strategy;
     private MovementStrategy movementStrategy;
     private ArrayList<ImageView> collisionsList;
+    private Renderer renderer;
+    private MovementObservable movementObservable;
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -44,7 +46,8 @@ public class GameActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.game_activity); // sets layout
-        instance = Player.getPlayer(); // gets Player Instance
+        instance = Player.getPlayer(); // gets Player
+        movementObservable = new MovementObservable();
 
         name = instance.getName();
         difficulty = instance.getDifficulty();
@@ -79,6 +82,10 @@ public class GameActivity extends AppCompatActivity {
         } else if ("shaggy".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.shaggy_png);
         }
+        // Create a renderer
+        renderer = new Renderer(spriteImg);
+        // Adds sprite image as a observer
+        movementObservable.addObserver(renderer);
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
