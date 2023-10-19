@@ -20,4 +20,10 @@ public class LeaderboardTest {
         LeaderboardModel leaderboard = LeaderboardModel.getInstance();
         assertFalse(LeaderBoard.isCurrentScore(leaderboard));
     }
+
+    @Test
+    public void instantiatedBoard() {
+        LeaderboardModel leaderboard = LeaderboardModel.getInstance();
+        assertFalse(LeaderBoard.isBoardInstantiated(leaderboard));
+    }
 }

@@ -155,4 +155,19 @@ public class LeaderBoard extends AppCompatActivity {
         }
         return result;
     }
+
+    public static boolean isBoardInstantiated(LeaderboardModel leaderboard) {
+        LeaderboardEntry[] entries = leaderboard.getEntries();
+        boolean result = false;
+        int count = 0;
+        for (int i = 0; i < entries.length; i++) {
+            if (entries[i] != null) {
+                count++;
+            }
+        }
+        if (count == 5) {
+            result = true;
+        }
+        return result;
+    }
 }
