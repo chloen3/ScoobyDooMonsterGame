@@ -25,6 +25,8 @@ public class Screen2 extends AppCompatActivity {
     private Handler handler = new Handler();
     private int screenWidth, screenHeight;
     private MovementStrategy movementStrategy;
+    private Renderer renderer;
+    private MovementObservable movementObservable;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +39,14 @@ public class Screen2 extends AppCompatActivity {
         double difficulty = player.getDifficulty();
         String sprite = player.getSprite();
         score = player.getScore();
+        movementObservable = new MovementObservable();
 
         if (difficulty == .5) {
-            movementStrategy = new MovementSlow();
+            movementStrategy = new MovementSlow(movementObservable);
         } else if (difficulty == .75) {
-            movementStrategy = new MovementMedium();
+            movementStrategy = new MovementMedium(movementObservable);
         } else {
-            movementStrategy = new MovementFast();
+            movementStrategy = new MovementFast(movementObservable);
         }
 
         TextView nameReceiver = findViewById(R.id.textView_2);
@@ -65,6 +68,10 @@ public class Screen2 extends AppCompatActivity {
         } else if ("shaggy".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.shaggy_png);
         }
+        // Create a renderer
+        renderer = new Renderer(spriteImg);
+        // Adds sprite image as a observer
+        movementObservable.addObserver(renderer);
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;

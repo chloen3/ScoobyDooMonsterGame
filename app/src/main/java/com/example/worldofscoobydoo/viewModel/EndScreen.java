@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Player;
 
-public class EndScreen extends AppCompatActivity implements Observer {
+public class EndScreen extends AppCompatActivity {
 
     private EditText lastScore;
     private Player player;
@@ -57,7 +57,6 @@ public class EndScreen extends AppCompatActivity implements Observer {
         });
     }
 
-    @Override
     public void notifyObservers() {
         player = Player.getPlayer();
         int score = player.getScore();
