@@ -38,6 +38,7 @@ public class Screen3 extends AppCompatActivity {
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.screen3);
         player = Player.getPlayer();
+        movementObservable = new MovementObservable();
 
         name = player.getName();
         difficulty = player.getDifficulty();
@@ -45,11 +46,11 @@ public class Screen3 extends AppCompatActivity {
         score = player.getScore();
 
         if (difficulty == .5) {
-            movementStrategy = new MovementSlow();
+            movementStrategy = new MovementSlow(movementObservable);
         } else if (difficulty == .75) {
-            movementStrategy = new MovementMedium();
+            movementStrategy = new MovementMedium(movementObservable);
         } else {
-            movementStrategy = new MovementFast();
+            movementStrategy = new MovementFast(movementObservable);
         }
 
         TextView nameReceiver = findViewById(R.id.textView_3);
@@ -71,7 +72,6 @@ public class Screen3 extends AppCompatActivity {
         } else if ("shaggy".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.shaggy_png);
         }
-        movementObservable = new MovementObservable();
         // Create a renderer
         renderer = new Renderer(spriteImg);
         // Adds sprite image as a observer

@@ -55,11 +55,11 @@ public class GameActivity extends AppCompatActivity {
 
         // implements movement strategy pattern
         if (difficulty == .5) {
-            movementStrategy = new MovementSlow();
+            movementStrategy = new MovementSlow(movementObservable);
         } else if (difficulty == .75) {
-            movementStrategy = new MovementMedium();
+            movementStrategy = new MovementMedium(movementObservable);
         } else {
-            movementStrategy = new MovementFast();
+            movementStrategy = new MovementFast(movementObservable);
         }
 
         TextView nameReceiver = findViewById(R.id.textView4);
