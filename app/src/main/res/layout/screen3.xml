@@ -100,21 +100,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3_3"
         app:layout_constraintVertical_bias="0.025" />
 
-    <Button
-        android:id="@+id/endgame_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/butcherman"
-        android:text="END GAME"
-        android:textColor="#FFEB3B"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3_3"
-        app:layout_constraintHorizontal_bias="0.97"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939" />
-
     <ImageView
         android:id="@+id/Border1"
         android:layout_width="138dp"
@@ -202,5 +187,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.131"
         app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+    <ImageView
+        android:id="@+id/exit_screen3"
+        android:layout_width="24dp"
+        android:layout_height="53dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3_3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3_3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView3_3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.697"
+        app:srcCompat="?attr/selectableItemBackgroundBorderless" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

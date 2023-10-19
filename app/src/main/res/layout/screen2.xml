@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/room2new" />
 
     <TextView
@@ -118,21 +118,6 @@
         app:layout_constraintVertical_bias="0.025" />
 
 
-    <Button
-        android:id="@+id/move_Screen3_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/butcherman"
-        android:text="NEXT SCREEN"
-        android:textColor="#FFEB3B"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3_2"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903" />
-
     <ImageView
         android:id="@+id/BorderC1"
         android:layout_width="81dp"
@@ -203,4 +188,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+    <ImageView
+        android:id="@+id/exit_screen2"
+        android:layout_width="30dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3_2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3_2"
+        app:layout_constraintVertical_bias="0.498"
+        app:srcCompat="?attr/actionBarItemBackground" />
 </androidx.constraintlayout.widget.ConstraintLayout>
