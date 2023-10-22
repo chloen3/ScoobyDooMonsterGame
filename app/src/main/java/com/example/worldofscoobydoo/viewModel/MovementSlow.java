@@ -32,4 +32,9 @@ public class MovementSlow implements MovementStrategy {
         spriteImg.setY(Math.min(spriteImg.getY() + 40, screenHeight - 240));
         movementObservable.notifyObservers(spriteImg.getX(), spriteImg.getY());
     }
+    @Override
+    public String toString() {
+        return "Slow";
+    }
+
 }

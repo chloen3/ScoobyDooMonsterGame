@@ -34,4 +34,8 @@ public class MovementFast implements MovementStrategy {
         spriteImg.setY(Math.min(spriteImg.getY() + 80, screenHeight - 240));
         movementObservable.notifyObservers(spriteImg.getX(), spriteImg.getY());
     }
+    @Override
+    public String toString() {
+        return "Fast";
+    }
 }

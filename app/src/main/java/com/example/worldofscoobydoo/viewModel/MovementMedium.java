@@ -34,4 +34,8 @@ public class MovementMedium implements MovementStrategy {
         spriteImg.setY(Math.min(spriteImg.getY() + 60, screenHeight - 240));
         movementObservable.notifyObservers(spriteImg.getX(), spriteImg.getY());
     }
+    @Override
+    public String toString() {
+        return "Medium";
+    }
 }
