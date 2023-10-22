@@ -6,6 +6,11 @@ import static org.junit.Assert.*;
 import com.example.worldofscoobydoo.model.Player;
 import com.example.worldofscoobydoo.viewModel.GameActivity;
 import com.example.worldofscoobydoo.viewModel.InitialConfiguration;
+import com.example.worldofscoobydoo.viewModel.MovementFast;
+import com.example.worldofscoobydoo.viewModel.MovementMedium;
+import com.example.worldofscoobydoo.viewModel.MovementObservable;
+import com.example.worldofscoobydoo.viewModel.MovementSlow;
+import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -87,4 +92,32 @@ public class PlayerTest {
         assertFalse(GameActivity.healthValid(player));
     }
 
+    @Test
+    public void slowSpeedIsValid() {
+        double difficulty = 0.5;
+        MovementObservable test = new MovementObservable();
+        MovementStrategy mv = new MovementSlow(test);
+        assertTrue(InitialConfiguration.slowSpeedIsValid(mv, difficulty));
+    }
+    @Test
+    public void mediumSpeedIsValid() {
+        double difficulty = 0.75;
+        MovementObservable test = new MovementObservable();
+        MovementStrategy mv = new MovementMedium(test);
+        assertTrue(InitialConfiguration.mediumSpeedIsValid(mv, difficulty));
+    }
+    @Test
+    public void fastSpeedIsValid() {
+        double difficulty = 1.0;
+        MovementObservable test = new MovementObservable();
+        MovementStrategy mv = new MovementFast(test);
+        assertTrue(InitialConfiguration.fastSpeedIsValid(mv, difficulty));
+    }
+    @Test
+    public void speedIsInvalid() {
+        double difficulty = 1.0;
+        MovementObservable test = new MovementObservable();
+        MovementStrategy mv = new MovementMedium(test);
+        assertFalse(InitialConfiguration.fastSpeedIsValid(mv, difficulty));
+    }
 }

@@ -110,4 +110,32 @@ public class InitialConfiguration extends AppCompatActivity {
     public static boolean characterIsValid(String sprite) {
         return sprite == "scooby" || sprite == "daphne" || sprite == "fred" || sprite == "velma"|| sprite == "shaggy";
     }
+
+    public static boolean slowSpeedIsValid(MovementStrategy mv, double difficulty) {
+        MovementObservable test = new MovementObservable();
+        MovementSlow mvs = new MovementSlow(test);
+        if (mvs.toString().equals(mv.toString()) && difficulty == 0.5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static boolean mediumSpeedIsValid(MovementStrategy mv, double difficulty) {
+        MovementObservable test = new MovementObservable();
+        MovementMedium mvm = new MovementMedium(test);
+        if (mvm.toString().equals(mv.toString()) && difficulty == 0.75) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static boolean fastSpeedIsValid(MovementStrategy mv, double difficulty) {
+        MovementObservable test = new MovementObservable();
+        MovementFast mvm = new MovementFast(test);
+        if (mvm.toString().equals(mv.toString()) && difficulty == 1.0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
