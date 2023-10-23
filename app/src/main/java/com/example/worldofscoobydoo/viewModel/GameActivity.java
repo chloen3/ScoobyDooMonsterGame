@@ -12,30 +12,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Player;
+import android.os.CountDownTimer;
+
 
 import java.util.ArrayList;
 
+import android.os.CountDownTimer;
 
 public class GameActivity extends AppCompatActivity {
-
     private String name;
-    private Runnable scoreUpdater;
     private double difficulty;
     private String sprite;
-    private int score = 600;
-
-    public TextView getScoreTextView() {
-        return scoreTextView;
-    }
-
+    private int score = 50;
     private TextView scoreTextView;
-
-    public Player getInstance() {
-        return instance;
-    }
-
     private Player instance;
     private Handler handler = new Handler();
+    private CountDownTimer scoreCountdownTimer;
     private int screenWidth;
     private int screenHeight;
     private String strategy;
@@ -44,21 +36,19 @@ public class GameActivity extends AppCompatActivity {
     private Renderer renderer;
     private MovementObservable movementObservable;
 
-
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
-        getSupportActionBar().hide(); // removes top bar
-        setContentView(R.layout.game_activity); // sets layout
-        instance = Player.getPlayer(); // gets Player
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+        setContentView(R.layout.game_activity);
+        instance = Player.getPlayer();
         movementObservable = new MovementObservable();
 
         name = instance.getName();
         difficulty = instance.getDifficulty();
         sprite = instance.getSprite();
 
-        // implements movement strategy pattern
         if (difficulty == .5) {
             movementStrategy = new MovementSlow(movementObservable);
         } else if (difficulty == .75) {
@@ -70,9 +60,9 @@ public class GameActivity extends AppCompatActivity {
         TextView nameReceiver = findViewById(R.id.textView4);
         nameReceiver.setText(name);
 
-        TextView difficultyReciever = findViewById(R.id.health_status);
+        TextView difficultyReceiver = findViewById(R.id.health_status);
         String diff = String.valueOf(difficulty * 100.0);
-        difficultyReciever.setText(diff);
+        difficultyReceiver.setText(diff);
         instance.setHealth(diff);
 
         ImageView spriteImg = findViewById(R.id.imageView);
@@ -87,9 +77,8 @@ public class GameActivity extends AppCompatActivity {
         } else if ("shaggy".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.shaggy_png);
         }
-        // Create a renderer
+
         renderer = new Renderer(spriteImg);
-        // Adds sprite image as a observer
         movementObservable.addObserver(renderer);
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -149,9 +138,13 @@ public class GameActivity extends AppCompatActivity {
                             return false;
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+                        if (scoreCountdownTimer != null) {
+                            scoreCountdownTimer.cancel();
+                        }
                         Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
-                        handler.removeCallbacksAndMessages(scoreUpdater);
                         instance.setScore(score);
+                        // Pass the remaining time in seconds to Screen2
+                        nextScreen.putExtra("remainingTimeInSeconds", score);
                         startActivity(nextScreen);
                     }
                     return true;
@@ -160,42 +153,42 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreTextView);
-        updateScore(score); // Update the initial score on the screen
+        updateScore(score);
 
-        //Define the score updater Runnable
-        scoreUpdater = new Runnable() {
-            @Override
-            public void run() {
-                if (score > 0) {
-                    score -= 1;
-                    updateScore(score); // Update the score on the screen
-                    handler.postDelayed(this, 1000); // Repeat every 1 second
-                } else {
-                    // Handle game over scenario here
-                    Intent intent = new Intent(GameActivity.this, EndScreen.class);
-                    instance.setScore(0);
-                    startActivity(intent);
-                }
+        startCountdownTimer();
+    }
+    private void updateScore(int score) {
+        scoreTextView.setText(String.valueOf(score));
+    }
+
+    private void startCountdownTimer() {
+        scoreCountdownTimer = new CountDownTimer(60000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                score -= 1;
+                updateScore(score);
             }
-        };
 
-        //Start updating the score
-        handler.postDelayed(scoreUpdater, 1000);
+            public void onFinish() {
+                Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                instance.setScore(0);
+                startActivity(intent);
+            }
+        }.start();
     }
 
-    // Helper method to update the score on the screen
-    private void updateScore(int sc) {
-        scoreTextView.setText(String.valueOf(sc));
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (scoreCountdownTimer != null) {
+            scoreCountdownTimer.cancel();
+        }
     }
 
-    // check for collisions
-    // return true if collision detected false otherwise
     public boolean checkCollision(float x, float y) {
         ImageView spriteImg = findViewById(R.id.imageView);
-        float playerX =  x;
-        float playerY =  y;
+        float playerX = x;
+        float playerY = y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
         ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
@@ -212,7 +205,6 @@ public class GameActivity extends AppCompatActivity {
             float objY = collisionBox.getY();
             int objWidth = collisionBox.getWidth();
             int objHeight = collisionBox.getHeight();
-            //check for collision
             if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
                     + playerHeight >= objY) && (playerY <= objY + objHeight)) {
                 return true;
@@ -223,8 +215,8 @@ public class GameActivity extends AppCompatActivity {
 
     public boolean checkExit(float x, float y) {
         ImageView spriteImg = findViewById(R.id.imageView);
-        float playerX =  x;
-        float playerY =  y;
+        float playerX = x;
+        float playerY = y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
         ImageView exitScreen1 = findViewById(R.id.exit_screen1);
@@ -233,7 +225,6 @@ public class GameActivity extends AppCompatActivity {
         float objY = exitScreen1.getY();
         int objWidth = exitScreen1.getWidth();
         int objHeight = exitScreen1.getHeight();
-        //check for collision
         if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
                 + playerHeight >= objY) && (playerY <= objY + objHeight)) {
             return true;
