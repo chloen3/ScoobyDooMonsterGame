@@ -9,7 +9,8 @@ public class Player {
     private static volatile Player player;
     private int speed = 5;
     private String currentDirection = null;
-    private int x, y;
+    private int x;
+    private int y;
 
     private Player() { }
     public static Player getPlayer() {
