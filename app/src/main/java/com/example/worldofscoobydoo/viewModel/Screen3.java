@@ -3,6 +3,7 @@ package com.example.worldofscoobydoo.viewModel;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class Screen3 extends AppCompatActivity {
 
     private String name;
-    private Runnable scoreUpdater;
+    private CountDownTimer scoreCountdownTimer;
     private double difficulty;
     private String sprite;
     private int score;
@@ -35,8 +36,8 @@ public class Screen3 extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
-        getSupportActionBar().hide(); // removes top bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         setContentView(R.layout.screen3);
         player = Player.getPlayer();
         movementObservable = new MovementObservable();
@@ -73,9 +74,8 @@ public class Screen3 extends AppCompatActivity {
         } else if ("shaggy".equals(sprite)) {
             spriteImg.setImageResource(R.drawable.shaggy_png);
         }
-        // Create a renderer
+
         renderer = new Renderer(spriteImg);
-        // Adds sprite image as a observer
         movementObservable.addObserver(renderer);
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -122,9 +122,12 @@ public class Screen3 extends AppCompatActivity {
                         default:
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+                        // Cancel the countdown timer
+                        if (scoreCountdownTimer != null) {
+                            scoreCountdownTimer.cancel();
+                        }
+
                         Intent intent = new Intent(Screen3.this, EndScreen.class);
-                        handler.removeCallbacksAndMessages(scoreUpdater);
-                        scoreUpdater = null;
                         player.setScore(score);
                         SharedPreferences pref = getSharedPreferences("PREFS", 0);
                         SharedPreferences.Editor editor = pref.edit();
@@ -141,34 +144,32 @@ public class Screen3 extends AppCompatActivity {
 
         // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreText);
-        updateScore(score); // Update the initial score on the screen
+        updateScore(score);
 
-        //Define the score updater Runnable
-        scoreUpdater = new Runnable() {
+        // Define the score countdown timer
+        scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
             @Override
-            public void run() {
-                if (score > 0) {
-                    score -= 1;
-                    updateScore(score); // Update the score on the screen
-                    handler.postDelayed(this, 1000); // Repeat every 1 second
-                } else {
-                    // Handle game over scenario here
-                    Intent intent = new Intent(Screen3.this, EndScreen.class);
-                    player.setScore(0);
-                    startActivity(intent);
-                }
+            public void onTick(long millisUntilFinished) {
+                score -= 1;
+                updateScore(score);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(Screen3.this, EndScreen.class);
+                player.setScore(0);
+                startActivity(intent);
             }
         };
 
-        //Start updating the score
-        handler.postDelayed(scoreUpdater, 1000);
+        // Start the score countdown timer
+        scoreCountdownTimer.start();
     }
+
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
     }
 
-    // check for collisions
-    // return true if collision detected false otherwise
     public boolean checkCollision(float x, float y) {
         ImageView spriteImg = findViewById(R.id.imageView_3);
         float playerX =  x;
@@ -189,7 +190,6 @@ public class Screen3 extends AppCompatActivity {
             float objY = collisionBox.getY();
             int objWidth = collisionBox.getWidth();
             int objHeight = collisionBox.getHeight();
-            //check for collision
             if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth)
                     && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)) {
                 return true;
@@ -197,6 +197,7 @@ public class Screen3 extends AppCompatActivity {
         }
         return false;
     }
+
     public boolean checkExit(float x, float y) {
         ImageView spriteImg = findViewById(R.id.imageView_3);
         float playerX =  x;
@@ -204,17 +205,14 @@ public class Screen3 extends AppCompatActivity {
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
         ImageView exitScreen1 = findViewById(R.id.exit_screen3);
-
         float objX = exitScreen1.getX();
         float objY = exitScreen1.getY();
         int objWidth = exitScreen1.getWidth();
         int objHeight = exitScreen1.getHeight();
-        //check for collision
         if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
                 + playerHeight >= objY) && (playerY <= objY + objHeight)) {
             return true;
         }
         return false;
     }
-
 }
