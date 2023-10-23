@@ -125,8 +125,7 @@ public class Screen3 extends AppCompatActivity {
                         SharedPreferences pref = getSharedPreferences("PREFS", 0);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putInt("lastScore", player.getScore());
-                        String namePass = name;
-                        editor.putString("player", namePass);
+                        editor.putString("player", player.getName());
                         editor.apply();
                         startActivity(intent);
                     }
