@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/endscreen" />
 
-    <EditText
+    <TextView
         android:id="@+id/finalGameStatus"
         android:layout_width="674dp"
         android:layout_height="76dp"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/userStatus"
         android:layout_width="675dp"
         android:layout_height="68dp"

@@ -13,7 +13,7 @@ import com.example.worldofscoobydoo.model.Player;
 
 public class EndScreen extends AppCompatActivity {
 
-    private EditText lastScore;
+    private TextView lastScore;
     private Player player;
 
     public void setFinalGameStatus(TextView finalGameStatus) {
@@ -23,7 +23,7 @@ public class EndScreen extends AppCompatActivity {
     private TextView finalGameStatus;
     private int prevScore;
 
-    public EditText getLastScore() {
+    public TextView getLastScore() {
         return lastScore;
     }
 
