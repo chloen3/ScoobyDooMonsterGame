@@ -23,7 +23,7 @@ public class GameActivity extends AppCompatActivity {
     private String name;
     private double difficulty;
     private String sprite;
-    private int score = 100;
+    private int score = 15;
 
     public TextView getScoreTextView() {
         return scoreTextView;
@@ -110,6 +110,9 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveUp(spriteImg);
+                                instance.moveUp();
+                                instance.setX((int) futureX);
+                                instance.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
@@ -117,6 +120,9 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveDown(spriteImg, screenHeight);
+                                instance.moveDown();
+                                instance.setX((int) futureX);
+                                instance.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
@@ -124,6 +130,9 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveLeft(spriteImg);
+                                instance.moveLeft();
+                                instance.setX((int) futureX);
+                                instance.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
@@ -131,6 +140,9 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveRight(spriteImg, screenWidth);
+                                instance.moveRight();
+                                instance.setX((int) futureX);
+                                instance.setY((int) futureY);
                             }
                             break;
                     }

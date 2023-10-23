@@ -8,6 +8,9 @@ public class Player {
     private String health;
     private static volatile Player player;
     private int speed = 5;
+    private String currentDirection = null;
+    private int x, y;
+
     private Player() { }
     public static Player getPlayer() {
         if (player == null) {
@@ -18,6 +21,19 @@ public class Player {
             }
         }
         return player;
+    }
+
+    public void moveUp() {
+        currentDirection = "up";
+    }
+    public void moveDown() {
+        currentDirection = "down";
+    }
+    public void moveLeft() {
+        currentDirection = "left";
+    }
+    public void moveRight() {
+        currentDirection = "right";
     }
 
     public String getSprite() {
@@ -66,5 +82,20 @@ public class Player {
 
     public void setHealth(String health) {
         this.health = health;
+    }
+    public void setX(int xPosition) {
+        x = xPosition;
+    }
+    public void setY(int yPosition) {
+        y = yPosition;
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public String getCurrentDirection() {
+        return currentDirection;
     }
 }
