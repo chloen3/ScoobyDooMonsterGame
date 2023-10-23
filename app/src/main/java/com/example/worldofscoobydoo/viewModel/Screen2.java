@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class Screen2 extends AppCompatActivity {
 
     private int score;
+    private Runnable scoreUpdater;
     private Player player;
     private TextView scoreTextView;
     private Handler handler = new Handler();
@@ -118,6 +119,8 @@ public class Screen2 extends AppCompatActivity {
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         Intent nextScreen = new Intent(Screen2.this, Screen3.class);
+                        handler.removeCallbacksAndMessages(scoreUpdater);
+                        scoreUpdater = null;
                         player.setScore(score);
                         startActivity(nextScreen);
                     }
@@ -132,7 +135,7 @@ public class Screen2 extends AppCompatActivity {
         updateScore(score); // Update the initial score on the screen
 
         //Define the score updater Runnable
-        Runnable scoreUpdater = new Runnable() {
+        scoreUpdater = new Runnable() {
             @Override
             public void run() {
                 if (score > 0) {
