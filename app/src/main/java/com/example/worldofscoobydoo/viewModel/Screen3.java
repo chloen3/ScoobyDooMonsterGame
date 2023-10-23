@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class Screen3 extends AppCompatActivity {
 
     private String name;
+    private Runnable scoreUpdater;
     private double difficulty;
     private String sprite;
     private int score;
@@ -122,6 +123,8 @@ public class Screen3 extends AppCompatActivity {
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         Intent intent = new Intent(Screen3.this, EndScreen.class);
+                        handler.removeCallbacksAndMessages(scoreUpdater);
+                        scoreUpdater = null;
                         player.setScore(score);
                         SharedPreferences pref = getSharedPreferences("PREFS", 0);
                         SharedPreferences.Editor editor = pref.edit();
@@ -141,7 +144,7 @@ public class Screen3 extends AppCompatActivity {
         updateScore(score); // Update the initial score on the screen
 
         //Define the score updater Runnable
-        Runnable scoreUpdater = new Runnable() {
+        scoreUpdater = new Runnable() {
             @Override
             public void run() {
                 if (score > 0) {

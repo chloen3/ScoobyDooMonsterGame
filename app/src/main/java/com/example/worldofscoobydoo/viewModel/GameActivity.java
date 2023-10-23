@@ -19,9 +19,10 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity {
 
     private String name;
+    private Runnable scoreUpdater;
     private double difficulty;
     private String sprite;
-    private int score = 15;
+    private int score = 600;
 
     public TextView getScoreTextView() {
         return scoreTextView;
@@ -149,6 +150,7 @@ public class GameActivity extends AppCompatActivity {
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
+                        handler.removeCallbacksAndMessages(scoreUpdater);
                         instance.setScore(score);
                         startActivity(nextScreen);
                     }
@@ -163,7 +165,7 @@ public class GameActivity extends AppCompatActivity {
         updateScore(score); // Update the initial score on the screen
 
         //Define the score updater Runnable
-        Runnable scoreUpdater = new Runnable() {
+        scoreUpdater = new Runnable() {
             @Override
             public void run() {
                 if (score > 0) {
