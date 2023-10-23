@@ -129,10 +129,8 @@ public class Screen2 extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView_2);
         updateScore(score);
 
-        int remainingTimeInSeconds = getIntent().getIntExtra("remainingTimeInSeconds", 0);
-
         // Define the score countdown timer
-        scoreCountdownTimer = new CountDownTimer(remainingTimeInSeconds * 1000, 1000) {
+        scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 score -= 1;

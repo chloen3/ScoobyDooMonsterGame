@@ -17,13 +17,11 @@ import android.os.CountDownTimer;
 
 import java.util.ArrayList;
 
-import android.os.CountDownTimer;
-
 public class GameActivity extends AppCompatActivity {
     private String name;
     private double difficulty;
     private String sprite;
-    private int score = 50;
+    private int score = 100;
     private TextView scoreTextView;
     private Player instance;
     private Handler handler = new Handler();
@@ -163,7 +161,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startCountdownTimer() {
-        scoreCountdownTimer = new CountDownTimer(60000, 1000) {
+        scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 score -= 1;
                 updateScore(score);
