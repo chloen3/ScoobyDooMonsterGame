@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +22,8 @@ public class Screen2 extends AppCompatActivity {
     private Player player;
     private TextView scoreTextView;
     private Handler handler = new Handler();
-    private int screenWidth, screenHeight;
+    private int screenWidth;
+    private int screenHeight;
     private MovementStrategy movementStrategy;
     private Renderer renderer;
     private MovementObservable movementObservable;
@@ -89,7 +89,7 @@ public class Screen2 extends AppCompatActivity {
                         case KeyEvent.KEYCODE_DPAD_UP:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
-                            if (!checkCollision(futureX, futureY)){
+                            if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveUp(spriteImg);
                             }
                             break;
@@ -103,17 +103,18 @@ public class Screen2 extends AppCompatActivity {
                         case KeyEvent.KEYCODE_DPAD_LEFT:
                             futureX = spriteImg.getX() - 80;
                             futureY = spriteImg.getY();
-                            if(!checkCollision(futureX, futureY)){
+                            if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveLeft(spriteImg);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
                             futureX = spriteImg.getX() + 80;
                             futureY = spriteImg.getY();
-                            if(!checkCollision(futureX, futureY)){
+                            if (!checkCollision(futureX, futureY)) {
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                             }
                             break;
+                        default:
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         Intent nextScreen = new Intent(Screen2.this, Screen3.class);
@@ -181,7 +182,8 @@ public class Screen2 extends AppCompatActivity {
             int objWidth = collisionBox.getWidth();
             int objHeight = collisionBox.getHeight();
             //check for collision
-            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)){
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth)
+                    && (playerY + playerHeight >= objY) && (playerY <= objY + objHeight)) {
                 return true;
             }
         }
@@ -193,12 +195,12 @@ public class Screen2 extends AppCompatActivity {
         float playerY =  y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
-        ImageView exit_screen1 = findViewById(R.id.exit_screen2);
+        ImageView exitScreen1 = findViewById(R.id.exit_screen2);
 
-        float objX = exit_screen1.getX();
-        float objY = exit_screen1.getY();
-        int objWidth = exit_screen1.getWidth();
-        int objHeight = exit_screen1.getHeight();
+        float objX = exitScreen1.getX();
+        float objY = exitScreen1.getY();
+        int objWidth = exitScreen1.getWidth();
+        int objHeight = exitScreen1.getHeight();
         //check for collision
         if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
                 + playerHeight >= objY) && (playerY <= objY + objHeight)) {

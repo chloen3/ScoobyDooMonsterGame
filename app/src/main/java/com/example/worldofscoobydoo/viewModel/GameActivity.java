@@ -4,11 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +35,8 @@ public class GameActivity extends AppCompatActivity {
 
     private Player instance;
     private Handler handler = new Handler();
-    private int screenWidth, screenHeight;
+    private int screenWidth;
+    private int screenHeight;
     private String strategy;
     private MovementStrategy movementStrategy;
     private ArrayList<ImageView> collisionsList;
@@ -104,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     float futureX;
                     float futureY;
-                    switch(key) {
+                    switch (key) {
                         case KeyEvent.KEYCODE_DPAD_UP:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
@@ -145,6 +144,8 @@ public class GameActivity extends AppCompatActivity {
                                 instance.setY((int) futureY);
                             }
                             break;
+                        default:
+                            return false;
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
@@ -224,12 +225,12 @@ public class GameActivity extends AppCompatActivity {
         float playerY =  y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
-        ImageView exit_screen1 = findViewById(R.id.exit_screen1);
+        ImageView exitScreen1 = findViewById(R.id.exit_screen1);
 
-        float objX = exit_screen1.getX();
-        float objY = exit_screen1.getY();
-        int objWidth = exit_screen1.getWidth();
-        int objHeight = exit_screen1.getHeight();
+        float objX = exitScreen1.getX();
+        float objY = exitScreen1.getY();
+        int objWidth = exitScreen1.getWidth();
+        int objHeight = exitScreen1.getHeight();
         //check for collision
         if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
                 + playerHeight >= objY) && (playerY <= objY + objHeight)) {
@@ -243,11 +244,7 @@ public class GameActivity extends AppCompatActivity {
         if (instance.getHealth() == null) {
             return false;
         } else {
-            if (Integer.parseInt(instance.getHealth()) >= 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return Integer.parseInt(instance.getHealth()) >= 0;
         }
     }
 }
