@@ -120,4 +120,40 @@ public class PlayerTest {
         MovementStrategy mv = new MovementMedium(test);
         assertFalse(InitialConfiguration.fastSpeedIsValid(mv, difficulty));
     }
+
+    @Test
+    public void testPlayerMovementUp() {
+        // Create an instance of your Player class
+        Player player =  Player.getPlayer();
+
+        player.moveUp();
+        assertEquals("up", player.getCurrentDirection());
+    }
+
+    @Test
+    public void testPlayerMovementDown() {
+        // Create an instance of your Player class
+        Player player =  Player.getPlayer();
+
+        player.moveDown();
+        assertEquals("down", player.getCurrentDirection());
+    }
+
+    @Test
+    public void testPlayerMovementLeft() {
+        // Create an instance of your Player class
+        Player player =  Player.getPlayer();
+
+        player.moveLeft();
+        assertEquals("left", player.getCurrentDirection());
+    }
+
+    @Test
+    public void testPlayerMovementRight() {
+        // Create an instance of your Player class
+        Player player =  Player.getPlayer();
+
+        player.moveRight();
+        assertEquals("right", player.getCurrentDirection());
+    }
 }
