@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo.viewModel;
+package com.example.worldofscoobydoo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

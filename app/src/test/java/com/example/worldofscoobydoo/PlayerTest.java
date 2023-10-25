@@ -4,8 +4,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.example.worldofscoobydoo.model.Player;
-import com.example.worldofscoobydoo.viewModel.GameActivity;
-import com.example.worldofscoobydoo.viewModel.InitialConfiguration;
+import com.example.worldofscoobydoo.view.GameActivity;
+import com.example.worldofscoobydoo.view.InitialConfiguration;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;

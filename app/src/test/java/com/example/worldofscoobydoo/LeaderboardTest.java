@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 import com.example.worldofscoobydoo.model.LeaderboardModel;
-import com.example.worldofscoobydoo.viewModel.LeaderBoard;
+import com.example.worldofscoobydoo.view.LeaderBoard;
 
 public class LeaderboardTest {
 

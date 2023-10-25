@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo.viewModel;
+package com.example.worldofscoobydoo.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Player;
+import com.example.worldofscoobydoo.viewModel.MovementFast;
+import com.example.worldofscoobydoo.viewModel.MovementMedium;
+import com.example.worldofscoobydoo.viewModel.MovementObservable;
+import com.example.worldofscoobydoo.viewModel.MovementSlow;
+import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 
 public class InitialConfiguration extends AppCompatActivity {
     private String name;
