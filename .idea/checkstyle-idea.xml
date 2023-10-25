@@ -5,14 +5,13 @@
     <scanScope>JavaOnly</scanScope>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
-      <option value="2f6ec3e9-148c-4f42-9327-5c54cec69500" />
+      <option value="c059d83d-bef7-4e32-b617-773703601439" />
     </option>
     <option name="locations">
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="2f6ec3e9-148c-4f42-9327-5c54cec69500" type="LOCAL_FILE" scope="All" description="CS2340 CHECKS">$PROJECT_DIR$/../cs2340-codestyle.xml</ConfigurationLocation>
-        <ConfigurationLocation id="c059d83d-bef7-4e32-b617-773703601439" type="LOCAL_FILE" scope="All" description="CS2340 checkstyle">$PROJECT_DIR$/../../checkstyle/cs2340_checkstyle.xml</ConfigurationLocation>
+        <ConfigurationLocation id="bd538939-61a4-4a1b-8f35-e2394efb210b" type="LOCAL_FILE" scope="All" description="CS2340 Checkstyle">$PROJECT_DIR$/../../cs2340_checkstyle.xml</ConfigurationLocation>
       </list>
     </option>
   </component>

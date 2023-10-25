@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFEB3B"
     android:backgroundTint="#FFEB3B"
-    tools:context=".viewModel.MainActivity">
+    tools:context=".view.MainActivity">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -16,10 +16,10 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/room1new" />
 
     <TextView
@@ -180,5 +180,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="?attr/selectableItemBackgroundBorderless" />
+
+    <ImageView
+        android:id="@+id/enemy1Screen1"
+        android:layout_width="84dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732"
+        app:srcCompat="@drawable/mummy" />
+
+    <ImageView
+        android:id="@+id/enemy2Screen1"
+        android:layout_width="52dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227"
+        app:srcCompat="@drawable/mummy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

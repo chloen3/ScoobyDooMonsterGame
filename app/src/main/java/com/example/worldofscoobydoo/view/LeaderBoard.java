@@ -1,4 +1,4 @@
-package com.example.worldofscoobydoo.viewModel;
+package com.example.worldofscoobydoo.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
@@ -14,6 +14,9 @@ import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 import com.example.worldofscoobydoo.model.LeaderboardModel;
 import com.example.worldofscoobydoo.model.Player;
+import com.example.worldofscoobydoo.view.EndScreen;
+import com.example.worldofscoobydoo.viewModel.LeaderboardAdapter;
+import com.example.worldofscoobydoo.viewModel.LeaderboardViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
