@@ -10,9 +10,9 @@ public class EnemyViewModel extends ViewModel {
     private Enemy enemy;
 
     // Initialize the Enemy instance when the ViewModel is created
-    public EnemyViewModel() {
-        enemy = new Enemy();
-    }
+    //public EnemyViewModel() {
+        //enemy = new Enemy();
+    //}
 
     // Methods to access and manipulate the Enemy instance
     public String getEnemyType() {

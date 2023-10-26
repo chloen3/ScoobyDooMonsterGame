@@ -2,15 +2,21 @@ package com.example.worldofscoobydoo.model;
 
 import android.widget.ImageView;
 
+import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Enemy {
+public abstract class Enemy {
     //Type of enemy
-    private String type;
+    String type;
     //Enemy image
-    private ImageView image;
+    ImageView image;
     //How fast the enemy is moving
-    private MovementStrategy mvStrategy;
+    MovementStrategy mvStrategy;
+
+    MovementObservable movementObservable;
+
     public Enemy(){
 
     }
@@ -35,5 +41,8 @@ public class Enemy {
 
     public void setImage(ImageView img) {
         this.image = img;
+    }
+
+    void createMultipleEnemies(int numEnemies) {
     }
 }
