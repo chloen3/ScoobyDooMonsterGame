@@ -1,3 +1,4 @@
+
 package com.example.worldofscoobydoo.viewModel;
 
 import android.media.Image;
@@ -9,10 +10,11 @@ import com.example.worldofscoobydoo.model.Enemy;
 public class EnemyViewModel extends ViewModel {
     private Enemy enemy;
 
-    // Initialize the Enemy instance when the ViewModel is created
-    //public EnemyViewModel() {
-        //enemy = new Enemy();
-    //}
+    //Initialize the Enemy instance when the ViewModel is created
+    /*public EnemyViewModel() {
+        enemy = new Enemy();
+    }
+     */
 
     // Methods to access and manipulate the Enemy instance
     public String getEnemyType() {
@@ -41,3 +43,4 @@ public class EnemyViewModel extends ViewModel {
         return enemy.getImage();
     }
 }
+
