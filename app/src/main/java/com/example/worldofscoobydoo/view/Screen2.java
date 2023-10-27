@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Enemy;
+import com.example.worldofscoobydoo.model.EnemyFactory;
 import com.example.worldofscoobydoo.model.Player;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
@@ -19,6 +21,7 @@ import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Screen2 extends AppCompatActivity {
 
@@ -31,6 +34,15 @@ public class Screen2 extends AppCompatActivity {
     private MovementStrategy movementStrategy;
     private Renderer renderer;
     private MovementObservable movementObservable;
+    private MovementStrategy enemy1MovementStrategy;
+    private MovementStrategy enemy2MovementStrategy;
+    private Renderer enemyOneRenderer;
+    private Renderer enemyTwoRenderer;
+    private MovementObservable enemyOneMovementObservable;
+    private MovementObservable enemyTwoMovementObservable;
+    private Enemy enemy1;
+    private Enemy enemy2;
+    private EnemyFactory enemyFactory;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +56,21 @@ public class Screen2 extends AppCompatActivity {
         String sprite = player.getSprite();
         score = player.getScore();
         movementObservable = new MovementObservable();
+
+        //Enemy stuff
+        enemyFactory = new EnemyFactory();
+        enemyOneMovementObservable = new MovementObservable();
+        enemyTwoMovementObservable = new MovementObservable();
+        ImageView enemy1Img = findViewById(R.id.enemy1Screen2);
+        ImageView enemy2Img = findViewById(R.id.enemy2);
+        Enemy enemy1 = enemyFactory.createEnemy("Mummy", enemy1Img, enemyOneMovementObservable);
+        Enemy enemy2 = enemyFactory.createEnemy("Giant", enemy2Img, enemyTwoMovementObservable);
+        enemy1MovementStrategy = enemy1.getMvStrategy();
+        enemy2MovementStrategy = enemy2.getMvStrategy();
+        enemyOneRenderer = new Renderer(enemy1Img);
+        enemyTwoRenderer = new Renderer(enemy2Img);
+        enemyOneMovementObservable.addObserver(enemyOneRenderer);
+        enemyTwoMovementObservable.addObserver(enemyTwoRenderer);
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow(movementObservable);
@@ -75,6 +102,9 @@ public class Screen2 extends AppCompatActivity {
 
         renderer = new Renderer(spriteImg);
         movementObservable.addObserver(renderer);
+
+        enemy1Img.setImageResource(R.drawable.giant);
+        enemy2Img.setImageResource(R.drawable.ghost);
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
@@ -118,6 +148,23 @@ public class Screen2 extends AppCompatActivity {
                             }
                             break;
                         default:
+                    }
+                    int random = new Random().nextInt(4);
+                    if (random == 0) {
+                        enemy1MovementStrategy.moveLeft(enemy1Img);
+                        enemy2MovementStrategy.moveUp(enemy2Img);
+                    }
+                    else if (random == 1) {
+                        enemy1MovementStrategy.moveUp(enemy1Img);
+                        enemy2MovementStrategy.moveRight(enemy2Img, screenWidth);
+                    }
+                    else if (random == 2) {
+                        enemy1MovementStrategy.moveRight(enemy1Img, screenWidth);
+                        enemy2MovementStrategy.moveDown(enemy2Img, screenWidth);
+                    }
+                    else if (random == 3) {
+                        enemy1MovementStrategy.moveDown(enemy1Img, screenWidth);
+                        enemy2MovementStrategy.moveLeft(enemy2Img);
                     }
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         if (scoreCountdownTimer != null) {
