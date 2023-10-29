@@ -7,6 +7,8 @@ import java.util.List;
 
 public class EnemyBoss extends Enemy {
 
+    
+
     public EnemyBoss() {
         type = "Boss";
         //image =

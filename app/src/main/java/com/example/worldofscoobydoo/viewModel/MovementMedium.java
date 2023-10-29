@@ -4,6 +4,8 @@ import android.widget.ImageView;
 
 public class MovementMedium implements MovementStrategy {
     private MovementObservable movementObservable;
+
+
     public MovementMedium(MovementObservable observable) {
         this.movementObservable = observable;
     }
