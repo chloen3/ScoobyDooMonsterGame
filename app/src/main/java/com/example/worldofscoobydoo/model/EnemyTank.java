@@ -1,6 +1,9 @@
 package com.example.worldofscoobydoo.model;
 
+import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
+import android.widget.ImageView;
+import com.example.worldofscoobydoo.R;
 
 import java.util.ArrayList;
 import java.util.List;

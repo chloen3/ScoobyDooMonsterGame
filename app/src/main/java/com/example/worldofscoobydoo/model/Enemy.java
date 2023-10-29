@@ -45,4 +45,8 @@ public abstract class Enemy {
 
     void createMultipleEnemies(int numEnemies) {
     }
+
+    public static boolean EnemyIsValid(String sprite) {
+        return sprite == "Basic" || sprite == "Tank" || sprite == "Giant" || sprite == "Boss";
+    }
 }

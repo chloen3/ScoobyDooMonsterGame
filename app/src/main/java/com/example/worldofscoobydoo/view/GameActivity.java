@@ -48,8 +48,12 @@ public class GameActivity extends AppCompatActivity {
     private MovementObservable movementObservable;
     private MovementObservable enemyOneMovementObservable;
     private MovementObservable enemyTwoMovementObservable;
+
+    /*
     private EnemyViewModel enemy1;
     private EnemyViewModel enemy2;
+
+     */
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_activity);
         instance = Player.getPlayer();
         movementObservable = new MovementObservable();
+        /*
         enemyOneMovementObservable = new MovementObservable();
         enemyTwoMovementObservable = new MovementObservable();
         enemy1 = new EnemyViewModel();
@@ -73,6 +78,7 @@ public class GameActivity extends AppCompatActivity {
         enemyTwoRenderer = new Renderer(enemy2.getImageView());
         enemyOneMovementObservable.addObserver(enemyOneRenderer);
         enemyTwoMovementObservable.addObserver(enemyTwoRenderer);
+        */
 
         name = instance.getName();
         difficulty = instance.getDifficulty();
@@ -166,6 +172,7 @@ public class GameActivity extends AppCompatActivity {
                         default:
                             return false;
                     }
+                    /*
                     int random = new Random().nextInt(4);
                     if (random == 0) {
                         enemy1MovementStrategy.moveLeft(enemy1.getImageView());
@@ -179,6 +186,8 @@ public class GameActivity extends AppCompatActivity {
                     else if (random == 3) {
                         enemy1MovementStrategy.moveDown(enemy1.getImageView(), screenWidth);
                     }
+
+                     */
 
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         if (scoreCountdownTimer != null) {
