@@ -129,5 +129,4 @@ public class Player implements Observer {
     public boolean isRunning() {
         return running;
     }
-
 }

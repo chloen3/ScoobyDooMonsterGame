@@ -3,6 +3,7 @@ package com.example.worldofscoobydoo;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.badlogic.gdx.Game;
 import com.example.worldofscoobydoo.model.Player;
 import com.example.worldofscoobydoo.view.GameActivity;
 import com.example.worldofscoobydoo.view.InitialConfiguration;
@@ -161,5 +162,10 @@ public class PlayerTest {
     public void testObserverRunnable() {
         Player player = Player.getPlayer();
         assertFalse(player.isRunning());
+    }
+
+    @Test
+    public void validDecrease() {
+        assertFalse(GameActivity.enemyAttack());
     }
 }

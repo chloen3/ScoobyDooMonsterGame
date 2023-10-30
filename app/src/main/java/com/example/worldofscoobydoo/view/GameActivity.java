@@ -50,13 +50,13 @@ public class GameActivity extends AppCompatActivity {
     private MovementObservable movementObservable;
     private MovementObservable enemyOneMovementObservable;
     private MovementObservable enemyTwoMovementObservable;
-    private Enemy enemy1;
-    private Enemy enemy2;
+    private Enemy enemy1 = null;
+    private Enemy enemy2 = null;
     private EnemyFactory enemyFactory;
     private int movementCount;
     private int movementCount2;
     private double health;
-    private double prevHealth;
+    private static boolean by10;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +142,8 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    prevHealth = health;
                                     health = health - 10;
+                                    by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
@@ -159,8 +159,8 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    prevHealth = health;
                                     health = health - 10;
+                                    by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
@@ -176,8 +176,8 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    prevHealth = health;
                                     health = health - 10;
+                                    by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
@@ -193,7 +193,6 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    prevHealth = health;
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
@@ -401,4 +400,9 @@ public class GameActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.collisionNotification);
         instance.notifyObservers(text);
     }
+
+    public static boolean enemyAttack() {
+        return by10;
+    }
+
 }
