@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Enemy;
+import com.example.worldofscoobydoo.model.EnemyFactory;
+//import com.example.worldofscoobydoo.model.EnemyTank;
 import com.example.worldofscoobydoo.model.Player;
-import com.example.worldofscoobydoo.viewModel.EnemyViewModel;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
@@ -48,12 +50,9 @@ public class GameActivity extends AppCompatActivity {
     private MovementObservable movementObservable;
     private MovementObservable enemyOneMovementObservable;
     private MovementObservable enemyTwoMovementObservable;
-
-    /*
-    private EnemyViewModel enemy1;
-    private EnemyViewModel enemy2;
-
-     */
+    private Enemy enemy1;
+    private Enemy enemy2;
+    private EnemyFactory enemyFactory;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,24 +60,21 @@ public class GameActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.game_activity);
+        enemyFactory = new EnemyFactory();
         instance = Player.getPlayer();
         movementObservable = new MovementObservable();
-        /*
         enemyOneMovementObservable = new MovementObservable();
         enemyTwoMovementObservable = new MovementObservable();
-        enemy1 = new EnemyViewModel();
-        enemy2 = new EnemyViewModel();
-        enemy1MovementStrategy = new MovementFast(enemyOneMovementObservable);
-        enemy2MovementStrategy = new MovementFast(enemyTwoMovementObservable);
         ImageView enemy1Img = findViewById(R.id.enemy1Screen1);
         ImageView enemy2Img = findViewById(R.id.enemy2Screen1);
-        enemy1.setImageView(enemy1Img);
-        enemy2.setImageView(enemy2Img);
-        enemyOneRenderer = new Renderer(enemy1.getImageView());
-        enemyTwoRenderer = new Renderer(enemy2.getImageView());
+        Enemy enemy1 = enemyFactory.createEnemy("Basic", enemy1Img, enemyOneMovementObservable);
+        Enemy enemy2 = enemyFactory.createEnemy("Boss", enemy2Img, enemyTwoMovementObservable);
+        enemy1MovementStrategy = enemy1.getMvStrategy();
+        enemy2MovementStrategy = enemy2.getMvStrategy();
+        enemyOneRenderer = new Renderer(enemy1Img);
+        enemyTwoRenderer = new Renderer(enemy2Img);
         enemyOneMovementObservable.addObserver(enemyOneRenderer);
         enemyTwoMovementObservable.addObserver(enemyTwoRenderer);
-        */
 
         name = instance.getName();
         difficulty = instance.getDifficulty();
@@ -92,8 +88,12 @@ public class GameActivity extends AppCompatActivity {
             movementStrategy = new MovementFast(movementObservable);
         }
 
+
         TextView nameReceiver = findViewById(R.id.textView4);
         nameReceiver.setText(name);
+
+        enemy1Img.setImageResource(R.drawable.mummy);
+        enemy2Img.setImageResource(R.drawable.ghost);
 
         TextView difficultyReceiver = findViewById(R.id.health_status);
         String diff = String.valueOf(difficulty * 100.0);
@@ -172,22 +172,23 @@ public class GameActivity extends AppCompatActivity {
                         default:
                             return false;
                     }
-                    /*
                     int random = new Random().nextInt(4);
                     if (random == 0) {
-                        enemy1MovementStrategy.moveLeft(enemy1.getImageView());
+                        enemy1MovementStrategy.moveLeft(enemy1Img);
+                        enemy2MovementStrategy.moveUp(enemy2Img);
                     }
                     else if (random == 1) {
-                        enemy1MovementStrategy.moveUp(enemy1.getImageView());
+                        enemy1MovementStrategy.moveUp(enemy1Img);
+                        enemy2MovementStrategy.moveRight(enemy2Img, screenWidth);
                     }
                     else if (random == 2) {
-                        enemy1MovementStrategy.moveRight(enemy1.getImageView(), screenWidth);
+                        enemy1MovementStrategy.moveRight(enemy1Img, screenWidth);
+                        enemy2MovementStrategy.moveDown(enemy2Img, screenWidth);
                     }
                     else if (random == 3) {
-                        enemy1MovementStrategy.moveDown(enemy1.getImageView(), screenWidth);
+                        enemy1MovementStrategy.moveDown(enemy1Img, screenWidth);
+                        enemy2MovementStrategy.moveLeft(enemy2Img);
                     }
-
-                     */
 
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         if (scoreCountdownTimer != null) {
@@ -293,5 +294,3 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 }
-
-
