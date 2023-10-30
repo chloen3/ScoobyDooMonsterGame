@@ -53,6 +53,8 @@ public class GameActivity extends AppCompatActivity {
     private Enemy enemy1;
     private Enemy enemy2;
     private EnemyFactory enemyFactory;
+    private int movementCount;
+    private int movementCount2;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,8 @@ public class GameActivity extends AppCompatActivity {
         enemyTwoRenderer = new Renderer(enemy2Img);
         enemyOneMovementObservable.addObserver(enemyOneRenderer);
         enemyTwoMovementObservable.addObserver(enemyTwoRenderer);
+        ImageView movementBox1 = findViewById(R.id.enemy2screen1box);
+        ImageView movementBox2 = findViewById(R.id.enemy1screen1box);
 
         name = instance.getName();
         difficulty = instance.getDifficulty();
@@ -118,6 +122,8 @@ public class GameActivity extends AppCompatActivity {
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
+        movementCount = 0;
+        movementCount2 = 0;
 
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
@@ -173,21 +179,63 @@ public class GameActivity extends AppCompatActivity {
                             return false;
                     }
                     int random = new Random().nextInt(4);
-                    if (random == 0) {
-                        enemy1MovementStrategy.moveLeft(enemy1Img);
-                        enemy2MovementStrategy.moveUp(enemy2Img);
+                    if (movementCount == 0) {
+                        enemy1Img.setX(movementBox1.getX());
+                        enemy1Img.setY(movementBox1.getY());
+                        movementCount++;
                     }
-                    else if (random == 1) {
-                        enemy1MovementStrategy.moveUp(enemy1Img);
-                        enemy2MovementStrategy.moveRight(enemy2Img, screenWidth);
+                    else if (movementCount == 1) {
+                        enemy1Img.setX(movementBox1.getX() + movementBox1.getWidth()/2);
+                        enemy1Img.setY(movementBox1.getY());
+                        movementCount++;
                     }
-                    else if (random == 2) {
-                        enemy1MovementStrategy.moveRight(enemy1Img, screenWidth);
-                        enemy2MovementStrategy.moveDown(enemy2Img, screenWidth);
+                    else if (movementCount == 2) {
+                        enemy1Img.setX(movementBox1.getX() + movementBox1.getWidth());
+                        enemy1Img.setY(movementBox1.getY());
+                        movementCount++;
                     }
-                    else if (random == 3) {
-                        enemy1MovementStrategy.moveDown(enemy1Img, screenWidth);
-                        enemy2MovementStrategy.moveLeft(enemy2Img);
+                    else if (movementCount == 3) {
+                        enemy1Img.setX(movementBox1.getX() + movementBox1.getWidth());
+                        enemy1Img.setY(movementBox1.getY() + movementBox1.getHeight()/2);
+                        movementCount++;
+                    }
+                    else if (movementCount == 4) {
+                        enemy1Img.setX(movementBox1.getX() +  movementBox1.getWidth());
+                        enemy1Img.setY(movementBox1.getY() + movementBox1.getHeight());
+                        movementCount++;
+                    }
+                    else if (movementCount == 5) {
+                        enemy1Img.setX(movementBox1.getX() +  movementBox1.getWidth()/2);
+                        enemy1Img.setY(movementBox1.getY() + movementBox1.getHeight());
+                        movementCount++;
+                    }
+                    else if (movementCount == 6) {
+                        enemy1Img.setX(movementBox1.getX());
+                        enemy1Img.setY(movementBox1.getY() + movementBox1.getHeight());
+                        movementCount++;
+                    }
+                    else if (movementCount == 7) {
+                        enemy1Img.setX(movementBox1.getX());
+                        enemy1Img.setY(movementBox1.getY() + movementBox1.getHeight()/2);
+                        movementCount = 0;
+                    }
+
+                    if (movementCount2 == 0) {
+                        enemy2Img.setX(movementBox2.getX());
+                        enemy2Img.setY(movementBox2.getY());
+                        movementCount2++;
+                    } else if (movementCount2 == 1) {
+                        enemy2Img.setX(movementBox2.getX() + movementBox2.getWidth());
+                        enemy2Img.setY(movementBox2.getY());
+                        movementCount2++;
+                    } else if (movementCount2 == 2) {
+                        enemy2Img.setX(movementBox2.getX() + movementBox2.getWidth());
+                        enemy2Img.setY(movementBox2.getY() + movementBox2.getHeight());
+                        movementCount2++;
+                    } else if (movementCount2 == 3) {
+                        enemy2Img.setX(movementBox2.getX());
+                        enemy2Img.setY(movementBox2.getY() + movementBox2.getHeight());
+                        movementCount2 = 0;
                     }
 
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
