@@ -144,6 +144,7 @@ public class GameActivity extends AppCompatActivity {
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
+                                    notification();
                                 }
                                 movementStrategy.moveUp(spriteImg);
                                 instance.moveUp();
@@ -159,6 +160,7 @@ public class GameActivity extends AppCompatActivity {
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
+                                    notification();
                                 }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 instance.moveDown();
@@ -174,6 +176,7 @@ public class GameActivity extends AppCompatActivity {
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
+                                    notification();
                                 }
                                 movementStrategy.moveLeft(spriteImg);
                                 instance.moveLeft();
@@ -189,6 +192,7 @@ public class GameActivity extends AppCompatActivity {
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
+                                    notification();
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 instance.moveRight();
@@ -386,5 +390,10 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    public void notification() {
+        TextView text = findViewById(R.id.collisionNotification);
+        instance.notifyObservers(text);
     }
 }

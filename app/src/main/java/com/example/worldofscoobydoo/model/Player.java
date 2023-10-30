@@ -1,6 +1,11 @@
 package com.example.worldofscoobydoo.model;
 
-public class Player {
+import android.os.Handler;
+import android.widget.TextView;
+
+import com.example.worldofscoobydoo.viewModel.Observer;
+
+public class Player implements Observer {
     private String sprite;
     private double difficulty;
     private String name;
@@ -98,5 +103,23 @@ public class Player {
     }
     public String getCurrentDirection() {
         return currentDirection;
+    }
+
+    @Override
+    public void onMovementChanged(float x, float y) {
+        Player player = getPlayer();
+        player.setX((int) x);
+        player.setY((int) y);
+    }
+
+    @Override
+    public void notifyObservers(TextView text) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                text.setText("");
+            }
+        }, 500);
+        text.setText("You've been hit!");
     }
 }

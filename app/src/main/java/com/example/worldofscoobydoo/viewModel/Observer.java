@@ -1,5 +1,9 @@
 package com.example.worldofscoobydoo.viewModel;
+
+import android.widget.TextView;
+
 //Interface that movement observers will implement
 public interface Observer {
-    public void onMovementChanged(float x, float y);
+    void onMovementChanged(float x, float y);
+    void notifyObservers(TextView text);
 }
