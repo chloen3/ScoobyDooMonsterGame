@@ -248,4 +248,3 @@ public class Screen2 extends AppCompatActivity {
         return false;
     }
 }
-
