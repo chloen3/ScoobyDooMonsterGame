@@ -214,9 +214,18 @@ public class Screen2 extends AppCompatActivity {
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
         ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
-        // Add collision boxes
-        // Example: ImageView cb = findViewById(R.id.collisionBox);
-        // collisionsList.add(cb);
+        ImageView cb = findViewById(R.id.BorderC1);
+        ImageView cb2 = findViewById(R.id.BorderC2);
+        ImageView cb3 = findViewById(R.id.BorderC3);
+        ImageView cb4 = findViewById(R.id.BorderC4);
+        ImageView cb5 = findViewById(R.id.BorderC5);
+        ImageView cb6 = findViewById(R.id.BorderC6);
+        collisionsList.add(cb);
+        collisionsList.add(cb2);
+        collisionsList.add(cb3);
+        collisionsList.add(cb4);
+        collisionsList.add(cb5);
+        collisionsList.add(cb6);
         for (ImageView collisionBox : collisionsList) {
             float objX = collisionBox.getX();
             float objY = collisionBox.getY();
