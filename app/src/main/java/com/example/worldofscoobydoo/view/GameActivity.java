@@ -56,6 +56,7 @@ public class GameActivity extends AppCompatActivity {
     private int movementCount;
     private int movementCount2;
     private double health;
+    private double prevHealth;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,7 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
+                                    prevHealth = health;
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
@@ -157,6 +159,7 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
+                                    prevHealth = health;
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
@@ -173,6 +176,7 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
+                                    prevHealth = health;
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
@@ -189,6 +193,7 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
+                                    prevHealth = health;
                                     health = health - 10;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));

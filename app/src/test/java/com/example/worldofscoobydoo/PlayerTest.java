@@ -156,4 +156,10 @@ public class PlayerTest {
         player.moveRight();
         assertEquals("right", player.getCurrentDirection());
     }
+
+    @Test
+    public void testObserverRunnable() {
+        Player player = Player.getPlayer();
+        assertFalse(player.isRunning());
+    }
 }

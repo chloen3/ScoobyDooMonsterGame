@@ -16,6 +16,7 @@ public class Player implements Observer {
     private String currentDirection = null;
     private int x;
     private int y;
+    private boolean running = false;
 
     private Player() { }
     public static Player getPlayer() {
@@ -117,9 +118,16 @@ public class Player implements Observer {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                running = true;
                 text.setText("");
             }
         }, 500);
         text.setText("You've been hit!");
+        running = false;
     }
+
+    public boolean isRunning() {
+        return running;
+    }
+
 }
