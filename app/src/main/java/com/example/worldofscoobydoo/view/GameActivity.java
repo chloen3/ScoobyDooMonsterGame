@@ -55,6 +55,7 @@ public class GameActivity extends AppCompatActivity {
     private EnemyFactory enemyFactory;
     private int movementCount;
     private int movementCount2;
+    private double health;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +101,9 @@ public class GameActivity extends AppCompatActivity {
         enemy2Img.setImageResource(R.drawable.ghost);
 
         TextView difficultyReceiver = findViewById(R.id.health_status);
-        String diff = String.valueOf(difficulty * 100.0);
-        difficultyReceiver.setText(diff);
-        instance.setHealth(diff);
+        health = difficulty * 100;
+        difficultyReceiver.setText(String.valueOf(health));
+        instance.setHealth(String.valueOf(health));
 
         ImageView spriteImg = findViewById(R.id.imageView);
         if ("scooby".equals(sprite)) {
@@ -139,6 +140,11 @@ public class GameActivity extends AppCompatActivity {
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                }
                                 movementStrategy.moveUp(spriteImg);
                                 instance.moveUp();
                                 instance.setX((int) futureX);
@@ -149,6 +155,11 @@ public class GameActivity extends AppCompatActivity {
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 instance.moveDown();
                                 instance.setX((int) futureX);
@@ -159,6 +170,11 @@ public class GameActivity extends AppCompatActivity {
                             futureX = spriteImg.getX() - 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                }
                                 movementStrategy.moveLeft(spriteImg);
                                 instance.moveLeft();
                                 instance.setX((int) futureX);
@@ -169,16 +185,22 @@ public class GameActivity extends AppCompatActivity {
                             futureX = spriteImg.getX() + 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 instance.moveRight();
                                 instance.setX((int) futureX);
                                 instance.setY((int) futureY);
+                            } else if (checkEnemyCollide(futureX, futureY)) {
+                                //Decrease Health
                             }
                             break;
                         default:
                             return false;
                     }
-                    int random = new Random().nextInt(4);
                     if (movementCount == 0) {
                         enemy1Img.setX(movementBox1.getX());
                         enemy1Img.setY(movementBox1.getY());
@@ -244,8 +266,8 @@ public class GameActivity extends AppCompatActivity {
                         }
                         Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
                         instance.setScore(score);
+                        instance.setHealth(String.valueOf(health));
                         // Pass the remaining time in seconds to Screen2
-                        nextScreen.putExtra("remainingTimeInSeconds", score);
                         startActivity(nextScreen);
                     }
                     return true;
@@ -340,5 +362,29 @@ public class GameActivity extends AppCompatActivity {
         } else {
             return Integer.parseInt(instance.getHealth()) >= 0;
         }
+    }
+
+    public boolean checkEnemyCollide(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.enemy1Screen1);
+        ImageView cb2 = findViewById(R.id.enemy2Screen1);
+        collisionsList.add(cb);
+        collisionsList.add(cb2);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

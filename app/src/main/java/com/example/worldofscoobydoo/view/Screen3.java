@@ -52,6 +52,7 @@ public class Screen3 extends AppCompatActivity {
         difficulty = player.getDifficulty();
         sprite = player.getSprite();
         score = player.getScore();
+        String health = player.getHealth();
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow(movementObservable);
@@ -65,8 +66,8 @@ public class Screen3 extends AppCompatActivity {
         nameReceiver.setText(name);
 
         TextView difficultyReceiver = findViewById(R.id.health_status_3);
-        String diff = String.valueOf(difficulty * 100.0);
-        difficultyReceiver.setText(diff);
+        String diff = String.valueOf(health);
+        difficultyReceiver.setText(health);
 
         ImageView spriteImg = findViewById(R.id.imageView_3);
         if ("scooby".equals(sprite)) {
