@@ -56,6 +56,7 @@ public class Screen2 extends AppCompatActivity {
         String sprite = player.getSprite();
         score = player.getScore();
         movementObservable = new MovementObservable();
+        String health = player.getHealth();
 
         //Enemy stuff
         enemyFactory = new EnemyFactory();
@@ -84,7 +85,7 @@ public class Screen2 extends AppCompatActivity {
         nameReceiver.setText(name);
 
         TextView difficultyReceiver = findViewById(R.id.health_status_2);
-        String diff = String.valueOf(difficulty * 100.0);
+        String diff = String.valueOf(health);
         difficultyReceiver.setText(diff);
 
         ImageView spriteImg = findViewById(R.id.imageView_2);
@@ -172,6 +173,7 @@ public class Screen2 extends AppCompatActivity {
                         }
                         Intent nextScreen = new Intent(Screen2.this, Screen3.class);
                         player.setScore(score);
+                        player.setHealth(health);
                         startActivity(nextScreen);
                     }
                     return true;
