@@ -229,4 +229,18 @@
         app:layout_constraintVertical_bias="0.652"
         app:srcCompat="@android:drawable/divider_horizontal_bright" />
 
+    <TextView
+        android:id="@+id/collisionNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/butcherman"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#FFEB3B"
+        android:textSize="24sp"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
