@@ -133,6 +133,7 @@ public class GameActivity extends AppCompatActivity {
         user.setFocusable(true);
         user.setFocusableInTouchMode(true);
         user.requestFocus();
+
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -145,6 +146,12 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        instance.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
@@ -162,6 +169,12 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        instance.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
@@ -179,6 +192,12 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        instance.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
@@ -196,6 +215,12 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        instance.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();

@@ -135,6 +135,12 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(Screen2.this, EndScreen.class);
+                                        player.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
@@ -152,6 +158,12 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(Screen2.this, EndScreen.class);
+                                        player.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
@@ -169,6 +181,12 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(Screen2.this, EndScreen.class);
+                                        player.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
@@ -186,10 +204,16 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     health = health - 10;
+                                    //check for game over
+                                    if (health <= 0) {
+                                        Intent intent = new Intent(Screen2.this, EndScreen.class);
+                                        player.setScore(0);
+                                        startActivity(intent);
+                                    }
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
-//                                    notification();
+//                                  notification();
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 player.moveRight();
@@ -317,5 +341,10 @@ public class Screen2 extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void notification() {
+        TextView text = findViewById(R.id.collisionNotification);
+        player.notifyObservers(text);
     }
 }
