@@ -155,7 +155,7 @@ public class Screen3 extends AppCompatActivity {
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
-//                                    notification();
+                                    notification();
                                 }
                                 movementStrategy.moveUp(spriteImg);
                                 player.moveUp();
@@ -178,7 +178,7 @@ public class Screen3 extends AppCompatActivity {
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
-//                                    notification();
+                                    notification();
                                 }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 player.moveDown();
@@ -201,7 +201,7 @@ public class Screen3 extends AppCompatActivity {
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
-//                                    notification();
+                                    notification();
                                 }
                                 movementStrategy.moveLeft(spriteImg);
                                 player.moveLeft();
@@ -224,7 +224,7 @@ public class Screen3 extends AppCompatActivity {
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
-//                                  notification();
+                                    notification();
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 player.moveRight();
@@ -355,5 +355,10 @@ public class Screen3 extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void notification() {
+        TextView text = findViewById(R.id.alert);
+        player.notifyObservers(text);
     }
 }
