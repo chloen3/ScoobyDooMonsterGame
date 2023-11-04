@@ -43,6 +43,10 @@ public class Screen2 extends AppCompatActivity {
     private Enemy enemy1;
     private Enemy enemy2;
     private EnemyFactory enemyFactory;
+    private double health;
+    private static boolean by10;
+    private int movementCount;
+    private int movementCount2;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +60,8 @@ public class Screen2 extends AppCompatActivity {
         String sprite = player.getSprite();
         score = player.getScore();
         movementObservable = new MovementObservable();
-        String health = player.getHealth();
+        String healthString = player.getHealth();
+        health = Double.parseDouble(healthString);
 
         //Enemy stuff
         enemyFactory = new EnemyFactory();
@@ -72,6 +77,8 @@ public class Screen2 extends AppCompatActivity {
         enemyTwoRenderer = new Renderer(enemy2Img);
         enemyOneMovementObservable.addObserver(enemyOneRenderer);
         enemyTwoMovementObservable.addObserver(enemyTwoRenderer);
+        ImageView movementBox1 = findViewById(R.id.enemy2Screen2Boundary);
+        ImageView movementBox2 = findViewById(R.id.enemy1Screen2Boundary);
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow(movementObservable);
@@ -104,11 +111,13 @@ public class Screen2 extends AppCompatActivity {
         renderer = new Renderer(spriteImg);
         movementObservable.addObserver(renderer);
 
-        enemy1Img.setImageResource(R.drawable.giant);
-        enemy2Img.setImageResource(R.drawable.ghost);
+        enemy1Img.setImageResource(R.drawable.mummy);
+        enemy2Img.setImageResource(R.drawable.giant);
 
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
+        movementCount = 0;
+        movementCount2 = 0;
 
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
@@ -124,56 +133,83 @@ public class Screen2 extends AppCompatActivity {
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveUp(spriteImg);
+                                player.moveUp();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
+                                player.moveDown();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
                             futureX = spriteImg.getX() - 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveLeft(spriteImg);
+                                player.moveLeft();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
                             futureX = spriteImg.getX() + 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
+                                player.moveRight();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         default:
                     }
-                    int random = new Random().nextInt(4);
-                    if (random == 0) {
-                        enemy1MovementStrategy.moveLeft(enemy1Img);
-                        enemy2MovementStrategy.moveUp(enemy2Img);
-                    }
-                    else if (random == 1) {
-                        enemy1MovementStrategy.moveUp(enemy1Img);
-                        enemy2MovementStrategy.moveRight(enemy2Img, screenWidth);
-                    }
-                    else if (random == 2) {
-                        enemy1MovementStrategy.moveRight(enemy1Img, screenWidth);
-                        enemy2MovementStrategy.moveDown(enemy2Img, screenWidth);
-                    }
-                    else if (random == 3) {
-                        enemy1MovementStrategy.moveDown(enemy1Img, screenWidth);
-                        enemy2MovementStrategy.moveLeft(enemy2Img);
-                    }
+                    enemy1.movement(movementCount, enemy1Img, movementBox1);
+                    movementCount = enemy1.setCount(movementCount);
+                    enemy2.movement(movementCount2, enemy2Img, movementBox2);
+                    movementCount2 = enemy2.setCount(movementCount2);
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         if (scoreCountdownTimer != null) {
                             scoreCountdownTimer.cancel();
                         }
                         Intent nextScreen = new Intent(Screen2.this, Screen3.class);
                         player.setScore(score);
-                        player.setHealth(health);
+                        player.setHealth(String.valueOf(health));
                         startActivity(nextScreen);
                     }
                     return true;
@@ -207,6 +243,30 @@ public class Screen2 extends AppCompatActivity {
 
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
+    }
+
+    public boolean checkEnemyCollide(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_2);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.enemy2);
+        ImageView cb2 = findViewById(R.id.enemy1Screen2);
+        collisionsList.add(cb);
+        collisionsList.add(cb2);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean checkCollision(float x, float y) {

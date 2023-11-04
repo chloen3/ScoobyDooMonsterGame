@@ -200,4 +200,51 @@
         app:layout_constraintVertical_bias="0.697"
         app:srcCompat="?attr/selectableItemBackgroundBorderless" />
 
+    <ImageView
+        android:id="@+id/enemy1Screen3"
+        android:layout_width="46dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3_3"
+        app:layout_constraintHorizontal_bias="0.361"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.463"
+        app:srcCompat="@drawable/mummy" />
+
+    <ImageView
+        android:id="@+id/enemy2Screen3"
+        android:layout_width="52dp"
+        android:layout_height="69dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.456"
+        app:srcCompat="@drawable/mummy" />
+
+    <ImageView
+        android:id="@+id/enemy1Screen3Boundary"
+        android:layout_width="113dp"
+        android:layout_height="115dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3_3"
+        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.462"
+        app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+    <ImageView
+        android:id="@+id/enemy2Screen3Boundary"
+        android:layout_width="117dp"
+        android:layout_height="135dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
