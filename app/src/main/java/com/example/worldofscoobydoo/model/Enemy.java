@@ -40,7 +40,11 @@ public abstract class Enemy {
         this.image = img;
     }
 
-    void createMultipleEnemies(int numEnemies) {
+    public void createMultipleEnemies(int numEnemies) {
+    }
+    public void movement(int movementCount, ImageView enemy, ImageView box) {}
+    public int setCount(int movementCount) {
+        return movementCount;
     }
     public static boolean EnemyIsValid(String sprite) {
         return sprite == "Basic" || sprite == "Tank" || sprite == "Giant" || sprite == "Boss";

@@ -6,10 +6,10 @@ import com.example.worldofscoobydoo.viewModel.MovementObservable;
 
 public class EnemyFactory {
     public Enemy createEnemy(String type, ImageView img, MovementObservable observable) {
-        if (type.equalsIgnoreCase("Basic")) {
+        if (type.equalsIgnoreCase("Mummy")) {
             // Create and return a Basic enemy instance with specific attributes.
             return new Mummy(img, observable);
-        } else if (type.equalsIgnoreCase("Boss")) {
+        } else if (type.equalsIgnoreCase("Ghost")) {
             // Create and return a Boss enemy instance with specific attributes.
             return new Ghost(img, observable);
         } else if (type.equalsIgnoreCase("Giant")) {

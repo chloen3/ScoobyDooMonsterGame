@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.Enemy;
+import com.example.worldofscoobydoo.model.EnemyFactory;
 import com.example.worldofscoobydoo.model.Player;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
@@ -39,6 +41,22 @@ public class Screen3 extends AppCompatActivity {
     private Player player;
     private Renderer renderer;
     private MovementObservable movementObservable;
+    private MovementStrategy enemy1MovementStrategy;
+    private MovementStrategy enemy2MovementStrategy;
+    private Renderer enemyOneRenderer;
+    private Renderer enemyTwoRenderer;
+    private MovementObservable enemyOneMovementObservable;
+    private MovementObservable enemyTwoMovementObservable;
+    private Enemy enemy1;
+    private Enemy enemy2;
+    private EnemyFactory enemyFactory;
+    private double health;
+    private static boolean by10;
+    private int movementCount;
+    private int movementCount2;
+    private ImageView movementBox1;
+    private ImageView movementBox2;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +70,25 @@ public class Screen3 extends AppCompatActivity {
         difficulty = player.getDifficulty();
         sprite = player.getSprite();
         score = player.getScore();
-        String health = player.getHealth();
+        String healthString = player.getHealth();
+        health = Double.parseDouble(healthString);
+
+        //Enemy stuff
+        enemyFactory = new EnemyFactory();
+        enemyOneMovementObservable = new MovementObservable();
+        enemyTwoMovementObservable = new MovementObservable();
+        ImageView enemy1Img = findViewById(R.id.enemy1Screen3);
+        ImageView enemy2Img = findViewById(R.id.enemy2Screen3);
+        Enemy enemy1 = enemyFactory.createEnemy("Giant", enemy1Img, enemyOneMovementObservable);
+        Enemy enemy2 = enemyFactory.createEnemy("Tank", enemy2Img, enemyTwoMovementObservable);
+        enemy1MovementStrategy = enemy1.getMvStrategy();
+        enemy2MovementStrategy = enemy2.getMvStrategy();
+        enemyOneRenderer = new Renderer(enemy1Img);
+        enemyTwoRenderer = new Renderer(enemy2Img);
+        enemyOneMovementObservable.addObserver(enemyOneRenderer);
+        enemyTwoMovementObservable.addObserver(enemyTwoRenderer);
+        movementBox1 = findViewById(R.id.enemy1Screen3Boundary);
+        movementBox2 = findViewById(R.id.enemy2Screen3Boundary);
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow(movementObservable);
@@ -67,7 +103,7 @@ public class Screen3 extends AppCompatActivity {
 
         TextView difficultyReceiver = findViewById(R.id.health_status_3);
         String diff = String.valueOf(health);
-        difficultyReceiver.setText(health);
+        difficultyReceiver.setText(diff);
 
         ImageView spriteImg = findViewById(R.id.imageView_3);
         if ("scooby".equals(sprite)) {
@@ -85,8 +121,14 @@ public class Screen3 extends AppCompatActivity {
         renderer = new Renderer(spriteImg);
         movementObservable.addObserver(renderer);
 
+        //Setting the images
+        enemy1Img.setImageResource(R.drawable.giant);
+        enemy2Img.setImageResource(R.drawable.boss);
+
         screenWidth = getResources().getDisplayMetrics().widthPixels;
         screenHeight = getResources().getDisplayMetrics().heightPixels;
+        movementCount = 0;
+        movementCount2 = 0;
 
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
@@ -102,32 +144,76 @@ public class Screen3 extends AppCompatActivity {
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveUp(spriteImg);
+                                player.moveUp();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
+                                player.moveDown();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
                             futureX = spriteImg.getX() - 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveLeft(spriteImg);
+                                player.moveLeft();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
                             futureX = spriteImg.getX() + 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    health = health - 10;
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+//                                    notification();
+                                }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
+                                player.moveRight();
+                                player.setX((int) futureX);
+                                player.setY((int) futureY);
                             }
                             break;
                         default:
                     }
+                    enemy1.movement(movementCount, enemy1Img, movementBox1);
+                    movementCount = enemy1.setCount(movementCount);
+                    enemy2.movement(movementCount2, enemy2Img, movementBox2);
+                    movementCount2 = enemy2.setCount(movementCount2);
                     if (checkExit(spriteImg.getX(), spriteImg.getY())) {
                         // Cancel the countdown timer
                         if (scoreCountdownTimer != null) {
@@ -175,6 +261,30 @@ public class Screen3 extends AppCompatActivity {
 
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
+    }
+
+    public boolean checkEnemyCollide(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_3);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.enemy1Screen3);
+        ImageView cb2 = findViewById(R.id.enemy2Screen3);
+        collisionsList.add(cb);
+        collisionsList.add(cb2);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean checkCollision(float x, float y) {
