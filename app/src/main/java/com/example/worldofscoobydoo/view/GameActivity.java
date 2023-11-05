@@ -104,7 +104,7 @@ public class GameActivity extends AppCompatActivity {
         enemy2Img.setImageResource(R.drawable.ghost);
 
         TextView difficultyReceiver = findViewById(R.id.health_status);
-        health = difficulty * 100;
+        health = 200;
         difficultyReceiver.setText(String.valueOf(health));
         instance.setHealth(String.valueOf(health));
 
@@ -145,7 +145,13 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(GameActivity.this, EndScreen.class);
@@ -168,7 +174,13 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(GameActivity.this, EndScreen.class);
@@ -191,7 +203,13 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(GameActivity.this, EndScreen.class);
@@ -214,7 +232,13 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(GameActivity.this, EndScreen.class);
