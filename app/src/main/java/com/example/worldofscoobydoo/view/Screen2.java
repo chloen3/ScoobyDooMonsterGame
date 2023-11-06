@@ -134,7 +134,13 @@ public class Screen2 extends AppCompatActivity {
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(Screen2.this, EndScreen.class);
@@ -157,7 +163,13 @@ public class Screen2 extends AppCompatActivity {
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(Screen2.this, EndScreen.class);
@@ -180,7 +192,13 @@ public class Screen2 extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(Screen2.this, EndScreen.class);
@@ -203,7 +221,13 @@ public class Screen2 extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    health = health - 10;
+                                    if (difficulty == .5) {
+                                        health = health - 15;
+                                    } else if (difficulty == .75) {
+                                        health = health - 10;
+                                    } else {
+                                        health = health - 5;
+                                    }
                                     //check for game over
                                     if (health <= 0) {
                                         Intent intent = new Intent(Screen2.this, EndScreen.class);
