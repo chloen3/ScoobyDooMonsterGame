@@ -3,8 +3,12 @@ package com.example.worldofscoobydoo;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import android.widget.ImageView;
+
+import com.example.worldofscoobydoo.model.EnemyTank;
 import com.example.worldofscoobydoo.view.InitialConfiguration;
 import com.example.worldofscoobydoo.model.Enemy;
+import com.example.worldofscoobydoo.viewModel.MovementObservable;
 
 import org.junit.Test;
 
@@ -30,5 +34,4 @@ public class EnemyTest {
         String type = "Giant";
         assertTrue(Enemy.EnemyIsValid(type));
     }
-
 }

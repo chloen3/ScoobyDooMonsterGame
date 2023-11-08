@@ -11,6 +11,7 @@ public class Player implements Observer {
     private String name;
     private int score;
     private String health;
+    private int healthInt;
     private static volatile Player player;
     private int speed = 5;
     private String currentDirection = null;
@@ -90,6 +91,12 @@ public class Player implements Observer {
     public void setHealth(String health) {
         this.health = health;
     }
+    public void setHealthInt(int health) {
+        this.healthInt = health;
+    }
+    public int getHealthInt() {
+        return healthInt;
+    }
     public void setX(int xPosition) {
         x = xPosition;
     }
@@ -104,6 +111,18 @@ public class Player implements Observer {
     }
     public String getCurrentDirection() {
         return currentDirection;
+    }
+
+    public void collide() {
+        if (difficulty == .5) {
+            healthInt -= 15;
+        }
+        if (difficulty == .75) {
+            healthInt -= 10;
+        }
+        if (difficulty == 1) {
+            healthInt -= 5;
+        }
     }
 
     @Override
