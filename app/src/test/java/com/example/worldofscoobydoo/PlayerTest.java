@@ -168,4 +168,40 @@ public class PlayerTest {
     public void validDecrease() {
         assertFalse(GameActivity.enemyAttack());
     }
+
+    @Test
+    public void whenHealthZeroScoreZero() {
+        Player player =  Player.getPlayer();
+        player.setHealth("0");
+
+        assertEquals(0, player.getScore());
+    }
+
+    @Test
+    public void testHealthDecrementHard() {
+        Player player =  Player.getPlayer();
+        player.setDifficulty(.5);
+        player.setHealthInt(100);
+        player.collide();
+        player.collide();
+        assertEquals(70, player.getHealthInt());
+    }
+    @Test
+    public void testHealthDecrementMedium() {
+        Player player =  Player.getPlayer();
+        player.setDifficulty(.75);
+        player.setHealthInt(100);
+        player.collide();
+        player.collide();
+        assertEquals(80, player.getHealthInt());
+    }
+    @Test
+    public void testHealthDecrementEasy() {
+        Player player =  Player.getPlayer();
+        player.setDifficulty(1);
+        player.setHealthInt(100);
+        player.collide();
+        player.collide();
+        assertEquals(90, player.getHealthInt());
+    }
 }
