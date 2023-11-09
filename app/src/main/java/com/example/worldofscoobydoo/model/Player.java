@@ -148,4 +148,10 @@ public class Player implements Observer {
     public boolean isRunning() {
         return running;
     }
+
+    public int countDownTimer(int removeTime) {
+        int time = 100;
+        time -= removeTime;
+        return time;
+    }
 }

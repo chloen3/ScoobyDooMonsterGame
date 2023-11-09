@@ -9,6 +9,14 @@ import com.example.worldofscoobydoo.viewModel.Renderer;
 
 public class Ghost extends Enemy {
 
+    private int xTest;
+    private int yTest;
+
+    public Ghost() {
+        super("Boss");
+    }
+
+
     public Ghost(ImageView img, MovementObservable observable) {
         super("Boss");
         setMvStrategy(new MovementFast(observable));
@@ -39,6 +47,7 @@ public class Ghost extends Enemy {
             enemy.setX(box.getX() + box.getWidth());
             enemy.setY(box.getY());
         }
+
     }
 
     public int setCount(int movementCount) {
@@ -49,4 +58,36 @@ public class Ghost extends Enemy {
         }
         return movementCount;
     }
+
+    public void setX(int x) {
+        xTest = x;
+    }
+    public void setY(int y) {
+        yTest = y;
+    }
+    public int getX() {
+        return xTest;
+    }
+    public int getY() {
+        return yTest;
+    }
+
+
+    public void testGhostMovement(int iterations, Ghost ghost) {
+        if (iterations == 0) {
+            ghost.setX(0);
+            ghost.setY(0);
+        }
+        if (iterations == 1) {
+            ghost.setX(100);
+            ghost.setY(0);
+        } if (iterations == 2) {
+            ghost.setX(100);
+            ghost.setY(100);
+        } if (iterations == 3) {
+            ghost.setX(0);
+            ghost.setY(100);
+        }
+    }
+
 }

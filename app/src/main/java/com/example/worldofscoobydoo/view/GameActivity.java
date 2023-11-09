@@ -401,4 +401,15 @@ public class GameActivity extends AppCompatActivity {
         return by10;
     }
 
+    public int countDownTimerTEST() {
+        score = 100;
+        score--;
+        return score;
+    }
+
+
+
+
+
+
 }

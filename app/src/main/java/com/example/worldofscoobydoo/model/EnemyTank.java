@@ -12,6 +12,12 @@ import java.util.List;
 
 public class EnemyTank extends Enemy {
 
+    private int xTest;
+    private int yTest;
+
+    public EnemyTank() {
+        super("Tank");
+    }
     public EnemyTank(ImageView img, MovementObservable observable) {
         super("Tank");
         setMvStrategy(new MovementSlow(observable));
@@ -51,4 +57,36 @@ public class EnemyTank extends Enemy {
         }
         return movementCount;
     }
+
+    public void setX(int x) {
+        xTest = x;
+    }
+    public void setY(int y) {
+        yTest = y;
+    }
+    public int getX() {
+        return xTest;
+    }
+    public int getY() {
+        return yTest;
+    }
+
+
+    public void testTankMovement(int iterations, EnemyTank tank) {
+        if (iterations == 0) {
+            tank.setX(0);
+            tank.setY(0);
+        }
+        if (iterations == 1) {
+            tank.setX(0);
+            tank.setY(100);
+        } if (iterations == 2) {
+            tank.setX(100);
+            tank.setY(100);
+        } if (iterations == 3) {
+            tank.setX(100);
+            tank.setY(0);
+        }
+    }
+
 }

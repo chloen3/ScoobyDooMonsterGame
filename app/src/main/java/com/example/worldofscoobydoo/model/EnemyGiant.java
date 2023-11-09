@@ -12,6 +12,12 @@ import java.util.List;
 
 public class EnemyGiant extends Enemy {
 
+    private int xTest;
+    private int yTest;
+
+    public EnemyGiant() {
+        super("Giant");
+    }
     public EnemyGiant(ImageView img, MovementObservable observable) {
         super("Giant");
         setMvStrategy(new MovementSlow(observable));
@@ -55,5 +61,34 @@ public class EnemyGiant extends Enemy {
             movementCount++;
         }
         return movementCount;
+    }
+    public void setX(int x) {
+        xTest = x;
+    }
+    public void setY(int y) {
+        yTest = y;
+    }
+    public int getX() {
+        return xTest;
+    }
+    public int getY() {
+        return yTest;
+    }
+
+    public void testGiantMovement(int iterations, EnemyGiant giant) {
+        if (iterations == 0 || iterations == 1) {
+            giant.setX(0);
+            giant.setY(0);
+        }
+        if (iterations == 2 || iterations == 3) {
+            giant.setX(100);
+            giant.setY(0);
+        } if (iterations == 4 || iterations == 5) {
+            giant.setX(100);
+            giant.setY(100);
+        } if (iterations == 6 || iterations == 7) {
+            giant.setX(0);
+            giant.setY(100);
+        }
     }
 }
