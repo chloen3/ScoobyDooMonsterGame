@@ -21,22 +21,22 @@ public class EnemyTest {
     @Test
     public void enemyIsBoss() {
         String type = "Boss";
-        assertTrue(Enemy.EnemyIsValid(type));
+        assertTrue(Enemy.enemyIsValid(type));
     }
     @Test
     public void enemyIsBasic() {
         String type = "Basic";
-        assertTrue(Enemy.EnemyIsValid(type));
+        assertTrue(Enemy.enemyIsValid(type));
     }
     @Test
     public void enemyIsTank() {
         String type = "Tank";
-        assertTrue(Enemy.EnemyIsValid(type));
+        assertTrue(Enemy.enemyIsValid(type));
     }
     @Test
     public void enemyIsGiant() {
         String type = "Giant";
-        assertTrue(Enemy.EnemyIsValid(type));
+        assertTrue(Enemy.enemyIsValid(type));
     }
 
     @Test

@@ -1,14 +1,8 @@
 package com.example.worldofscoobydoo.model;
-
 import android.widget.ImageView;
-
-import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.Renderer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EnemyTank extends Enemy {
 
@@ -25,19 +19,12 @@ public class EnemyTank extends Enemy {
         observable.addObserver(new Renderer(img));
     }
 
-//    void createMultipleEnemies(int numEnemies) {
-//        List<Enemy> enemies = new ArrayList<>();
-//        for (int i = 1; i <= numEnemies; i++) {
-//            enemies.add(new EnemyTank());
-//        }
-//    }
     @Override
     public void movement(int movementCount, ImageView enemy, ImageView box) {
         if (movementCount == 0) {
             enemy.setX(box.getX());
             enemy.setY(box.getY());
-        }
-        else if (movementCount == 1) {
+        } else if (movementCount == 1) {
             enemy.setX(box.getX());
             enemy.setY(box.getY() + box.getHeight());
         } else if (movementCount == 2) {
@@ -80,10 +67,12 @@ public class EnemyTank extends Enemy {
         if (iterations == 1) {
             tank.setX(0);
             tank.setY(100);
-        } if (iterations == 2) {
+        }
+        if (iterations == 2) {
             tank.setX(100);
             tank.setY(100);
-        } if (iterations == 3) {
+        }
+        if (iterations == 3) {
             tank.setX(100);
             tank.setY(0);
         }

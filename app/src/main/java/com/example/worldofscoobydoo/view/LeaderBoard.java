@@ -14,7 +14,6 @@ import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.LeaderboardEntry;
 import com.example.worldofscoobydoo.model.LeaderboardModel;
 import com.example.worldofscoobydoo.model.Player;
-import com.example.worldofscoobydoo.view.EndScreen;
 import com.example.worldofscoobydoo.viewModel.LeaderboardAdapter;
 import com.example.worldofscoobydoo.viewModel.LeaderboardViewModel;
 
