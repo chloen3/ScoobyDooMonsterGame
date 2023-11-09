@@ -9,6 +9,14 @@ import com.example.worldofscoobydoo.viewModel.Renderer;
 
 public class Mummy extends Enemy {
 
+
+    private int xTest;
+    private int yTest;
+
+    public Mummy() {
+        super("Basic");
+    }
+
     public Mummy(ImageView img, MovementObservable observable) {
         super("Basic");
         setMvStrategy(new MovementMedium(observable));
@@ -65,4 +73,54 @@ public class Mummy extends Enemy {
         }
         return movementCount;
     }
+
+
+    public void setX(int x) {
+        xTest = x;
+    }
+    public void setY(int y) {
+        yTest = y;
+    }
+    public int getX() {
+        return xTest;
+    }
+    public int getY() {
+        return yTest;
+    }
+
+
+    public void testMummyMovement(int iterations, Mummy mummy) {
+        if (iterations == 0) {
+            mummy.setX(0);
+            mummy.setY(0);
+        }
+        if (iterations == 1) {
+            mummy.setX(50);
+            mummy.setY(0);
+        } if (iterations == 2) {
+            mummy.setX(100);
+            mummy.setY(0);
+        } if (iterations == 3) {
+            mummy.setX(100);
+            mummy.setY(50);
+        }
+        if (iterations == 4) {
+            mummy.setX(100);
+            mummy.setY(100);
+        }
+        if (iterations == 5) {
+            mummy.setX(50);
+            mummy.setY(100);
+        } if (iterations == 6) {
+            mummy.setX(0);
+            mummy.setY(100);
+        } if (iterations == 7) {
+            mummy.setX(0);
+            mummy.setY(50);
+        }
+    }
+
+
+
+
 }

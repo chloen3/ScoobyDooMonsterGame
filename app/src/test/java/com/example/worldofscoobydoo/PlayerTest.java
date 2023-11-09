@@ -204,4 +204,16 @@ public class PlayerTest {
         player.collide();
         assertEquals(90, player.getHealthInt());
     }
+
+    @Test
+    public void testCountDownTimer() {
+        Player player =  Player.getPlayer();
+        int score = player.countDownTimer(10);
+        assertEquals(90, score);
+    }
+
+
+
+
+
 }
