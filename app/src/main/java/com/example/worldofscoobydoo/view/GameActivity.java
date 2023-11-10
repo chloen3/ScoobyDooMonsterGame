@@ -26,7 +26,6 @@ import android.os.CountDownTimer;
 
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
     private String name;
@@ -154,7 +153,8 @@ public class GameActivity extends AppCompatActivity {
                                     }
                                     //check for game over
                                     if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        Intent intent = new Intent(GameActivity.this,
+                                                EndScreen.class);
                                         instance.setScore(0);
                                         startActivity(intent);
                                     }
@@ -183,7 +183,8 @@ public class GameActivity extends AppCompatActivity {
                                     }
                                     //check for game over
                                     if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        Intent intent = new Intent(GameActivity.this,
+                                                EndScreen.class);
                                         instance.setScore(0);
                                         startActivity(intent);
                                     }
@@ -212,7 +213,8 @@ public class GameActivity extends AppCompatActivity {
                                     }
                                     //check for game over
                                     if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        Intent intent = new Intent(GameActivity.this,
+                                                EndScreen.class);
                                         instance.setScore(0);
                                         startActivity(intent);
                                     }
@@ -241,7 +243,8 @@ public class GameActivity extends AppCompatActivity {
                                     }
                                     //check for game over
                                     if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        Intent intent = new Intent(GameActivity.this,
+                                                EndScreen.class);
                                         instance.setScore(0);
                                         startActivity(intent);
                                     }
@@ -253,8 +256,6 @@ public class GameActivity extends AppCompatActivity {
                                 instance.moveRight();
                                 instance.setX((int) futureX);
                                 instance.setY((int) futureY);
-                            } else if (checkEnemyCollide(futureX, futureY)) {
-                                //Decrease Health
                             }
                             break;
                         default:

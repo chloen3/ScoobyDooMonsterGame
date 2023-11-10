@@ -1,14 +1,8 @@
 package com.example.worldofscoobydoo.model;
-
 import android.widget.ImageView;
-
-import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.Renderer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EnemyGiant extends Enemy {
 
@@ -25,30 +19,20 @@ public class EnemyGiant extends Enemy {
         observable.addObserver(new Renderer(img));
     }
 
-//    void createMultipleEnemies(int numEnemies) {
-//        List<Enemy> enemies = new ArrayList<>();
-//        for (int i = 1; i <= numEnemies; i++) {
-//            enemies.add(new EnemyBoss());
-//        }
-//    }
-
     public void movement(int movementCount, ImageView enemy, ImageView box) {
         if (movementCount == 0 || movementCount == 1) {
             enemy.setX(box.getX());
             enemy.setY(box.getY());
             movementCount++;
-        }
-        else if (movementCount == 2 || movementCount == 3) {
+        } else if (movementCount == 2 || movementCount == 3) {
             enemy.setX(box.getX() + box.getWidth());
             enemy.setY(box.getY());
             movementCount++;
-        }
-        else if (movementCount == 4 || movementCount == 5) {
+        } else if (movementCount == 4 || movementCount == 5) {
             enemy.setX(box.getX() +  box.getWidth());
             enemy.setY(box.getY() + box.getHeight());
             movementCount++;
-        }
-        else if (movementCount == 6 || movementCount == 7) {
+        } else if (movementCount == 6 || movementCount == 7) {
             enemy.setX(box.getX());
             enemy.setY(box.getY() + box.getHeight());
             movementCount++;
@@ -83,10 +67,12 @@ public class EnemyGiant extends Enemy {
         if (iterations == 2 || iterations == 3) {
             giant.setX(100);
             giant.setY(0);
-        } if (iterations == 4 || iterations == 5) {
+        }
+        if (iterations == 4 || iterations == 5) {
             giant.setX(100);
             giant.setY(100);
-        } if (iterations == 6 || iterations == 7) {
+        }
+        if (iterations == 6 || iterations == 7) {
             giant.setX(0);
             giant.setY(100);
         }

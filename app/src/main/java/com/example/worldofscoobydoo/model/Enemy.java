@@ -1,19 +1,13 @@
 package com.example.worldofscoobydoo.model;
-
-import android.media.Image;
 import android.widget.ImageView;
-
-import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Enemy {
     //Type of enemy
-    String type;
+    private String type;
     //How fast the enemy is moving
-    MovementStrategy mvStrategy;
-    ImageView image;
+    private MovementStrategy mvStrategy;
+    private ImageView image;
     public Enemy(String type) {
         this.type = type;
     }
@@ -42,11 +36,11 @@ public abstract class Enemy {
 
     public void createMultipleEnemies(int numEnemies) {
     }
-    public void movement(int movementCount, ImageView enemy, ImageView box) {}
+    public void movement(int movementCount, ImageView enemy, ImageView box) { }
     public int setCount(int movementCount) {
         return movementCount;
     }
-    public static boolean EnemyIsValid(String sprite) {
+    public static boolean enemyIsValid(String sprite) {
         return sprite == "Basic" || sprite == "Tank" || sprite == "Giant" || sprite == "Boss";
     }
 }

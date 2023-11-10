@@ -1,6 +1,5 @@
 package com.example.worldofscoobydoo.viewModel;
 
-import android.text.Layout;
 import android.widget.ImageView;
 import android.widget.TextView;
 

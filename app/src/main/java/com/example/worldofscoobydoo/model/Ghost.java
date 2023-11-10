@@ -1,8 +1,6 @@
 package com.example.worldofscoobydoo.model;
 
-import android.media.Image;
 import android.widget.ImageView;
-
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.Renderer;
@@ -24,20 +22,12 @@ public class Ghost extends Enemy {
         observable.addObserver(new Renderer(img));
     }
 
-//    void createMultipleEnemies(int numEnemies) {
-//        List<Enemy> enemies = new ArrayList<>();
-//        for (int i = 1; i <= numEnemies; i++) {
-//            enemies.add(new EnemyBoss());
-//        }
-//    }
-
     @Override
     public void movement(int movementCount, ImageView enemy, ImageView box) {
         if (movementCount == 0) {
             enemy.setX(box.getX());
             enemy.setY(box.getY());
-        }
-        else if (movementCount == 1) {
+        } else if (movementCount == 1) {
             enemy.setX(box.getX() +  box.getWidth());
             enemy.setY(box.getY() + box.getHeight());
         } else if (movementCount == 2) {
@@ -81,10 +71,12 @@ public class Ghost extends Enemy {
         if (iterations == 1) {
             ghost.setX(100);
             ghost.setY(0);
-        } if (iterations == 2) {
+        }
+        if (iterations == 2) {
             ghost.setX(100);
             ghost.setY(100);
-        } if (iterations == 3) {
+        }
+        if (iterations == 3) {
             ghost.setX(0);
             ghost.setY(100);
         }

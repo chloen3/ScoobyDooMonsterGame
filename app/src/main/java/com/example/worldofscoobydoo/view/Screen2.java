@@ -19,9 +19,7 @@ import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.Renderer;
-
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Screen2 extends AppCompatActivity {
 
