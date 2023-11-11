@@ -64,6 +64,7 @@ public class Screen3 extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.screen3);
         init();
+        //Movement
         movement();
         // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreText);
