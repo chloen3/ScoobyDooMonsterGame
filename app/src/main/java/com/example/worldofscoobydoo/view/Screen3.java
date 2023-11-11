@@ -63,6 +63,33 @@ public class Screen3 extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.screen3);
+        init();
+        movement();
+        // Initialize the score TextView
+        scoreTextView = findViewById(R.id.scoreText);
+        updateScore(score);
+
+        // Define the score countdown timer
+        scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                score -= 1;
+                updateScore(score);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(Screen3.this, EndScreen.class);
+                player.setScore(0);
+                startActivity(intent);
+            }
+        };
+
+        // Start the score countdown timer
+        scoreCountdownTimer.start();
+    }
+
+    private void init() {
         player = Player.getPlayer();
         movementObservable = new MovementObservable();
 
@@ -79,8 +106,8 @@ public class Screen3 extends AppCompatActivity {
         enemyTwoMovementObservable = new MovementObservable();
         ImageView enemy1Img = findViewById(R.id.enemy1Screen3);
         ImageView enemy2Img = findViewById(R.id.enemy2Screen3);
-        Enemy enemy1 = enemyFactory.createEnemy("Giant", enemy1Img, enemyOneMovementObservable);
-        Enemy enemy2 = enemyFactory.createEnemy("Tank", enemy2Img, enemyTwoMovementObservable);
+        enemy1 = enemyFactory.createEnemy("Giant", enemy1Img, enemyOneMovementObservable);
+        enemy2 = enemyFactory.createEnemy("Tank", enemy2Img, enemyTwoMovementObservable);
         enemy1MovementStrategy = enemy1.getMvStrategy();
         enemy2MovementStrategy = enemy2.getMvStrategy();
         enemyOneRenderer = new Renderer(enemy1Img);
@@ -129,13 +156,20 @@ public class Screen3 extends AppCompatActivity {
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         movementCount = 0;
         movementCount2 = 0;
+    }
 
+    private void movement() {
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
         user.setFocusableInTouchMode(true);
         user.requestFocus();
+        ImageView enemy1Img = findViewById(R.id.enemy1Screen3);
+        ImageView enemy2Img = findViewById(R.id.enemy2Screen3);
+        TextView difficultyReceiver = findViewById(R.id.health_status_3);
+        ImageView spriteImg = findViewById(R.id.imageView_3);
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
+
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     float futureX;
                     float futureY;
@@ -262,51 +296,32 @@ public class Screen3 extends AppCompatActivity {
                     movementCount = enemy1.setCount(movementCount);
                     enemy2.movement(movementCount2, enemy2Img, movementBox2);
                     movementCount2 = enemy2.setCount(movementCount2);
-                    if (checkExit(spriteImg.getX(), spriteImg.getY())) {
-                        // Cancel the countdown timer
-                        if (scoreCountdownTimer != null) {
-                            scoreCountdownTimer.cancel();
-                        }
-
-                        Intent intent = new Intent(Screen3.this, EndScreen.class);
-                        player.setScore(score);
-                        SharedPreferences pref = getSharedPreferences("PREFS", 0);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putInt("lastScore", player.getScore());
-                        editor.putString("player", player.getName());
-                        editor.apply();
-                        startActivity(intent);
-                    }
+                    exitCondition();
                     return true;
                 }
                 return false;
             }
         });
-
-        // Initialize the score TextView
-        scoreTextView = findViewById(R.id.scoreText);
-        updateScore(score);
-
-        // Define the score countdown timer
-        scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                score -= 1;
-                updateScore(score);
-            }
-
-            @Override
-            public void onFinish() {
-                Intent intent = new Intent(Screen3.this, EndScreen.class);
-                player.setScore(0);
-                startActivity(intent);
-            }
-        };
-
-        // Start the score countdown timer
-        scoreCountdownTimer.start();
     }
 
+    private void exitCondition() {
+        ImageView spriteImg = findViewById(R.id.imageView_3);
+        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+            // Cancel the countdown timer
+            if (scoreCountdownTimer != null) {
+                scoreCountdownTimer.cancel();
+            }
+
+            Intent intent = new Intent(Screen3.this, EndScreen.class);
+            player.setScore(score);
+            SharedPreferences pref = getSharedPreferences("PREFS", 0);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putInt("lastScore", player.getScore());
+            editor.putString("player", player.getName());
+            editor.apply();
+            startActivity(intent);
+        }
+    }
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
     }
