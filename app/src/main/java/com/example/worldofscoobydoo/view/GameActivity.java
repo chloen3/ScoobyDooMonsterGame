@@ -49,8 +49,8 @@ public class GameActivity extends AppCompatActivity {
     private MovementObservable movementObservable;
     private MovementObservable enemyOneMovementObservable;
     private MovementObservable enemyTwoMovementObservable;
-    private Enemy enemy1 = null;
-    private Enemy enemy2 = null;
+    private Enemy enemy1;
+    private Enemy enemy2;
     private EnemyFactory enemyFactory;
     private int movementCount;
     private int movementCount2;
@@ -65,6 +65,17 @@ public class GameActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.game_activity);
+
+        initializeGame();
+        userMovement();
+
+        scoreTextView = findViewById(R.id.scoreTextView);
+        updateScore(score);
+
+        startCountdownTimer();
+    }
+
+    private void initializeGame() {
         enemyFactory = new EnemyFactory();
         instance = Player.getPlayer();
         movementObservable = new MovementObservable();
@@ -72,8 +83,8 @@ public class GameActivity extends AppCompatActivity {
         enemyTwoMovementObservable = new MovementObservable();
         ImageView enemy1Img = findViewById(R.id.enemy1Screen1);
         ImageView enemy2Img = findViewById(R.id.enemy2Screen1);
-        Enemy enemy1 = enemyFactory.createEnemy("Mummy", enemy1Img, enemyOneMovementObservable);
-        Enemy enemy2 = enemyFactory.createEnemy("Ghost", enemy2Img, enemyTwoMovementObservable);
+        enemy1 = enemyFactory.createEnemy("Mummy", enemy1Img, enemyOneMovementObservable);
+        enemy2 = enemyFactory.createEnemy("Ghost", enemy2Img, enemyTwoMovementObservable);
         enemy1MovementStrategy = enemy1.getMvStrategy();
         enemy2MovementStrategy = enemy2.getMvStrategy();
         enemyOneRenderer = new Renderer(enemy1Img);
@@ -82,7 +93,6 @@ public class GameActivity extends AppCompatActivity {
         enemyTwoMovementObservable.addObserver(enemyTwoRenderer);
         movementBox1 = findViewById(R.id.enemy2screen1box);
         movementBox2 = findViewById(R.id.enemy1screen1box);
-
         name = instance.getName();
         difficulty = instance.getDifficulty();
         sprite = instance.getSprite();
@@ -127,12 +137,17 @@ public class GameActivity extends AppCompatActivity {
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         movementCount = 0;
         movementCount2 = 0;
+    }
 
+    private void userMovement() {
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
         user.setFocusableInTouchMode(true);
         user.requestFocus();
-
+        ImageView spriteImg = findViewById(R.id.imageView);
+        TextView difficultyReceiver = findViewById(R.id.health_status);
+        ImageView enemy1Img = findViewById(R.id.enemy1Screen1);
+        ImageView enemy2Img = findViewById(R.id.enemy2Screen1);
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -265,26 +280,25 @@ public class GameActivity extends AppCompatActivity {
                     movementCount = enemy1.setCount(movementCount);
                     enemy2.movement(movementCount2, enemy2Img, movementBox2);
                     movementCount2 = enemy2.setCount(movementCount2);
-                    if (checkExit(spriteImg.getX(), spriteImg.getY())) {
-                        if (scoreCountdownTimer != null) {
-                            scoreCountdownTimer.cancel();
-                        }
-                        Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
-                        instance.setScore(score);
-                        instance.setHealth(String.valueOf(health));
-                        // Pass the remaining time in seconds to Screen2
-                        startActivity(nextScreen);
-                    }
+                    exitHandling();
                     return true;
                 }
                 return false;
             }
         });
-
-        scoreTextView = findViewById(R.id.scoreTextView);
-        updateScore(score);
-
-        startCountdownTimer();
+    }
+    private void exitHandling() {
+        ImageView spriteImg = findViewById(R.id.imageView);
+        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+            if (scoreCountdownTimer != null) {
+                scoreCountdownTimer.cancel();
+            }
+            Intent nextScreen = new Intent(GameActivity.this, Screen2.class);
+            instance.setScore(score);
+            instance.setHealth(String.valueOf(health));
+            // Pass the remaining time in seconds to Screen2
+            startActivity(nextScreen);
+        }
     }
     private void updateScore(int score) {
         scoreTextView.setText(String.valueOf(score));

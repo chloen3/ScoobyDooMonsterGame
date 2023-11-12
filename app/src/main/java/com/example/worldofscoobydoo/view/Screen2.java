@@ -51,6 +51,34 @@ public class Screen2 extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.screen2);
+
+        init();
+        movement();
+
+        scoreTextView = findViewById(R.id.scoreTextView_2);
+        updateScore(score);
+
+        // Define the score countdown timer
+        scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                score -= 1;
+                updateScore(score);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(Screen2.this, EndScreen.class);
+                player.setScore(0);
+                startActivity(intent);
+            }
+        };
+
+        // Start the score countdown timer
+        scoreCountdownTimer.start();
+    }
+
+    private void init() {
         player = Player.getPlayer();
 
         String name = player.getName();
@@ -67,8 +95,8 @@ public class Screen2 extends AppCompatActivity {
         enemyTwoMovementObservable = new MovementObservable();
         ImageView enemy1Img = findViewById(R.id.enemy1Screen2);
         ImageView enemy2Img = findViewById(R.id.enemy2);
-        Enemy enemy1 = enemyFactory.createEnemy("Mummy", enemy1Img, enemyOneMovementObservable);
-        Enemy enemy2 = enemyFactory.createEnemy("Giant", enemy2Img, enemyTwoMovementObservable);
+        enemy1 = enemyFactory.createEnemy("Mummy", enemy1Img, enemyOneMovementObservable);
+        enemy2 = enemyFactory.createEnemy("Giant", enemy2Img, enemyTwoMovementObservable);
         enemy1MovementStrategy = enemy1.getMvStrategy();
         enemy2MovementStrategy = enemy2.getMvStrategy();
         enemyOneRenderer = new Renderer(enemy1Img);
@@ -116,11 +144,20 @@ public class Screen2 extends AppCompatActivity {
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         movementCount = 0;
         movementCount2 = 0;
+    }
 
+    private void movement() {
         View user = findViewById(android.R.id.content);
         user.setFocusable(true);
         user.setFocusableInTouchMode(true);
         user.requestFocus();
+        ImageView spriteImg = findViewById(R.id.imageView_2);
+        double difficulty = player.getDifficulty();
+        TextView difficultyReceiver = findViewById(R.id.health_status_2);
+        ImageView enemy1Img = findViewById(R.id.enemy1Screen2);
+        ImageView enemy2Img = findViewById(R.id.enemy2);
+        ImageView movementBox1 = findViewById(R.id.enemy2Screen2Boundary);
+        ImageView movementBox2 = findViewById(R.id.enemy1Screen2Boundary);
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -249,44 +286,26 @@ public class Screen2 extends AppCompatActivity {
                     movementCount = enemy1.setCount(movementCount);
                     enemy2.movement(movementCount2, enemy2Img, movementBox2);
                     movementCount2 = enemy2.setCount(movementCount2);
-                    if (checkExit(spriteImg.getX(), spriteImg.getY())) {
-                        if (scoreCountdownTimer != null) {
-                            scoreCountdownTimer.cancel();
-                        }
-                        Intent nextScreen = new Intent(Screen2.this, Screen3.class);
-                        player.setScore(score);
-                        player.setHealth(String.valueOf(health));
-                        startActivity(nextScreen);
-                    }
+                    exitCondition();
                     return true;
                 }
                 return false;
             }
         });
-
-        scoreTextView = findViewById(R.id.scoreTextView_2);
-        updateScore(score);
-
-        // Define the score countdown timer
-        scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                score -= 1;
-                updateScore(score);
-            }
-
-            @Override
-            public void onFinish() {
-                Intent intent = new Intent(Screen2.this, EndScreen.class);
-                player.setScore(0);
-                startActivity(intent);
-            }
-        };
-
-        // Start the score countdown timer
-        scoreCountdownTimer.start();
     }
 
+    private void exitCondition() {
+        ImageView spriteImg = findViewById(R.id.imageView_2);
+        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+            if (scoreCountdownTimer != null) {
+                scoreCountdownTimer.cancel();
+            }
+            Intent nextScreen = new Intent(Screen2.this, Screen3.class);
+            player.setScore(score);
+            player.setHealth(String.valueOf(health));
+            startActivity(nextScreen);
+        }
+    }
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
     }
