@@ -3,17 +3,20 @@ package com.example.worldofscoobydoo.model;
 import android.os.Handler;
 import android.widget.TextView;
 
+import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.viewModel.Observer;
 
-public class Player implements Observer {
+public class Player implements Observer,PowerUp {
     private String sprite;
+    private boolean tracker2;
+    private boolean tracker1;
     private double difficulty;
     private String name;
     private int score;
     private String health;
     private int healthInt;
     private static volatile Player player;
-    private int speed = 5;
+    private String speed;
     private String currentDirection = null;
     private int x;
     private int y;
@@ -64,11 +67,11 @@ public class Player implements Observer {
         return health;
     }
 
-    public int getSpeed() {
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(String speed) {
         this.speed = speed;
     }
 
@@ -145,6 +148,45 @@ public class Player implements Observer {
         running = false;
     }
 
+    public void notifyObservers2(TextView text) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                running = true;
+                text.setText("");
+            }
+        }, 500);
+        PowerUp power = new SpeedDecorator(player);
+        text.setText(power.powerUp());
+        running = false;
+    }
+
+    public void notifyObservers3(TextView text) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                running = true;
+                text.setText("");
+            }
+        }, 500);
+        PowerUp power = new HealthUpgradeDecorator(player);
+        text.setText(power.powerUp());
+        running = false;
+    }
+
+    public void notifyObservers4(TextView text) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                running = true;
+                text.setText("");
+            }
+        }, 500);
+        PowerUp power = new ScoreBoostDecorator(player);
+        text.setText(power.powerUp());
+        running = false;
+    }
+
     public boolean isRunning() {
         return running;
     }
@@ -153,5 +195,31 @@ public class Player implements Observer {
         int time = 100;
         time -= removeTime;
         return time;
+    }
+
+    @Override
+    public String powerUp() {
+        return "Activated: ";
+    }
+
+    @Override
+    public int gameEffect() {
+        return 0;
+    }
+
+    public boolean isTracker1() {
+        return tracker1;
+    }
+
+    public void setTracker1(boolean tracker1) {
+        this.tracker1 = tracker1;
+    }
+
+    public boolean isTracker2() {
+        return tracker2;
+    }
+
+    public void setTracker2(boolean tracker2) {
+        this.tracker2 = tracker2;
     }
 }

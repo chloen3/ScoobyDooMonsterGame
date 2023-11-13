@@ -15,11 +15,14 @@ import com.example.worldofscoobydoo.model.Enemy;
 import com.example.worldofscoobydoo.model.EnemyFactory;
 //import com.example.worldofscoobydoo.model.EnemyTank;
 import com.example.worldofscoobydoo.model.Player;
+import com.example.worldofscoobydoo.model.PowerUp;
+import com.example.worldofscoobydoo.model.SpeedDecorator;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
+import com.example.worldofscoobydoo.viewModel.MovementSuper;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 
 import android.os.CountDownTimer;
@@ -29,6 +32,7 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
     private String name;
+    private boolean flag = true;
     private double difficulty;
     private String sprite;
     private int score = 100;
@@ -160,11 +164,11 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -177,6 +181,14 @@ public class GameActivity extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    instance.setTracker1(false);
+                                    movementStrategy = new MovementSuper(movementObservable);
+                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification2();
+                                    flag = false;
                                 }
                                 movementStrategy.moveUp(spriteImg);
                                 instance.moveUp();
@@ -190,11 +202,11 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -207,6 +219,14 @@ public class GameActivity extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    instance.setTracker1(false);
+                                    movementStrategy = new MovementSuper(movementObservable);
+                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification2();
+                                    flag = false;
                                 }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 instance.moveDown();
@@ -220,11 +240,11 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -238,6 +258,14 @@ public class GameActivity extends AppCompatActivity {
                                     instance.setHealth(String.valueOf(health));
                                     notification();
                                 }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    instance.setTracker1(false);
+                                    movementStrategy = new MovementSuper(movementObservable);
+                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification2();
+                                    flag = false;
+                                }
                                 movementStrategy.moveLeft(spriteImg);
                                 instance.moveLeft();
                                 instance.setX((int) futureX);
@@ -250,11 +278,11 @@ public class GameActivity extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -266,6 +294,14 @@ public class GameActivity extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    instance.setTracker1(false);
+                                    movementStrategy = new MovementSuper(movementObservable);
+                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification2();
+                                    flag = false;
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 instance.moveRight();
@@ -407,9 +443,36 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
+    public boolean checkPowerUp(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.speedPowerUp);
+        collisionsList.add(cb);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void notification() {
         TextView text = findViewById(R.id.collisionNotification);
         instance.notifyObservers(text);
+    }
+
+    public void notification2() {
+        TextView text = findViewById(R.id.collisionNotification);
+        instance.notifyObservers2(text);
     }
 
     public static boolean enemyAttack() {
@@ -423,7 +486,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-
+    public static boolean powerUpValid(Player player) {
+        if (player.isTracker1()) {
+            String check = "Super Speed";
+            return check.equals(player.getSpeed());
+        }
+        return true;
+    }
 
 
 

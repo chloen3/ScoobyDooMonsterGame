@@ -7,6 +7,7 @@ import com.badlogic.gdx.Game;
 import com.example.worldofscoobydoo.model.Player;
 import com.example.worldofscoobydoo.view.GameActivity;
 import com.example.worldofscoobydoo.view.InitialConfiguration;
+import com.example.worldofscoobydoo.view.Screen2;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
@@ -213,7 +214,16 @@ public class PlayerTest {
     }
 
 
+    @Test
+    public void validSpeedPower() {
+        Player player = Player.getPlayer();
+        assertTrue(GameActivity.powerUpValid(player));
+    }
 
-
+    @Test
+    public void validHealthPower() {
+        Player player = Player.getPlayer();
+        assertFalse(Screen2.powerHealthValid(player));
+    }
 
 }

@@ -14,9 +14,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.worldofscoobydoo.R;
+import com.example.worldofscoobydoo.model.ScoreBoostDecorator;
 import com.example.worldofscoobydoo.model.Enemy;
 import com.example.worldofscoobydoo.model.EnemyFactory;
 import com.example.worldofscoobydoo.model.Player;
+import com.example.worldofscoobydoo.model.PowerUp;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 public class Screen3 extends AppCompatActivity {
 
     private String name;
+    private boolean flag = true;
     private CountDownTimer scoreCountdownTimer;
     private double difficulty;
     private String sprite;
@@ -198,6 +201,16 @@ public class Screen3 extends AppCompatActivity {
                                     player.setHealth(String.valueOf(health));
                                     notification();
                                 }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    PowerUp power = new ScoreBoostDecorator(player);
+                                    int change = power.gameEffect();
+                                    score += change;
+                                    updateScore(score);
+                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification4();
+                                    flag = false;
+                                }
                                 movementStrategy.moveUp(spriteImg);
                                 player.moveUp();
                                 player.setX((int) futureX);
@@ -210,11 +223,11 @@ public class Screen3 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -226,6 +239,16 @@ public class Screen3 extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    PowerUp power = new ScoreBoostDecorator(player);
+                                    int change = power.gameEffect();
+                                    score += change;
+                                    updateScore(score);
+                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification4();
+                                    flag = false;
                                 }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 player.moveDown();
@@ -239,11 +262,11 @@ public class Screen3 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -255,6 +278,16 @@ public class Screen3 extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    PowerUp power = new ScoreBoostDecorator(player);
+                                    int change = power.gameEffect();
+                                    score += change;
+                                    updateScore(score);
+                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification4();
+                                    flag = false;
                                 }
                                 movementStrategy.moveLeft(spriteImg);
                                 player.moveLeft();
@@ -268,11 +301,11 @@ public class Screen3 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -284,6 +317,16 @@ public class Screen3 extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    PowerUp power = new ScoreBoostDecorator(player);
+                                    int change = power.gameEffect();
+                                    score += change;
+                                    updateScore(score);
+                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification4();
+                                    flag = false;
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 player.moveRight();
@@ -400,5 +443,32 @@ public class Screen3 extends AppCompatActivity {
     public void notification() {
         TextView text = findViewById(R.id.alert);
         player.notifyObservers(text);
+    }
+
+    public boolean checkPowerUp(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_3);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.DamagePowerUp);
+        collisionsList.add(cb);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void notification4() {
+        TextView text = findViewById(R.id.alert);
+        player.notifyObservers4(text);
     }
 }
