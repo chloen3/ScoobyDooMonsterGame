@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Enemy;
 import com.example.worldofscoobydoo.model.EnemyFactory;
+import com.example.worldofscoobydoo.model.HealthUpgradeDecorator;
 import com.example.worldofscoobydoo.model.Player;
+import com.example.worldofscoobydoo.model.PowerUp;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 public class Screen2 extends AppCompatActivity {
 
     private int score;
+    private boolean flag = true;
     private CountDownTimer scoreCountdownTimer;
     private Player player;
     private TextView scoreTextView;
@@ -170,11 +173,11 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -186,6 +189,18 @@ public class Screen2 extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    PowerUp power = new HealthUpgradeDecorator(player);
+                                    int change = power.gameEffect();
+                                    health += change;
+                                    player.setTracker2(true);
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+                                    ImageView powerUp = findViewById(R.id.healthPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification3();
+                                    flag = false;
                                 }
                                 movementStrategy.moveUp(spriteImg);
                                 player.moveUp();
@@ -199,11 +214,11 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -215,6 +230,18 @@ public class Screen2 extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    player.setTracker2(true);
+                                    PowerUp power = new HealthUpgradeDecorator(player);
+                                    int change = power.gameEffect();
+                                    health += change;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+                                    ImageView powerUp = findViewById(R.id.healthPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification3();
+                                    flag = false;
                                 }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 player.moveDown();
@@ -228,11 +255,11 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -244,6 +271,18 @@ public class Screen2 extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    player.setTracker2(true);
+                                    PowerUp power = new HealthUpgradeDecorator(player);
+                                    int change = power.gameEffect();
+                                    health += change;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+                                    ImageView powerUp = findViewById(R.id.healthPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification3();
+                                    flag = false;
                                 }
                                 movementStrategy.moveLeft(spriteImg);
                                 player.moveLeft();
@@ -257,11 +296,11 @@ public class Screen2 extends AppCompatActivity {
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
                                     if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
                                         health = health - 10;
+                                    } else if (difficulty == .75) {
+                                        health = health - 6;
                                     } else {
-                                        health = health - 5;
+                                        health = health - 4;
                                     }
                                     //check for game over
                                     if (health <= 0) {
@@ -273,6 +312,18 @@ public class Screen2 extends AppCompatActivity {
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    player.setTracker2(true);
+                                    PowerUp power = new HealthUpgradeDecorator(player);
+                                    int change = power.gameEffect();
+                                    health += change;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    player.setHealth(String.valueOf(health));
+                                    ImageView powerUp = findViewById(R.id.healthPowerUp);
+                                    powerUp.setImageDrawable(null);
+                                    notification3();
+                                    flag = false;
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 player.moveRight();
@@ -384,8 +435,42 @@ public class Screen2 extends AppCompatActivity {
         return false;
     }
 
+    public boolean checkPowerUp(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_2);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.healthPowerUp);
+        collisionsList.add(cb);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void notification() {
         TextView text = findViewById(R.id.observerAlert);
         player.notifyObservers(text);
+    }
+
+    public void notification3() {
+        TextView text = findViewById(R.id.observerAlert);
+        player.notifyObservers3(text);
+    }
+
+    public static boolean powerHealthValid(Player player) {
+        if (player.isTracker2()) {
+            return player.getHealthInt() % 2 != 0;
+        }
+        return false;
     }
 }
