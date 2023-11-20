@@ -274,4 +274,16 @@
         app:layout_constraintVertical_bias="0.283"
         app:srcCompat="@drawable/scooby_snacks" />
 
+    <Button
+        android:id="@+id/pause_button"
+        android:layout_width="94dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="10dp"
+        android:text="Pause"
+        android:textColor="#FFEB3B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

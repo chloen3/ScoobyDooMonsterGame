@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
+import android.app.Dialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Enemy;
@@ -37,6 +40,8 @@ public class GameActivity extends AppCompatActivity {
     private String sprite;
     private int score = 100;
     private TextView scoreTextView;
+    private Button pauseButton;
+    private Button resumeButton;
     private Player instance;
     private Handler handler = new Handler();
     private CountDownTimer scoreCountdownTimer;
@@ -62,6 +67,8 @@ public class GameActivity extends AppCompatActivity {
     private static boolean by10;
     private ImageView movementBox1;
     private ImageView movementBox2;
+    private View pauseMenuView;
+    private Dialog pauseMenuDialog;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +76,50 @@ public class GameActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.game_activity);
-
         initializeGame();
         userMovement();
 
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
+
+        pauseMenuDialog = new Dialog(this);
+        pauseMenuDialog.setContentView(pauseMenuView);
+        pauseMenuDialog.setCancelable(false);
+
         scoreTextView = findViewById(R.id.scoreTextView);
+        pauseButton = findViewById(R.id.pause_button);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pauseGame();
+                pauseMenuDialog.show();
+            }
+        });
+        resumeButton = pauseMenuView.findViewById(R.id.resume_button);
+        resumeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resumeGame();
+                pauseMenuDialog.dismiss();
+            }
+        });
         updateScore(score);
 
         startCountdownTimer();
     }
+
+
+    private void pauseGame() {
+        if (scoreCountdownTimer != null) {
+            scoreCountdownTimer.cancel();
+        }
+        // Add any additional logic needed to pause the game
+    }
+    private void resumeGame() {
+        startCountdownTimer();
+        // Add any additional logic needed to resume the game
+    }
+
 
     private void initializeGame() {
         enemyFactory = new EnemyFactory();

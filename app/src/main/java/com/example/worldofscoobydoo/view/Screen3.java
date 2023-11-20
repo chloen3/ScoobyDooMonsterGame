@@ -1,11 +1,13 @@
 package com.example.worldofscoobydoo.view;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -27,6 +29,7 @@ import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 
 import java.util.ArrayList;
+import android.widget.Button;
 
 public class Screen3 extends AppCompatActivity {
 
@@ -37,6 +40,8 @@ public class Screen3 extends AppCompatActivity {
     private String sprite;
     private int score;
     private TextView scoreTextView;
+    private Button pauseButton;
+    private Button resumeButton;
     private Handler handler = new Handler();
     private int screenWidth;
     private int screenHeight;
@@ -59,6 +64,8 @@ public class Screen3 extends AppCompatActivity {
     private int movementCount2;
     private ImageView movementBox1;
     private ImageView movementBox2;
+    private View pauseMenuView;
+    private Dialog pauseMenuDialog;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +78,32 @@ public class Screen3 extends AppCompatActivity {
         movement();
         // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreText);
+        pauseButton = findViewById(R.id.pause_button);
         updateScore(score);
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
+
+        pauseMenuDialog = new Dialog(this);
+        pauseMenuDialog.setContentView(pauseMenuView);
+        pauseMenuDialog.setCancelable(false);
+
+        pauseButton = findViewById(R.id.pause_button);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pauseGame();
+                pauseMenuDialog.show();
+            }
+        });
+        resumeButton = pauseMenuView.findViewById(R.id.resume_button);
+        resumeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resumeGame();
+                pauseMenuDialog.dismiss();
+            }
+        });
 
         // Define the score countdown timer
         scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
@@ -91,6 +123,17 @@ public class Screen3 extends AppCompatActivity {
 
         // Start the score countdown timer
         scoreCountdownTimer.start();
+    }
+
+    private void pauseGame() {
+        if (scoreCountdownTimer != null) {
+            scoreCountdownTimer.cancel();
+        }
+        // Add any additional logic needed to pause the game
+    }
+    private void resumeGame() {
+        //startCountdownTimer();
+        // Add any additional logic needed to resume the game
     }
 
     private void init() {
