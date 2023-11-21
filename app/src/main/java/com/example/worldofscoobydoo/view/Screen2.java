@@ -1,5 +1,7 @@
 package com.example.worldofscoobydoo.view;
 
+import static com.example.worldofscoobydoo.viewModel.CountDownTimerUtil.startCountdownTimer;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +25,8 @@ import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
+import com.example.worldofscoobydoo.viewModel.CountdownTimerCallback;
+import com.example.worldofscoobydoo.viewModel.CountDownTimerUtil;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 import java.util.ArrayList;
 
@@ -56,7 +60,6 @@ public class Screen2 extends AppCompatActivity {
     private View pauseMenuView;
     private Dialog pauseMenuDialog;
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -74,6 +77,7 @@ public class Screen2 extends AppCompatActivity {
         pauseMenuDialog.setCancelable(false);
 
         pauseButton = findViewById(R.id.pause_button);
+
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +97,7 @@ public class Screen2 extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView_2);
         pauseButton = findViewById(R.id.pause_button);
         updateScore(score);
+
 
         // Define the score countdown timer
         scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
@@ -114,6 +119,23 @@ public class Screen2 extends AppCompatActivity {
         scoreCountdownTimer.start();
     }
 
+    private void startCountdownTimer() {
+        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(score, new CountdownTimerCallback() {
+            @Override
+            public void onTick(int newScore) {
+                score = newScore;
+                updateScore(score);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(Screen2.this, EndScreen.class);
+                player.setScore(0);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void pauseGame() {
         if (scoreCountdownTimer != null) {
             scoreCountdownTimer.cancel();
@@ -121,9 +143,10 @@ public class Screen2 extends AppCompatActivity {
         // Add any additional logic needed to pause the game
     }
     private void resumeGame() {
-        //startCountdownTimer();
+        startCountdownTimer();
         // Add any additional logic needed to resume the game
     }
+
 
 
     private void init() {

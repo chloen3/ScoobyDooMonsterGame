@@ -25,6 +25,8 @@ import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementSlow;
+import com.example.worldofscoobydoo.viewModel.CountdownTimerCallback;
+import com.example.worldofscoobydoo.viewModel.CountDownTimerUtil;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 
@@ -125,6 +127,23 @@ public class Screen3 extends AppCompatActivity {
         scoreCountdownTimer.start();
     }
 
+    private void startCountdownTimer() {
+        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(score, new CountdownTimerCallback() {
+            @Override
+            public void onTick(int newScore) {
+                score = newScore;
+                updateScore(score);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(Screen3.this, EndScreen.class);
+                player.setScore(0);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void pauseGame() {
         if (scoreCountdownTimer != null) {
             scoreCountdownTimer.cancel();
@@ -132,9 +151,10 @@ public class Screen3 extends AppCompatActivity {
         // Add any additional logic needed to pause the game
     }
     private void resumeGame() {
-        //startCountdownTimer();
+        startCountdownTimer();
         // Add any additional logic needed to resume the game
     }
+
 
     private void init() {
         player = Player.getPlayer();
