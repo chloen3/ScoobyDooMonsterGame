@@ -1,7 +1,9 @@
 package com.example.worldofscoobydoo.view;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,8 @@ public class InitialConfiguration extends AppCompatActivity {
     private String name;
     private String sprite;
     private Player player;
+    public static MediaPlayer mySong;
+    private Button playButton;
     public void setName(String name) {
         this.name = name;
     }
@@ -36,11 +40,24 @@ public class InitialConfiguration extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // removes top bar title
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.initial_configuration); // sets to layout
+        mySong = MediaPlayer.create(InitialConfiguration.this, R.raw.scooby);
+        playButton = findViewById(R.id.playButton);
+
 
         Button startBtn = findViewById(R.id.button); // continue button
         EditText nameInput = findViewById(R.id.editTextText); // Name Input
 
         player = Player.getPlayer(); // gets Singleton instance
+
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start playing the music when the button is clicked
+                if (mySong != null) {
+                    mySong.start();
+                }
+            }
+        });
 
         // Sets Difficulty
         startBtn.setOnClickListener(v -> {

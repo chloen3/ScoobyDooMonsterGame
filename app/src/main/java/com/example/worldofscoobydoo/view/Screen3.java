@@ -1,15 +1,19 @@
 package com.example.worldofscoobydoo.view;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.graphics.drawable.ColorDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,10 +27,13 @@ import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
 import com.example.worldofscoobydoo.viewModel.MovementSlow;
+import com.example.worldofscoobydoo.viewModel.CountdownTimerCallback;
+import com.example.worldofscoobydoo.viewModel.CountDownTimerUtil;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 
 import java.util.ArrayList;
+import android.widget.Button;
 
 public class Screen3 extends AppCompatActivity {
 
@@ -37,6 +44,8 @@ public class Screen3 extends AppCompatActivity {
     private String sprite;
     private int score;
     private TextView scoreTextView;
+    private Button pauseButton;
+    private Button resumeButton;
     private Handler handler = new Handler();
     private int screenWidth;
     private int screenHeight;
@@ -59,6 +68,10 @@ public class Screen3 extends AppCompatActivity {
     private int movementCount2;
     private ImageView movementBox1;
     private ImageView movementBox2;
+    private View pauseMenuView;
+    private Dialog pauseMenuDialog;
+    private Button muteButton;
+    private Button exitButton;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +84,54 @@ public class Screen3 extends AppCompatActivity {
         movement();
         // Initialize the score TextView
         scoreTextView = findViewById(R.id.scoreText);
+        pauseButton = findViewById(R.id.pause_button);
         updateScore(score);
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
+
+        pauseMenuDialog = new Dialog(this);
+        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pauseMenuDialog.setContentView(pauseMenuView);
+        pauseMenuDialog.setCancelable(false);
+
+        exitButton = pauseMenuView.findViewById(R.id.exit);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start MainActivity
+                stopMusic();
+                Intent intent = new Intent(Screen3.this, MainActivity.class);
+                startActivity(intent);
+                // Optionally finish this activity
+                finish();
+            }
+        });
+
+        pauseButton = findViewById(R.id.pause_button);
+
+        muteButton = pauseMenuView.findViewById(R.id.stop_music_button);
+        muteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopMusic();
+            }
+        });
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pauseGame();
+                pauseMenuDialog.show();
+            }
+        });
+        resumeButton = pauseMenuView.findViewById(R.id.resume_button);
+        resumeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resumeGame();
+                pauseMenuDialog.dismiss();
+            }
+        });
 
         // Define the score countdown timer
         scoreCountdownTimer = new CountDownTimer(score * 1000, 1000) {
@@ -92,6 +152,41 @@ public class Screen3 extends AppCompatActivity {
         // Start the score countdown timer
         scoreCountdownTimer.start();
     }
+
+    private void startCountdownTimer() {
+        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(score, new CountdownTimerCallback() {
+            @Override
+            public void onTick(int newScore) {
+                score = newScore;
+                updateScore(score);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(Screen3.this, EndScreen.class);
+                player.setScore(0);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void stopMusic() {
+        if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
+            InitialConfiguration.mySong.pause(); // Pause the music
+        }
+    }
+
+    private void pauseGame() {
+        if (scoreCountdownTimer != null) {
+            scoreCountdownTimer.cancel();
+        }
+        // Add any additional logic needed to pause the game
+    }
+    private void resumeGame() {
+        startCountdownTimer();
+        // Add any additional logic needed to resume the game
+    }
+
 
     private void init() {
         player = Player.getPlayer();
@@ -351,6 +446,12 @@ public class Screen3 extends AppCompatActivity {
     private void exitCondition() {
         ImageView spriteImg = findViewById(R.id.imageView_3);
         if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+            //stop the music
+            if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
+                InitialConfiguration.mySong.stop();
+                InitialConfiguration.mySong.release();
+                InitialConfiguration.mySong = null;
+            }
             // Cancel the countdown timer
             if (scoreCountdownTimer != null) {
                 scoreCountdownTimer.cancel();
