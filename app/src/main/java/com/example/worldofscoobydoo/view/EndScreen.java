@@ -51,6 +51,7 @@ public class EndScreen extends AppCompatActivity {
         lastScore.setText("Your Score: " + player.getScore());
         Button leaderButton = findViewById(R.id.finalLeaderboard);
         leaderButton.setOnClickListener(v -> {
+            winSound.pause();
             Intent leaderboard = new Intent(getApplicationContext(), LeaderBoard.class);
             startActivity(leaderboard);
         });
