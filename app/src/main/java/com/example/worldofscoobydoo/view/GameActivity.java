@@ -28,6 +28,7 @@ import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.MovementSuper;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 import android.media.MediaPlayer;
+import android.graphics.drawable.ColorDrawable;
 
 import android.os.CountDownTimer;
 
@@ -72,6 +73,7 @@ public class GameActivity extends AppCompatActivity {
     private Dialog pauseMenuDialog;
     private Button muteButton;
     private MediaPlayer mySong;
+    private Button exitButton;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +88,23 @@ public class GameActivity extends AppCompatActivity {
         View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
 
         pauseMenuDialog = new Dialog(this);
+        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pauseMenuDialog.setContentView(pauseMenuView);
         pauseMenuDialog.setCancelable(false);
+
+        exitButton = pauseMenuView.findViewById(R.id.exit);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start MainActivity
+                stopMusic();
+                Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                startActivity(intent);
+                // Optionally finish this activity
+                finish();
+            }
+        });
+
 
         scoreTextView = findViewById(R.id.scoreTextView);
         pauseButton = findViewById(R.id.pause_button);
@@ -100,6 +117,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        exitButton = findViewById(R.id.exit);
 
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override

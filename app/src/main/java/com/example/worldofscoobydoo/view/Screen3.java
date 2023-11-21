@@ -3,6 +3,7 @@ package com.example.worldofscoobydoo.view;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.graphics.drawable.ColorDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,6 +71,7 @@ public class Screen3 extends AppCompatActivity {
     private View pauseMenuView;
     private Dialog pauseMenuDialog;
     private Button muteButton;
+    private Button exitButton;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +91,22 @@ public class Screen3 extends AppCompatActivity {
         View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
 
         pauseMenuDialog = new Dialog(this);
+        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pauseMenuDialog.setContentView(pauseMenuView);
         pauseMenuDialog.setCancelable(false);
+
+        exitButton = pauseMenuView.findViewById(R.id.exit);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start MainActivity
+                stopMusic();
+                Intent intent = new Intent(Screen3.this, MainActivity.class);
+                startActivity(intent);
+                // Optionally finish this activity
+                finish();
+            }
+        });
 
         pauseButton = findViewById(R.id.pause_button);
 
@@ -429,6 +446,12 @@ public class Screen3 extends AppCompatActivity {
     private void exitCondition() {
         ImageView spriteImg = findViewById(R.id.imageView_3);
         if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+            //stop the music
+            if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
+                InitialConfiguration.mySong.stop();
+                InitialConfiguration.mySong.release();
+                InitialConfiguration.mySong = null;
+            }
             // Cancel the countdown timer
             if (scoreCountdownTimer != null) {
                 scoreCountdownTimer.cancel();

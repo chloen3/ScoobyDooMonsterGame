@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Player;
+import android.media.MediaPlayer;
 
 public class EndScreen extends AppCompatActivity {
+
+    private MediaPlayer winSound;
 
     private TextView lastScore;
     private Player player;
@@ -21,6 +24,7 @@ public class EndScreen extends AppCompatActivity {
 
     private TextView finalGameStatus;
     private int prevScore;
+
 
     public TextView getLastScore() {
         return lastScore;
@@ -37,6 +41,8 @@ public class EndScreen extends AppCompatActivity {
         getSupportActionBar().hide(); // removes top bar
         setContentView(R.layout.endscreen);
 
+        winSound = MediaPlayer.create(this, R.raw.winner);
+
         notifyObservers();
 
         lastScore = findViewById(R.id.userStatus);
@@ -51,6 +57,7 @@ public class EndScreen extends AppCompatActivity {
 
         Button restartButton = findViewById(R.id.playAgain);
         restartButton.setOnClickListener(v -> {
+            winSound.pause();
             Intent restart = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(restart);
         });
@@ -61,6 +68,7 @@ public class EndScreen extends AppCompatActivity {
         int score = player.getScore();
         setFinalGameStatus(findViewById(R.id.finalGameStatus));
         if (score > 0) {
+            winSound.start();
             finalGameStatus.setText("You Win!");
         } else {
             finalGameStatus.setText("You Lose!");

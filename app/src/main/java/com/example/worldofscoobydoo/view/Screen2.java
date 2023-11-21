@@ -4,6 +4,7 @@ import static com.example.worldofscoobydoo.viewModel.CountDownTimerUtil.startCou
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.KeyEvent;
@@ -29,6 +30,7 @@ import com.example.worldofscoobydoo.viewModel.CountdownTimerCallback;
 import com.example.worldofscoobydoo.viewModel.CountDownTimerUtil;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 import java.util.ArrayList;
+import android.graphics.drawable.ColorDrawable;
 
 public class Screen2 extends AppCompatActivity {
 
@@ -60,6 +62,7 @@ public class Screen2 extends AppCompatActivity {
     private View pauseMenuView;
     private Dialog pauseMenuDialog;
     private Button muteButton;
+    private Button exitButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +77,22 @@ public class Screen2 extends AppCompatActivity {
         View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
 
         pauseMenuDialog = new Dialog(this);
+        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pauseMenuDialog.setContentView(pauseMenuView);
         pauseMenuDialog.setCancelable(false);
+
+        exitButton = pauseMenuView.findViewById(R.id.exit);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start MainActivity
+                stopMusic();
+                Intent intent = new Intent(Screen2.this, MainActivity.class);
+                startActivity(intent);
+                // Optionally finish this activity
+                finish();
+            }
+        });
 
         pauseButton = findViewById(R.id.pause_button);
 
