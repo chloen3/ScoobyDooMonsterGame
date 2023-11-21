@@ -5,16 +5,44 @@
     android:layout_height="match_parent"
     android:id="@+id/pause_menu_layout">
 
-    <Button
-        android:id="@+id/resume_button"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:text="Resume"
-        android:textColor="#FFEB3B"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="@android:color/transparent">
+
+        <Button
+            android:id="@+id/resume_button"
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:text="Resume"
+            android:textColor="#FFEB3B"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"
+        />
+
+        <Button
+            android:id="@+id/stop_music_button"
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:text="Mute Music"
+            android:textColor="#FFEB3B"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"
+
+        />
+
+        <Button
+            android:id="@+id/exit"
+            android:layout_width="160dp"
+            android:layout_height="80dp"
+            android:text="Exit"
+            android:textColor="#FFEB3B"
+            android:textSize="20sp"
+        />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

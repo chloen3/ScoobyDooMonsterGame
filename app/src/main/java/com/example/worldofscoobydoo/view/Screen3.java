@@ -68,6 +68,7 @@ public class Screen3 extends AppCompatActivity {
     private ImageView movementBox2;
     private View pauseMenuView;
     private Dialog pauseMenuDialog;
+    private Button muteButton;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,14 @@ public class Screen3 extends AppCompatActivity {
         pauseMenuDialog.setCancelable(false);
 
         pauseButton = findViewById(R.id.pause_button);
+
+        muteButton = pauseMenuView.findViewById(R.id.stop_music_button);
+        muteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopMusic();
+            }
+        });
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +151,12 @@ public class Screen3 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void stopMusic() {
+        if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
+            InitialConfiguration.mySong.pause(); // Pause the music
+        }
     }
 
     private void pauseGame() {
