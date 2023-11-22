@@ -42,4 +42,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.badlogicgames.gdx:gdx:1.9.12")
+    // Espresso Core for UI testing
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Espresso Intents for testing intents
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
 }
