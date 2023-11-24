@@ -24,7 +24,9 @@
 
         <activity android:name=".view.EndScreen" android:parentActivityName=".view.MainActivity" ></activity>
 
-        <activity android:name=".view.InitialConfiguration" android:parentActivityName=".view.MainActivity"></activity>
+        <activity android:name=".view.InitialConfiguration" android:parentActivityName=".view.HowToPlay"></activity>
+
+        <activity android:name=".view.HowToPlay" android:parentActivityName=".view.MainActivity"></activity>
 
         <activity android:name=".view.GameActivity" android:parentActivityName=".view.MainActivity"></activity>
 
