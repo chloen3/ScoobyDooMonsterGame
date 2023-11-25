@@ -173,6 +173,7 @@ public class PlayerTest {
     @Test
     public void whenHealthZeroScoreZero() {
         Player player =  Player.getPlayer();
+        player.setScore(0);
         player.setHealth("0");
 
         assertEquals(0, player.getScore());
@@ -225,5 +226,24 @@ public class PlayerTest {
         Player player = Player.getPlayer();
         assertFalse(Screen2.powerHealthValid(player));
     }
-
+    @Test
+    public void healthPowerScoreTest() {
+        Player playerHealth = Player.getPlayer();
+        playerHealth.collectHealthPowerUp();
+        assertTrue(playerHealth.getScore() == 20);
+    }
+    @Test
+    public void speedPowerScoreTest() {
+        Player playerSpeed = Player.getPlayer();
+        playerSpeed.setScore(0);
+        playerSpeed.collectSpeedPowerUp();
+        assertTrue(playerSpeed.getScore() == 20);
+    }
+    @Test
+    public void scorePowerScoreTest() {
+        Player playerScore = Player.getPlayer();
+        playerScore.setScore(0);
+        playerScore.collectScorePowerUp();
+        assertTrue(playerScore.getScore() == 40);
+    }
 }

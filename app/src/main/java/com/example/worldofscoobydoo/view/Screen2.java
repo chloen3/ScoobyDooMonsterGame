@@ -293,6 +293,7 @@ public class Screen2 extends AppCompatActivity {
                                     player.setHealth(String.valueOf(health));
                                     ImageView powerUp = findViewById(R.id.healthPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification3();
                                     flag = false;
                                 }
@@ -334,6 +335,7 @@ public class Screen2 extends AppCompatActivity {
                                     player.setHealth(String.valueOf(health));
                                     ImageView powerUp = findViewById(R.id.healthPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification3();
                                     flag = false;
                                 }
@@ -375,6 +377,7 @@ public class Screen2 extends AppCompatActivity {
                                     player.setHealth(String.valueOf(health));
                                     ImageView powerUp = findViewById(R.id.healthPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification3();
                                     flag = false;
                                 }
@@ -416,6 +419,7 @@ public class Screen2 extends AppCompatActivity {
                                     player.setHealth(String.valueOf(health));
                                     ImageView powerUp = findViewById(R.id.healthPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification3();
                                     flag = false;
                                 }

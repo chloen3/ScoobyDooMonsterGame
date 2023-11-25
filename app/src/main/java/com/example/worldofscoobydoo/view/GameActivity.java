@@ -260,6 +260,7 @@ public class GameActivity extends AppCompatActivity {
                                     movementStrategy = new MovementSuper(movementObservable);
                                     ImageView powerUp = findViewById(R.id.speedPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification2();
                                     flag = false;
                                 }
@@ -298,6 +299,7 @@ public class GameActivity extends AppCompatActivity {
                                     movementStrategy = new MovementSuper(movementObservable);
                                     ImageView powerUp = findViewById(R.id.speedPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification2();
                                     flag = false;
                                 }
@@ -336,6 +338,7 @@ public class GameActivity extends AppCompatActivity {
                                     movementStrategy = new MovementSuper(movementObservable);
                                     ImageView powerUp = findViewById(R.id.speedPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification2();
                                     flag = false;
                                 }
@@ -373,6 +376,7 @@ public class GameActivity extends AppCompatActivity {
                                     movementStrategy = new MovementSuper(movementObservable);
                                     ImageView powerUp = findViewById(R.id.speedPowerUp);
                                     powerUp.setImageDrawable(null);
+                                    score += 20;
                                     notification2();
                                     flag = false;
                                 }
