@@ -63,6 +63,7 @@ public class Screen3 extends AppCompatActivity {
     private Enemy enemy2;
     private EnemyFactory enemyFactory;
     private double health;
+    private double endHealth;
     private static boolean by10;
     private int movementCount;
     private int movementCount2;
@@ -461,7 +462,8 @@ public class Screen3 extends AppCompatActivity {
             player.setScore(score);
             SharedPreferences pref = getSharedPreferences("PREFS", 0);
             SharedPreferences.Editor editor = pref.edit();
-            editor.putInt("lastScore", player.getScore());
+            int endScore = (int) (player.getScore() + health);
+            editor.putInt("lastScore", endScore);
             editor.putString("player", player.getName());
             editor.apply();
             startActivity(intent);

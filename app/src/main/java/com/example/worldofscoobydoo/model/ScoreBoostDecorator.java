@@ -11,7 +11,7 @@ public class ScoreBoostDecorator extends PowerUpDecorator {
     }
 
     public int gameEffect() {
-        int result = 10;
+        int result = 40;
         return powerup.gameEffect() + result;
     }
 }

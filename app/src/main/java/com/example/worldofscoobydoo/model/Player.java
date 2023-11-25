@@ -215,6 +215,19 @@ public class Player implements Observer,PowerUp,Weapon {
         return "Activated: ";
     }
 
+    public String collectSpeedPowerUp() {
+        score += 20;
+        return "speedPowerUp";
+    }
+    public String collectHealthPowerUp() {
+        score += 20;
+        return "healthPowerUp";
+    }
+    public String collectScorePowerUp() {
+        score += 40;
+        return "scorePowerUp";
+    }
+
     @Override
     public int gameEffect() {
         return 0;
