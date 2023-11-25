@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.viewModel.Observer;
 
-public class Player implements Observer,PowerUp {
+public class Player implements Observer,PowerUp,Weapon {
     private String sprite;
     private boolean tracker2;
     private boolean tracker1;
@@ -187,6 +187,19 @@ public class Player implements Observer,PowerUp {
         running = false;
     }
 
+    public void notifyObserversSword(TextView text) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                running = true;
+                text.setText("");
+            }
+        }, 500);
+        Weapon weapon = new SwordClassDecorator(player);
+        text.setText(weapon.weapon());
+        running = false;
+    }
+
     public boolean isRunning() {
         return running;
     }
@@ -221,5 +234,10 @@ public class Player implements Observer,PowerUp {
 
     public void setTracker2(boolean tracker2) {
         this.tracker2 = tracker2;
+    }
+
+    @Override
+    public String weapon() {
+        return "Acquired: ";
     }
 }
