@@ -287,4 +287,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/lightningScreen3"
+        android:layout_width="42dp"
+        android:layout_height="66dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="@+id/imageView3_3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3_3"
+        app:layout_constraintVertical_bias="0.939"
+        app:srcCompat="@drawable/lightning_spell" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

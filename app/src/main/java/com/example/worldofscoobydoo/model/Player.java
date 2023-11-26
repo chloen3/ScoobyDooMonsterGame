@@ -18,8 +18,8 @@ public class Player implements Observer,PowerUp,Weapon {
     private static volatile Player player;
     private String speed;
     private String currentDirection = null;
-    private int x;
-    private int y;
+    private float x;
+    private float y;
     private boolean running = false;
 
     private Player() { }
@@ -100,16 +100,16 @@ public class Player implements Observer,PowerUp,Weapon {
     public int getHealthInt() {
         return healthInt;
     }
-    public void setX(int xPosition) {
+    public void setX(float xPosition) {
         x = xPosition;
     }
-    public void setY(int yPosition) {
+    public void setY(float yPosition) {
         y = yPosition;
     }
-    public int getX() {
+    public float getX() {
         return x;
     }
-    public int getY() {
+    public float getY() {
         return y;
     }
     public String getCurrentDirection() {
