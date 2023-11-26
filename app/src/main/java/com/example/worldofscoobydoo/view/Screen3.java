@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.graphics.drawable.ColorDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,6 +72,11 @@ public class Screen3 extends AppCompatActivity {
     private Dialog pauseMenuDialog;
     private Button muteButton;
     private Button exitButton;
+    private ImageView enemyCollide;
+    ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
+    public boolean lightningFlag = false;
+    private boolean enemyDead = false;
+    private ArrayList<ImageView> enemyList;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,6 +271,8 @@ public class Screen3 extends AppCompatActivity {
         ImageView enemy2Img = findViewById(R.id.enemy2Screen3);
         TextView difficultyReceiver = findViewById(R.id.health_status_3);
         ImageView spriteImg = findViewById(R.id.imageView_3);
+        ImageView lightning = findViewById(R.id.lightningScreen3);
+
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
 
@@ -274,11 +280,23 @@ public class Screen3 extends AppCompatActivity {
                     float futureX;
                     float futureY;
                     switch (key) {
+                        case KeyEvent.KEYCODE_Q:
+                            if (lightningFlag) {
+                                for (ImageView i:enemyCollisionsList) {
+                                    i.setImageDrawable(null);
+                                }
+                                enemyDead = true;
+                                score = score + 5;
+                                updateScore(score);
+                            }
+                            lightning.setImageDrawable(null);
+                            lightningFlag = false;
+                            return true; // Consume the key event for 'Q'
                         case KeyEvent.KEYCODE_DPAD_UP:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
-                                if (checkEnemyCollide(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
                                     if (difficulty == .5) {
                                         health = health - 15;
                                     } else if (difficulty == .75) {
@@ -311,13 +329,17 @@ public class Screen3 extends AppCompatActivity {
                                 player.moveUp();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (lightningFlag) {
+                                    lightning.setX(futureX);
+                                    lightning.setY(futureY);
+                                }
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
-                                if (checkEnemyCollide(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
                                     if (difficulty == .5) {
                                         health = health - 10;
                                     } else if (difficulty == .75) {
@@ -350,13 +372,17 @@ public class Screen3 extends AppCompatActivity {
                                 player.moveDown();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (lightningFlag) {
+                                    lightning.setX(futureX);
+                                    lightning.setY(futureY);
+                                }
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
                             futureX = spriteImg.getX() - 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
-                                if (checkEnemyCollide(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
                                     if (difficulty == .5) {
                                         health = health - 10;
                                     } else if (difficulty == .75) {
@@ -389,13 +415,17 @@ public class Screen3 extends AppCompatActivity {
                                 player.moveLeft();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (lightningFlag) {
+                                    lightning.setX(futureX);
+                                    lightning.setY(futureY);
+                                }
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
                             futureX = spriteImg.getX() + 80;
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
-                                if (checkEnemyCollide(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
                                     if (difficulty == .5) {
                                         health = health - 10;
                                     } else if (difficulty == .75) {
@@ -428,9 +458,18 @@ public class Screen3 extends AppCompatActivity {
                                 player.moveRight();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (lightningFlag) {
+                                    lightning.setX(futureX);
+                                    lightning.setY(futureY);
+                                }
                             }
                             break;
                         default:
+                            return false;
+                    }
+                    if (checkLightning(futureX, futureY) && !lightningFlag) {
+                        notification4();
+                        lightningFlag = true;
                     }
                     enemy1.movement(movementCount, enemy1Img, movementBox1);
                     movementCount = enemy1.setCount(movementCount);
@@ -443,10 +482,9 @@ public class Screen3 extends AppCompatActivity {
             }
         });
     }
-
     private void exitCondition() {
         ImageView spriteImg = findViewById(R.id.imageView_3);
-        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+        if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemyDead) {
             //stop the music
             if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
                 InitialConfiguration.mySong.stop();
@@ -479,18 +517,21 @@ public class Screen3 extends AppCompatActivity {
         float playerY = y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
-        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        enemyCollisionsList = new ArrayList<ImageView>();
         ImageView cb = findViewById(R.id.enemy1Screen3);
         ImageView cb2 = findViewById(R.id.enemy2Screen3);
-        collisionsList.add(cb);
-        collisionsList.add(cb2);
-        for (ImageView collisionBox : collisionsList) {
+        if (!enemyDead) {
+            enemyCollisionsList.add(cb);
+            enemyCollisionsList.add(cb2);
+        }
+        for (ImageView collisionBox : enemyCollisionsList) {
             float objX = collisionBox.getX();
             float objY = collisionBox.getY();
             int objWidth = collisionBox.getWidth();
             int objHeight = collisionBox.getHeight();
             if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
                     + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                enemyCollide = collisionBox;
                 return true;
             }
         }
@@ -569,6 +610,29 @@ public class Screen3 extends AppCompatActivity {
         }
         return false;
     }
+
+    public boolean checkLightning(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_3);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.lightningScreen3);
+        collisionsList.add(cb);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void notification4() {
         TextView text = findViewById(R.id.alert);

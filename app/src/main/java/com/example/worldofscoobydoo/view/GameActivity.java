@@ -77,6 +77,8 @@ public class GameActivity extends AppCompatActivity {
     private MediaPlayer mySong;
     private Button exitButton;
     private ImageView enemyCollide;
+    private boolean enemy1Dead = false;
+    private boolean enemy2Dead = false;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,6 +233,8 @@ public class GameActivity extends AppCompatActivity {
         TextView difficultyReceiver = findViewById(R.id.health_status);
         ImageView enemy1Img = findViewById(R.id.enemy1Screen1);
         ImageView enemy2Img = findViewById(R.id.enemy2Screen1);
+        ImageView sword = findViewById(R.id.swordImageView);
+
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -241,8 +245,15 @@ public class GameActivity extends AppCompatActivity {
                             if (swordFlag && checkEnemyCollide(spriteImg.getX(), spriteImg.getY())) {
                                 // Perform the action when 'Q' is pressed and a sword is available
                                 enemyCollide.setImageDrawable(null); // Assuming this removes the enemy image
-                                enemyList.remove(enemyCollide);
                                 // Add any additional logic for handling the enemy death
+                                if (enemyCollide == enemy1Img) {
+                                    enemy1Dead = true;
+                                }
+                                if (enemyCollide == enemy2Img) {
+                                    enemy2Dead = true;
+                                }
+                                score = score + 5;
+                                updateScore(score);
                             }
                             return true; // Consume the key event for 'Q'
                         case KeyEvent.KEYCODE_DPAD_UP:
@@ -259,8 +270,7 @@ public class GameActivity extends AppCompatActivity {
                                     }
                                     //check for game over
                                     if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this,
-                                                EndScreen.class);
+                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
                                         instance.setScore(0);
                                         startActivity(intent);
                                     }
@@ -278,24 +288,13 @@ public class GameActivity extends AppCompatActivity {
                                     notification2();
                                     flag = false;
                                 }
-                                if (checkSword(futureX, futureY) && !swordFlag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    notification3();
-                                    swordFlag = true;
-                                }
                                 movementStrategy.moveUp(spriteImg);
+                                instance.moveUp();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
                                 if (swordFlag) {
-                                    instance.moveUp();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
-                                    ImageView sword = findViewById(R.id.swordImageView);
-                                    sword.setX((int) futureX + 2);
-                                    sword.setY((int) futureY);
-                                } else {
-                                    instance.moveUp();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
                                 }
                             }
                             break;
@@ -332,24 +331,13 @@ public class GameActivity extends AppCompatActivity {
                                     notification2();
                                     flag = false;
                                 }
-                                if (checkSword(futureX, futureY) && !swordFlag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    notification3();
-                                    swordFlag = true;
-                                }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
+                                instance.moveDown();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
                                 if (swordFlag) {
-                                    ImageView sword = findViewById(R.id.swordImageView);
-                                    instance.moveDown();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
-                                    sword.setX((int) futureX + 2);
-                                    sword.setY((int) futureY);
-                                } else {
-                                    instance.moveDown();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
                                 }
                             }
                             break;
@@ -386,24 +374,13 @@ public class GameActivity extends AppCompatActivity {
                                     notification2();
                                     flag = false;
                                 }
-                                if (checkSword(futureX, futureY) && !swordFlag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    notification3();
-                                    swordFlag = true;
-                                }
                                 movementStrategy.moveLeft(spriteImg);
+                                instance.moveLeft();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
                                 if (swordFlag) {
-                                    ImageView sword = findViewById(R.id.swordImageView);
-                                    instance.moveLeft();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
-                                    sword.setX((int) futureX + 2);
-                                    sword.setY((int) futureY);
-                                } else {
-                                    instance.moveLeft();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
                                 }
                             }
                             break;
@@ -439,30 +416,24 @@ public class GameActivity extends AppCompatActivity {
                                     notification2();
                                     flag = false;
                                 }
-                                if (checkSword(futureX, futureY) && !swordFlag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    notification3();
-                                    swordFlag = true;
-                                }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
+                                instance.moveRight();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
                                 if (swordFlag) {
-                                    ImageView sword = findViewById(R.id.swordImageView);
-                                    instance.moveRight();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
-                                    sword.setX((int) futureX + 2);
-                                    sword.setY((int) futureY);
-                                } else {
-                                    instance.moveRight();
-                                    instance.setX((int) futureX);
-                                    instance.setY((int) futureY);
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
                                 }
                             }
                             break;
                         default:
                             return false;
                     }
+                    if (checkSword(futureX, futureY) && !swordFlag) {
+                        notification3();
+                        swordFlag = true;
+                    }
+
                     enemy1.movement(movementCount, enemy1Img, movementBox1);
                     movementCount = enemy1.setCount(movementCount);
                     enemy2.movement(movementCount2, enemy2Img, movementBox2);
@@ -476,7 +447,7 @@ public class GameActivity extends AppCompatActivity {
     }
     private void exitHandling() {
         ImageView spriteImg = findViewById(R.id.imageView);
-        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+        if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemy1Dead && enemy2Dead) {
             if (scoreCountdownTimer != null) {
                 scoreCountdownTimer.cancel();
             }
@@ -579,8 +550,12 @@ public class GameActivity extends AppCompatActivity {
         enemyList = new ArrayList<ImageView>();
         ImageView cb = findViewById(R.id.enemy1Screen1);
         ImageView cb2 = findViewById(R.id.enemy2Screen1);
-        enemyList.add(cb);
-        enemyList.add(cb2);
+        if (!enemy1Dead) {
+            enemyList.add(cb);
+        }
+        if (!enemy2Dead) {
+            enemyList.add(cb2);
+        }
         for (ImageView collisionBox : enemyList) {
             float objX = collisionBox.getX();
             float objY = collisionBox.getY();

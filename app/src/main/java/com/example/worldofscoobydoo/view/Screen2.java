@@ -1,7 +1,5 @@
 package com.example.worldofscoobydoo.view;
 
-import static com.example.worldofscoobydoo.viewModel.CountDownTimerUtil.startCountdownTimer;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -30,7 +28,6 @@ import com.example.worldofscoobydoo.viewModel.CountdownTimerCallback;
 import com.example.worldofscoobydoo.viewModel.CountDownTimerUtil;
 import com.example.worldofscoobydoo.viewModel.Renderer;
 import java.util.ArrayList;
-import android.graphics.drawable.ColorDrawable;
 
 public class Screen2 extends AppCompatActivity {
 
@@ -39,6 +36,7 @@ public class Screen2 extends AppCompatActivity {
     private CountDownTimer scoreCountdownTimer;
     private Player player;
     private TextView scoreTextView;
+    public boolean swordFlag = false;
     private Button pauseButton;
     private Button resumeButton;
     private int screenWidth;
@@ -63,6 +61,11 @@ public class Screen2 extends AppCompatActivity {
     private Dialog pauseMenuDialog;
     private Button muteButton;
     private Button exitButton;
+    private ImageView enemyCollide;
+    ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
+    private boolean enemy1Dead = false;
+    private boolean enemy2Dead = false;
+    private ArrayList<ImageView> enemyList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -255,12 +258,29 @@ public class Screen2 extends AppCompatActivity {
         ImageView enemy2Img = findViewById(R.id.enemy2);
         ImageView movementBox1 = findViewById(R.id.enemy2Screen2Boundary);
         ImageView movementBox2 = findViewById(R.id.enemy1Screen2Boundary);
+        ImageView sword = findViewById(R.id.swordScreen2);
+
         user.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int key, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     float futureX;
                     float futureY;
                     switch (key) {
+                        case KeyEvent.KEYCODE_Q:
+                            if (swordFlag && checkEnemyCollide(spriteImg.getX(), spriteImg.getY())) {
+                                // Perform the action when 'Q' is pressed and a sword is available
+                                enemyCollide.setImageDrawable(null); // Assuming this removes the enemy image
+                                // Add any additional logic for handling the enemy death
+                                if (enemyCollide == enemy1Img) {
+                                    enemy1Dead = true;
+                                }
+                                if (enemyCollide == enemy2Img) {
+                                    enemy2Dead = true;
+                                }
+                                score = score + 5;
+                                updateScore(score);
+                            }
+                            return true; // Consume the key event for 'Q'
                         case KeyEvent.KEYCODE_DPAD_UP:
                             futureX = spriteImg.getX();
                             futureY = spriteImg.getY() - 80;
@@ -301,6 +321,10 @@ public class Screen2 extends AppCompatActivity {
                                 player.moveUp();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_DOWN:
@@ -343,6 +367,10 @@ public class Screen2 extends AppCompatActivity {
                                 player.moveDown();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_LEFT:
@@ -385,6 +413,10 @@ public class Screen2 extends AppCompatActivity {
                                 player.moveLeft();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
                             }
                             break;
                         case KeyEvent.KEYCODE_DPAD_RIGHT:
@@ -427,9 +459,18 @@ public class Screen2 extends AppCompatActivity {
                                 player.moveRight();
                                 player.setX((int) futureX);
                                 player.setY((int) futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
                             }
                             break;
                         default:
+                            return false;
+                    }
+                    if (checkSword(futureX, futureY) && !swordFlag) {
+                        notification3();
+                        swordFlag = true;
                     }
                     enemy1.movement(movementCount, enemy1Img, movementBox1);
                     movementCount = enemy1.setCount(movementCount);
@@ -451,7 +492,7 @@ public class Screen2 extends AppCompatActivity {
 
     private void exitCondition() {
         ImageView spriteImg = findViewById(R.id.imageView_2);
-        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+        if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemy1Dead && enemy2Dead) {
             if (scoreCountdownTimer != null) {
                 scoreCountdownTimer.cancel();
             }
@@ -471,18 +512,23 @@ public class Screen2 extends AppCompatActivity {
         float playerY = y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
-        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        enemyCollisionsList = new ArrayList<ImageView>();
         ImageView cb = findViewById(R.id.enemy2);
         ImageView cb2 = findViewById(R.id.enemy1Screen2);
-        collisionsList.add(cb);
-        collisionsList.add(cb2);
-        for (ImageView collisionBox : collisionsList) {
+        if (!enemy2Dead) {
+            enemyCollisionsList.add(cb);
+        }
+        if (!enemy1Dead) {
+            enemyCollisionsList.add(cb2);
+        }
+        for (ImageView collisionBox : enemyCollisionsList) {
             float objX = collisionBox.getX();
             float objY = collisionBox.getY();
             int objWidth = collisionBox.getWidth();
             int objHeight = collisionBox.getHeight();
             if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
                     + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                enemyCollide = collisionBox;
                 return true;
             }
         }
@@ -547,6 +593,27 @@ public class Screen2 extends AppCompatActivity {
         float playerHeight = spriteImg.getHeight();
         ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
         ImageView cb = findViewById(R.id.healthPowerUp);
+        collisionsList.add(cb);
+        for (ImageView collisionBox : collisionsList) {
+            float objX = collisionBox.getX();
+            float objY = collisionBox.getY();
+            int objWidth = collisionBox.getWidth();
+            int objHeight = collisionBox.getHeight();
+            if ((playerX + playerWidth >= objX) && (playerX <= objX + objWidth) && (playerY
+                    + playerHeight >= objY) && (playerY <= objY + objHeight)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkSword(float x, float y) {
+        ImageView spriteImg = findViewById(R.id.imageView_2);
+        float playerX = x;
+        float playerY = y;
+        float playerWidth = spriteImg.getWidth();
+        float playerHeight = spriteImg.getHeight();
+        ArrayList<ImageView> collisionsList = new ArrayList<ImageView>();
+        ImageView cb = findViewById(R.id.swordScreen2);
         collisionsList.add(cb);
         for (ImageView collisionBox : collisionsList) {
             float objX = collisionBox.getX();
