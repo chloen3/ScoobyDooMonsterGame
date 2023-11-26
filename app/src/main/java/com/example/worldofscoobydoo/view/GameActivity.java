@@ -77,6 +77,8 @@ public class GameActivity extends AppCompatActivity {
     private MediaPlayer mySong;
     private Button exitButton;
     private ImageView enemyCollide;
+    private boolean enemy1Dead = false;
+    private boolean enemy2Dead = false;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,8 +245,13 @@ public class GameActivity extends AppCompatActivity {
                             if (swordFlag && checkEnemyCollide(spriteImg.getX(), spriteImg.getY())) {
                                 // Perform the action when 'Q' is pressed and a sword is available
                                 enemyCollide.setImageDrawable(null); // Assuming this removes the enemy image
-                                enemyList.remove(enemyCollide);
                                 // Add any additional logic for handling the enemy death
+                                if (enemyCollide == enemy1Img) {
+                                    enemy1Dead = true;
+                                }
+                                if (enemyCollide == enemy2Img) {
+                                    enemy2Dead = true;
+                                }
                                 score = score + 5;
                                 updateScore(score);
                             }
@@ -440,7 +447,7 @@ public class GameActivity extends AppCompatActivity {
     }
     private void exitHandling() {
         ImageView spriteImg = findViewById(R.id.imageView);
-        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+        if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemy1Dead && enemy2Dead) {
             if (scoreCountdownTimer != null) {
                 scoreCountdownTimer.cancel();
             }
@@ -543,8 +550,12 @@ public class GameActivity extends AppCompatActivity {
         enemyList = new ArrayList<ImageView>();
         ImageView cb = findViewById(R.id.enemy1Screen1);
         ImageView cb2 = findViewById(R.id.enemy2Screen1);
-        enemyList.add(cb);
-        enemyList.add(cb2);
+        if (!enemy1Dead) {
+            enemyList.add(cb);
+        }
+        if (!enemy2Dead) {
+            enemyList.add(cb2);
+        }
         for (ImageView collisionBox : enemyList) {
             float objX = collisionBox.getX();
             float objY = collisionBox.getY();

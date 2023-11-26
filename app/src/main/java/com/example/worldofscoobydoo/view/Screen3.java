@@ -76,6 +76,8 @@ public class Screen3 extends AppCompatActivity {
     ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
     public boolean lightningFlag = false;
     private boolean enemyDead = false;
+    private ArrayList<ImageView> enemyList;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -482,7 +484,7 @@ public class Screen3 extends AppCompatActivity {
     }
     private void exitCondition() {
         ImageView spriteImg = findViewById(R.id.imageView_3);
-        if (checkExit(spriteImg.getX(), spriteImg.getY())) {
+        if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemyDead) {
             //stop the music
             if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
                 InitialConfiguration.mySong.stop();
@@ -515,10 +517,13 @@ public class Screen3 extends AppCompatActivity {
         float playerY = y;
         float playerWidth = spriteImg.getWidth();
         float playerHeight = spriteImg.getHeight();
+        enemyCollisionsList = new ArrayList<ImageView>();
         ImageView cb = findViewById(R.id.enemy1Screen3);
         ImageView cb2 = findViewById(R.id.enemy2Screen3);
-        enemyCollisionsList.add(cb);
-        enemyCollisionsList.add(cb2);
+        if (!enemyDead) {
+            enemyCollisionsList.add(cb);
+            enemyCollisionsList.add(cb2);
+        }
         for (ImageView collisionBox : enemyCollisionsList) {
             float objX = collisionBox.getX();
             float objY = collisionBox.getY();
