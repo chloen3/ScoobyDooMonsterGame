@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
     public boolean swordFlag = false;
     private double difficulty;
     private String sprite;
-    private int score = 100;
+    private int score;
     private TextView scoreTextView;
     private Button pauseButton;
     private Button resumeButton;
@@ -181,6 +181,7 @@ public class GameActivity extends AppCompatActivity {
         name = instance.getName();
         difficulty = instance.getDifficulty();
         sprite = instance.getSprite();
+        score = 100;
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow(movementObservable);
@@ -252,7 +253,7 @@ public class GameActivity extends AppCompatActivity {
                                 if (enemyCollide == enemy2Img) {
                                     enemy2Dead = true;
                                 }
-                                score = score + 5;
+                                score = score + 50;
                                 updateScore(score);
                             }
                             return true; // Consume the key event for 'Q'

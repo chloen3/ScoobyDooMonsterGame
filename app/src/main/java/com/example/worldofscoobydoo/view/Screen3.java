@@ -286,7 +286,7 @@ public class Screen3 extends AppCompatActivity {
                                     i.setImageDrawable(null);
                                 }
                                 enemyDead = true;
-                                score = score + 5;
+                                score = score + 50;
                                 updateScore(score);
                             }
                             lightning.setImageDrawable(null);

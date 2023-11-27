@@ -277,7 +277,7 @@ public class Screen2 extends AppCompatActivity {
                                 if (enemyCollide == enemy2Img) {
                                     enemy2Dead = true;
                                 }
-                                score = score + 5;
+                                score = score + 50;
                                 updateScore(score);
                             }
                             return true; // Consume the key event for 'Q'
