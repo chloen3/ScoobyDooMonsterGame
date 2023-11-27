@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -37,6 +38,7 @@ import android.widget.Button;
 public class Screen3 extends AppCompatActivity {
 
     private String name;
+    private static MediaPlayer mySong;
     private boolean flag = true;
     private CountDownTimer scoreCountdownTimer;
     private double difficulty;
@@ -73,8 +75,8 @@ public class Screen3 extends AppCompatActivity {
     private Button muteButton;
     private Button exitButton;
     private ImageView enemyCollide;
-    ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
-    public boolean lightningFlag = false;
+    private ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
+    private boolean lightningFlag = false;
     private boolean enemyDead = false;
     private ArrayList<ImageView> enemyList;
 
@@ -96,7 +98,8 @@ public class Screen3 extends AppCompatActivity {
         View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
 
         pauseMenuDialog = new Dialog(this);
-        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pauseMenuDialog.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pauseMenuDialog.setContentView(pauseMenuView);
         pauseMenuDialog.setCancelable(false);
 
@@ -159,20 +162,20 @@ public class Screen3 extends AppCompatActivity {
     }
 
     private void startCountdownTimer() {
-        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(score, new CountdownTimerCallback() {
-            @Override
-            public void onTick(int newScore) {
-                score = newScore;
-                updateScore(score);
-            }
-
-            @Override
-            public void onFinish() {
-                Intent intent = new Intent(Screen3.this, EndScreen.class);
-                player.setScore(0);
-                startActivity(intent);
-            }
-        });
+        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(score,
+                new CountdownTimerCallback() {
+                @Override
+                public void onTick(int newScore) {
+                    score = newScore;
+                    updateScore(score);
+                }
+                @Override
+                public void onFinish() {
+                    Intent intent = new Intent(Screen3.this, EndScreen.class);
+                    player.setScore(0);
+                    startActivity(intent);
+                }
+            });
     }
 
     private void stopMusic() {
@@ -297,33 +300,14 @@ public class Screen3 extends AppCompatActivity {
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
-                                    if (difficulty == .5) {
-                                        health = health - 15;
-                                    } else if (difficulty == .75) {
-                                        health = health - 10;
-                                    } else {
-                                        health = health - 5;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(Screen3.this, EndScreen.class);
-                                        player.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    PowerUp power = new ScoreBoostDecorator(player);
-                                    int change = power.gameEffect();
-                                    score += change;
-                                    updateScore(score);
-                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    notification4();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveUp(spriteImg);
                                 player.moveUp();
@@ -340,33 +324,14 @@ public class Screen3 extends AppCompatActivity {
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
-                                    if (difficulty == .5) {
-                                        health = health - 10;
-                                    } else if (difficulty == .75) {
-                                        health = health - 6;
-                                    } else {
-                                        health = health - 4;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(Screen3.this, EndScreen.class);
-                                        player.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    PowerUp power = new ScoreBoostDecorator(player);
-                                    int change = power.gameEffect();
-                                    score += change;
-                                    updateScore(score);
-                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    notification4();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 player.moveDown();
@@ -383,33 +348,14 @@ public class Screen3 extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
-                                    if (difficulty == .5) {
-                                        health = health - 10;
-                                    } else if (difficulty == .75) {
-                                        health = health - 6;
-                                    } else {
-                                        health = health - 4;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(Screen3.this, EndScreen.class);
-                                        player.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    PowerUp power = new ScoreBoostDecorator(player);
-                                    int change = power.gameEffect();
-                                    score += change;
-                                    updateScore(score);
-                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    notification4();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveLeft(spriteImg);
                                 player.moveLeft();
@@ -426,33 +372,14 @@ public class Screen3 extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY) && !enemyDead) {
-                                    if (difficulty == .5) {
-                                        health = health - 10;
-                                    } else if (difficulty == .75) {
-                                        health = health - 6;
-                                    } else {
-                                        health = health - 4;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(Screen3.this, EndScreen.class);
-                                        player.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     player.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    PowerUp power = new ScoreBoostDecorator(player);
-                                    int change = power.gameEffect();
-                                    score += change;
-                                    updateScore(score);
-                                    ImageView powerUp = findViewById(R.id.DamagePowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    notification4();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 player.moveRight();
@@ -506,6 +433,31 @@ public class Screen3 extends AppCompatActivity {
             editor.apply();
             startActivity(intent);
         }
+    }
+    private void collisionHandling() {
+        if (difficulty == .5) {
+            health = health - 15;
+        } else if (difficulty == .75) {
+            health = health - 10;
+        } else {
+            health = health - 5;
+        }
+        //check for game over
+        if (health <= 0) {
+            Intent intent = new Intent(Screen3.this, EndScreen.class);
+            player.setScore(0);
+            startActivity(intent);
+        }
+    }
+    private void powerUpHandling() {
+        PowerUp power = new ScoreBoostDecorator(player);
+        int change = power.gameEffect();
+        score += change;
+        updateScore(score);
+        ImageView powerUp = findViewById(R.id.DamagePowerUp);
+        powerUp.setImageDrawable(null);
+        notification4();
+        flag = false;
     }
     private void updateScore(int sc) {
         scoreTextView.setText(String.valueOf(sc));
