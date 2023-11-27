@@ -402,8 +402,8 @@ public class Screen2 extends AppCompatActivity {
     }
 
     private void stopMusic() {
-        if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
-            InitialConfiguration.mySong.pause(); // Pause the music
+        if (InitialConfiguration.checkSongNotNull() && InitialConfiguration.checkSongPlaying()) {
+            InitialConfiguration.pauseSong(); // Pause the music
         }
     }
     private void collisionHandling() {

@@ -23,7 +23,7 @@ public class InitialConfiguration extends AppCompatActivity {
     private String name;
     private String sprite;
     private Player player;
-    public static MediaPlayer mySong;
+    private static MediaPlayer mySong;
     private Button playButton;
     public void setName(String name) {
         this.name = name;
@@ -31,6 +31,25 @@ public class InitialConfiguration extends AppCompatActivity {
 
     public void setSprite(String sprite) {
         this.sprite = sprite;
+    }
+
+    public static void stopSong() {
+        mySong.stop();
+    }
+    public static void pauseSong() {
+        mySong.pause();
+    }
+    public static boolean checkSongPlaying() {
+        return mySong.isPlaying();
+    }
+    public static boolean checkSongNotNull() {
+        return (mySong != null);
+    }
+    public static void releaseSong() {
+        mySong.release();
+    }
+    public static void setSongNull() {
+        mySong = null;
     }
 
     /** @noinspection checkstyle:Indentation*/

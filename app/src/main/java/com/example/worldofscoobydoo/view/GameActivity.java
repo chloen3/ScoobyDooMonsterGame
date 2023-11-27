@@ -27,7 +27,6 @@ import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.MovementSuper;
 import com.example.worldofscoobydoo.viewModel.Renderer;
-import android.media.MediaPlayer;
 import android.graphics.drawable.ColorDrawable;
 
 import android.os.CountDownTimer;
@@ -73,7 +72,6 @@ public class GameActivity extends AppCompatActivity {
     private View pauseMenuView;
     private Dialog pauseMenuDialog;
     private Button muteButton;
-    private MediaPlayer mySong;
     private Button exitButton;
     private ImageView enemyCollide;
     private boolean enemy1Dead = false;
@@ -569,8 +567,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void stopMusic() {
-        if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
-            InitialConfiguration.mySong.pause(); // Pause the music
+        if (InitialConfiguration.checkSongNotNull() && InitialConfiguration.checkSongPlaying()) {
+            InitialConfiguration.pauseSong(); // Pause the music
         }
     }
 

@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -38,7 +37,6 @@ import android.widget.Button;
 public class Screen3 extends AppCompatActivity {
 
     private String name;
-    private static MediaPlayer mySong;
     private boolean flag = true;
     private CountDownTimer scoreCountdownTimer;
     private double difficulty;
@@ -179,8 +177,8 @@ public class Screen3 extends AppCompatActivity {
     }
 
     private void stopMusic() {
-        if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
-            InitialConfiguration.mySong.pause(); // Pause the music
+        if (InitialConfiguration.checkSongNotNull() && InitialConfiguration.checkSongPlaying()) {
+            InitialConfiguration.pauseSong(); // Pause the music
         }
     }
 
@@ -413,10 +411,11 @@ public class Screen3 extends AppCompatActivity {
         ImageView spriteImg = findViewById(R.id.imageView_3);
         if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemyDead) {
             //stop the music
-            if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
-                InitialConfiguration.mySong.stop();
-                InitialConfiguration.mySong.release();
-                InitialConfiguration.mySong = null;
+            if (InitialConfiguration.checkSongNotNull()
+                    && InitialConfiguration.checkSongPlaying()) {
+                InitialConfiguration.stopSong();
+                InitialConfiguration.releaseSong();
+                InitialConfiguration.setSongNull();
             }
             // Cancel the countdown timer
             if (scoreCountdownTimer != null) {
