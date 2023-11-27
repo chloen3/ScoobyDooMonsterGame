@@ -27,7 +27,6 @@ import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.MovementSuper;
 import com.example.worldofscoobydoo.viewModel.Renderer;
-import android.media.MediaPlayer;
 import android.graphics.drawable.ColorDrawable;
 
 import android.os.CountDownTimer;
@@ -73,7 +72,6 @@ public class GameActivity extends AppCompatActivity {
     private View pauseMenuView;
     private Dialog pauseMenuDialog;
     private Button muteButton;
-    private MediaPlayer mySong;
     private Button exitButton;
     private ImageView enemyCollide;
     private boolean enemy1Dead = false;
@@ -243,10 +241,11 @@ public class GameActivity extends AppCompatActivity {
                     float futureY;
                     switch (key) {
                         case KeyEvent.KEYCODE_Q:
-                            if (swordFlag && checkEnemyCollide(
-                                    spriteImg.getX(), spriteImg.getY())) {
+                            if (swordFlag && checkEnemyCollide(spriteImg.getX(),
+                                    spriteImg.getY())) {
                                 // Perform the action when 'Q' is pressed and a sword is available
                                 enemyCollide.setImageDrawable(null);
+                                // Assuming this removes the enemy image
                                 // Add any additional logic for handling the enemy death
                                 if (enemyCollide == enemy1Img) {
                                     enemy1Dead = true;
@@ -263,33 +262,14 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() - 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    if (difficulty == .5) {
-                                        health = health - 10;
-                                    } else if (difficulty == .75) {
-                                        health = health - 6;
-                                    } else {
-                                        health = health - 4;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this,
-                                                EndScreen.class);
-                                        instance.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    score += 20;
-                                    notification2();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveUp(spriteImg);
                                 instance.moveUp();
@@ -306,33 +286,14 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY() + 80;
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    if (difficulty == .5) {
-                                        health = health - 10;
-                                    } else if (difficulty == .75) {
-                                        health = health - 6;
-                                    } else {
-                                        health = health - 4;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this,
-                                                EndScreen.class);
-                                        instance.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    score += 20;
-                                    notification2();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveDown(spriteImg, screenHeight);
                                 instance.moveDown();
@@ -349,33 +310,14 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    if (difficulty == .5) {
-                                        health = health - 10;
-                                    } else if (difficulty == .75) {
-                                        health = health - 6;
-                                    } else {
-                                        health = health - 4;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this,
-                                                EndScreen.class);
-                                        instance.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
                                     by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    score += 20;
-                                    notification2();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveLeft(spriteImg);
                                 instance.moveLeft();
@@ -392,32 +334,14 @@ public class GameActivity extends AppCompatActivity {
                             futureY = spriteImg.getY();
                             if (!checkCollision(futureX, futureY)) {
                                 if (checkEnemyCollide(futureX, futureY)) {
-                                    if (difficulty == .5) {
-                                        health = health - 10;
-                                    } else if (difficulty == .75) {
-                                        health = health - 6;
-                                    } else {
-                                        health = health - 4;
-                                    }
-                                    //check for game over
-                                    if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this,
-                                                EndScreen.class);
-                                        instance.setScore(0);
-                                        startActivity(intent);
-                                    }
+                                    collisionHandling();
+                                    by10 = true;
                                     difficultyReceiver.setText(String.valueOf(health));
                                     instance.setHealth(String.valueOf(health));
                                     notification();
                                 }
                                 if (checkPowerUp(futureX, futureY) && flag) {
-                                    instance.setTracker1(false);
-                                    movementStrategy = new MovementSuper(movementObservable);
-                                    ImageView powerUp = findViewById(R.id.speedPowerUp);
-                                    powerUp.setImageDrawable(null);
-                                    score += 20;
-                                    notification2();
-                                    flag = false;
+                                    powerUpHandling();
                                 }
                                 movementStrategy.moveRight(spriteImg, screenWidth);
                                 instance.moveRight();
@@ -459,6 +383,31 @@ public class GameActivity extends AppCompatActivity {
             instance.setHealth(String.valueOf(health));
             // Pass the remaining time in seconds to Screen2
             startActivity(nextScreen);
+        }
+    }
+    private void powerUpHandling() {
+        instance.setTracker1(false);
+        movementStrategy = new MovementSuper(movementObservable);
+        ImageView powerUp = findViewById(R.id.speedPowerUp);
+        powerUp.setImageDrawable(null);
+        score += 20;
+        notification2();
+        flag = false;
+    }
+    private void collisionHandling() {
+        if (difficulty == .5) {
+            health = health - 10;
+        } else if (difficulty == .75) {
+            health = health - 6;
+        } else {
+            health = health - 4;
+        }
+        //check for game over
+        if (health <= 0) {
+            Intent intent = new Intent(GameActivity.this,
+                    EndScreen.class);
+            instance.setScore(0);
+            startActivity(intent);
         }
     }
     private void updateScore(int score) {
@@ -618,8 +567,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void stopMusic() {
-        if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
-            InitialConfiguration.mySong.pause(); // Pause the music
+        if (InitialConfiguration.checkSongNotNull() && InitialConfiguration.checkSongPlaying()) {
+            InitialConfiguration.pauseSong(); // Pause the music
         }
     }
 
@@ -667,17 +616,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public static boolean swordTest(SwordClassDecorator sword, Player player) {
-        if (sword.getX() == player.getX() && sword.getY() == player.getY()) {
-            return true;
-        }
-        return false;
+        return (sword.getX() == player.getX() && sword.getY() == player.getY());
     }
 
     public static boolean lightningTest(LightingDecorator lightning, Player player) {
-        if (lightning.getX() == player.getX() && lightning.getY() == player.getY()) {
-            return true;
-        }
-        return false;
+        return (lightning.getX() == player.getX() && lightning.getY() == player.getY());
     }
 
     public static int swordScoreTest(SwordClassDecorator sword, Player player, int score) {
