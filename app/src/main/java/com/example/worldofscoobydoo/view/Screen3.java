@@ -73,8 +73,8 @@ public class Screen3 extends AppCompatActivity {
     private Button muteButton;
     private Button exitButton;
     private ImageView enemyCollide;
-    ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
-    public boolean lightningFlag = false;
+    private ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
+    private boolean lightningFlag = false;
     private boolean enemyDead = false;
     private ArrayList<ImageView> enemyList;
 
@@ -96,7 +96,8 @@ public class Screen3 extends AppCompatActivity {
         View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
 
         pauseMenuDialog = new Dialog(this);
-        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pauseMenuDialog.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pauseMenuDialog.setContentView(pauseMenuView);
         pauseMenuDialog.setCancelable(false);
 
@@ -159,20 +160,21 @@ public class Screen3 extends AppCompatActivity {
     }
 
     private void startCountdownTimer() {
-        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(score, new CountdownTimerCallback() {
-            @Override
-            public void onTick(int newScore) {
-                score = newScore;
-                updateScore(score);
-            }
+        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(
+                score, new CountdownTimerCallback() {
+                    @Override
+                    public void onTick(int newScore) {
+                        score = newScore;
+                        updateScore(score);
+                    }
 
-            @Override
-            public void onFinish() {
-                Intent intent = new Intent(Screen3.this, EndScreen.class);
-                player.setScore(0);
-                startActivity(intent);
-            }
-        });
+                    @Override
+                    public void onFinish() {
+                        Intent intent = new Intent(Screen3.this, EndScreen.class);
+                        player.setScore(0);
+                        startActivity(intent);
+                    }
+                });
     }
 
     private void stopMusic() {

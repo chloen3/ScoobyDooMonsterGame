@@ -3,10 +3,9 @@ package com.example.worldofscoobydoo.model;
 import android.os.Handler;
 import android.widget.TextView;
 
-import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.viewModel.Observer;
 
-public class Player implements Observer,PowerUp,Weapon {
+public class Player implements Observer, PowerUp, Weapon {
     private String sprite;
     private boolean tracker2;
     private boolean tracker1;

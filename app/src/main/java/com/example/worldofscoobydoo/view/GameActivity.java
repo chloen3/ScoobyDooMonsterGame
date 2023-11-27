@@ -17,11 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Enemy;
 import com.example.worldofscoobydoo.model.EnemyFactory;
-//import com.example.worldofscoobydoo.model.EnemyTank;
 import com.example.worldofscoobydoo.model.LightingDecorator;
 import com.example.worldofscoobydoo.model.Player;
-import com.example.worldofscoobydoo.model.PowerUp;
-import com.example.worldofscoobydoo.model.SpeedDecorator;
 import com.example.worldofscoobydoo.model.SwordClassDecorator;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
@@ -41,7 +38,7 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity {
     private String name;
     private boolean flag = true;
-    public boolean swordFlag = false;
+    private boolean swordFlag = false;
     private double difficulty;
     private String sprite;
     private int score = 100;
@@ -95,7 +92,8 @@ public class GameActivity extends AppCompatActivity {
         View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
 
         pauseMenuDialog = new Dialog(this);
-        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pauseMenuDialog.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pauseMenuDialog.setContentView(pauseMenuView);
         pauseMenuDialog.setCancelable(false);
 
@@ -244,9 +242,10 @@ public class GameActivity extends AppCompatActivity {
                     float futureY;
                     switch (key) {
                         case KeyEvent.KEYCODE_Q:
-                            if (swordFlag && checkEnemyCollide(spriteImg.getX(), spriteImg.getY())) {
+                            if (swordFlag && checkEnemyCollide(
+                                    spriteImg.getX(), spriteImg.getY())) {
                                 // Perform the action when 'Q' is pressed and a sword is available
-                                enemyCollide.setImageDrawable(null); // Assuming this removes the enemy image
+                                enemyCollide.setImageDrawable(null);
                                 // Add any additional logic for handling the enemy death
                                 if (enemyCollide == enemy1Img) {
                                     enemy1Dead = true;
@@ -272,7 +271,8 @@ public class GameActivity extends AppCompatActivity {
                                     }
                                     //check for game over
                                     if (health <= 0) {
-                                        Intent intent = new Intent(GameActivity.this, EndScreen.class);
+                                        Intent intent = new Intent(GameActivity.this,
+                                                EndScreen.class);
                                         instance.setScore(0);
                                         startActivity(intent);
                                     }
@@ -668,17 +668,15 @@ public class GameActivity extends AppCompatActivity {
     public static boolean swordTest(SwordClassDecorator sword, Player player) {
         if (sword.getX() == player.getX() && sword.getY() == player.getY()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public static boolean lightningTest(LightingDecorator lightning, Player player) {
         if (lightning.getX() == player.getX() && lightning.getY() == player.getY()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public static int swordScoreTest(SwordClassDecorator sword, Player player, int score) {

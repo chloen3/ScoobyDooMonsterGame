@@ -18,7 +18,7 @@ public class SwordClassDecorator extends WeaponDecorator {
     }
 
     public int getX() {
-       return this.x;
+        return this.x;
     }
     public int getY() {
         return this.y;

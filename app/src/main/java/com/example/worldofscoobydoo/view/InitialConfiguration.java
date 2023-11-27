@@ -23,7 +23,7 @@ public class InitialConfiguration extends AppCompatActivity {
     private String name;
     private String sprite;
     private Player player;
-    public static MediaPlayer mySong;
+    private static MediaPlayer mySong;
     private Button playButton;
     public void setName(String name) {
         this.name = name;

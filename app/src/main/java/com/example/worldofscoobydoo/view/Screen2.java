@@ -36,7 +36,7 @@ public class Screen2 extends AppCompatActivity {
     private CountDownTimer scoreCountdownTimer;
     private Player player;
     private TextView scoreTextView;
-    public boolean swordFlag = false;
+    private boolean swordFlag = false;
     private Button pauseButton;
     private Button resumeButton;
     private int screenWidth;
@@ -62,7 +62,7 @@ public class Screen2 extends AppCompatActivity {
     private Button muteButton;
     private Button exitButton;
     private ImageView enemyCollide;
-    ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
+    private ArrayList<ImageView> enemyCollisionsList = new ArrayList<ImageView>();
     private boolean enemy1Dead = false;
     private boolean enemy2Dead = false;
     private ArrayList<ImageView> enemyList;
@@ -80,7 +80,8 @@ public class Screen2 extends AppCompatActivity {
         View pauseMenuView = inflater.inflate(R.layout.pause_menu_layout, null);
 
         pauseMenuDialog = new Dialog(this);
-        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pauseMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(
+                android.graphics.Color.TRANSPARENT));
         pauseMenuDialog.setContentView(pauseMenuView);
         pauseMenuDialog.setCancelable(false);
 
@@ -149,20 +150,21 @@ public class Screen2 extends AppCompatActivity {
     }
 
     private void startCountdownTimer() {
-        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(score, new CountdownTimerCallback() {
-            @Override
-            public void onTick(int newScore) {
-                score = newScore;
-                updateScore(score);
-            }
+        scoreCountdownTimer = CountDownTimerUtil.startCountdownTimer(
+                score, new CountdownTimerCallback() {
+                    @Override
+                    public void onTick(int newScore) {
+                        score = newScore;
+                        updateScore(score);
+                    }
 
-            @Override
-            public void onFinish() {
-                Intent intent = new Intent(Screen2.this, EndScreen.class);
-                player.setScore(0);
-                startActivity(intent);
-            }
-        });
+                    @Override
+                    public void onFinish() {
+                        Intent intent = new Intent(Screen2.this, EndScreen.class);
+                        player.setScore(0);
+                        startActivity(intent);
+                    }
+                });
     }
 
     private void pauseGame() {
@@ -267,9 +269,10 @@ public class Screen2 extends AppCompatActivity {
                     float futureY;
                     switch (key) {
                         case KeyEvent.KEYCODE_Q:
-                            if (swordFlag && checkEnemyCollide(spriteImg.getX(), spriteImg.getY())) {
+                            if (swordFlag && checkEnemyCollide(
+                                    spriteImg.getX(), spriteImg.getY())) {
                                 // Perform the action when 'Q' is pressed and a sword is available
-                                enemyCollide.setImageDrawable(null); // Assuming this removes the enemy image
+                                enemyCollide.setImageDrawable(null);
                                 // Add any additional logic for handling the enemy death
                                 if (enemyCollide == enemy1Img) {
                                     enemy1Dead = true;
