@@ -39,7 +39,7 @@
         android:layout_marginBottom="104dp"
         android:fontFamily="@font/butcherman"
         android:padding="16dp"
-        android:text="- Use the keypad to move\n- Avoid the monsters\n- Collect powerups for a variety of effects\n- Pick up weapons and press Q to attack monsters\n- Make it through the three rooms before time is up to win!"
+        android:text="- Use the keypad to move\n- Collect powerups for a variety of effects\n- Pick up weapons and press Q to kill the monsters and advance to the next room\n- Make it through the three rooms before time is up to win!"
         android:textColor="#FFEB3B"
         android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="@+id/welcomeBackground"
