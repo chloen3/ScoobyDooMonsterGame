@@ -9,7 +9,12 @@ import android.widget.ImageView;
 import com.example.worldofscoobydoo.model.EnemyGiant;
 import com.example.worldofscoobydoo.model.EnemyTank;
 import com.example.worldofscoobydoo.model.Ghost;
+import com.example.worldofscoobydoo.model.LightingDecorator;
 import com.example.worldofscoobydoo.model.Mummy;
+import com.example.worldofscoobydoo.model.Player;
+import com.example.worldofscoobydoo.model.SwordClassDecorator;
+import com.example.worldofscoobydoo.model.Weapon;
+import com.example.worldofscoobydoo.view.GameActivity;
 import com.example.worldofscoobydoo.view.InitialConfiguration;
 import com.example.worldofscoobydoo.model.Enemy;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
@@ -68,4 +73,46 @@ public class EnemyTest {
         assertEquals(tank.getY(), 0);
     }
 
+    @Test
+    public void testSwordPicksUp() {
+        Player p = Player.getPlayer();
+        SwordClassDecorator sword = new SwordClassDecorator(p);
+        p.setX(100);
+        p.setY(100);
+        sword.setX(100);
+        sword.setY(100);
+        assertTrue(GameActivity.swordTest(sword, p));
+    }
+    @Test
+    public void testLightningWorks() {
+        Player p = Player.getPlayer();
+        LightingDecorator lightning = new LightingDecorator(p);
+        p.setX(100);
+        p.setY(100);
+        lightning.setX(100);
+        lightning.setY(100);
+        assertTrue(GameActivity.lightningTest(lightning, p));
+    }
+    @Test
+    public void testScoreUpdatedSword() {
+        int score = 0;
+        Player p = Player.getPlayer();
+        SwordClassDecorator sword = new SwordClassDecorator(p);
+        p.setX(70);
+        p.setY(60);
+        sword.setX(70);
+        sword.setY(60);
+        assertEquals(5, GameActivity.swordScoreTest(sword, p, score));
+    }
+    @Test
+    public void testScoreUpdatedLightning() {
+        int score = 0;
+        Player p = Player.getPlayer();
+        LightingDecorator lightning = new LightingDecorator(p);
+        p.setX(70);
+        p.setY(60);
+        lightning.setX(70);
+        lightning.setY(60);
+        assertEquals(5, GameActivity.lightningScoreTest(lightning, p, score));
+    }
 }

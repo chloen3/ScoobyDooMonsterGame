@@ -468,7 +468,7 @@ public class Screen3 extends AppCompatActivity {
                             return false;
                     }
                     if (checkLightning(futureX, futureY) && !lightningFlag) {
-                        notification4();
+                        notification3();
                         lightningFlag = true;
                     }
                     enemy1.movement(movementCount, enemy1Img, movementBox1);
@@ -633,7 +633,10 @@ public class Screen3 extends AppCompatActivity {
         return false;
     }
 
-
+    public void notification3() {
+        TextView text = findViewById(R.id.alert);
+        player.notifyObserversLightning(text);
+    }
     public void notification4() {
         TextView text = findViewById(R.id.alert);
         player.notifyObservers4(text);

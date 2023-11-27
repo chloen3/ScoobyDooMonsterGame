@@ -1,13 +1,13 @@
 package com.example.worldofscoobydoo.model;
 
-public class SwordClassDecorator extends WeaponDecorator {
+public class LightingDecorator extends WeaponDecorator {
     private int x;
     private int y;
-    public SwordClassDecorator(Weapon weapon) {
+    public LightingDecorator(Weapon weapon) {
         super(weapon);
     }
     public String weapon() {
-        String result = "Sword!";
+        String result = "Lighting!";
         return weapon.weapon() + result;
     }
     public void setX(int x) {
@@ -18,10 +18,9 @@ public class SwordClassDecorator extends WeaponDecorator {
     }
 
     public int getX() {
-       return this.x;
+        return this.x;
     }
     public int getY() {
         return this.y;
     }
-
 }
