@@ -3,9 +3,11 @@ import android.os.CountDownTimer;
 
 
 public class CountDownTimerUtil {
-    public static CountDownTimer startCountdownTimer(int initialScore, CountdownTimerCallback callback) {
+
+    public static CountDownTimer startCountdownTimer(int initialScore,
+                                                     CountdownTimerCallback callback) {
         return new CountDownTimer(initialScore * 1000, 1000) {
-            int score = initialScore;
+            private int score = initialScore;
 
             @Override
             public void onTick(long millisUntilFinished) {
