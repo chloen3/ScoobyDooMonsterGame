@@ -635,7 +635,7 @@ public class Screen2 extends AppCompatActivity {
 
     public void notification3() {
         TextView text = findViewById(R.id.observerAlert);
-        player.notifyObservers3(text);
+        player.notifyObserversSword(text);
     }
 
     public static boolean powerHealthValid(Player player) {

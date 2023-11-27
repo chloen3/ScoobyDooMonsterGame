@@ -18,9 +18,11 @@ import com.example.worldofscoobydoo.R;
 import com.example.worldofscoobydoo.model.Enemy;
 import com.example.worldofscoobydoo.model.EnemyFactory;
 //import com.example.worldofscoobydoo.model.EnemyTank;
+import com.example.worldofscoobydoo.model.LightingDecorator;
 import com.example.worldofscoobydoo.model.Player;
 import com.example.worldofscoobydoo.model.PowerUp;
 import com.example.worldofscoobydoo.model.SpeedDecorator;
+import com.example.worldofscoobydoo.model.SwordClassDecorator;
 import com.example.worldofscoobydoo.viewModel.MovementFast;
 import com.example.worldofscoobydoo.viewModel.MovementMedium;
 import com.example.worldofscoobydoo.viewModel.MovementObservable;
@@ -660,6 +662,36 @@ public class GameActivity extends AppCompatActivity {
     public int countDownTimerTEST() {
         score = 100;
         score--;
+        return score;
+    }
+
+    public static boolean swordTest(SwordClassDecorator sword, Player player) {
+        if (sword.getX() == player.getX() && sword.getY() == player.getY()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean lightningTest(LightingDecorator lightning, Player player) {
+        if (lightning.getX() == player.getX() && lightning.getY() == player.getY()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static int swordScoreTest(SwordClassDecorator sword, Player player, int score) {
+        if (swordTest(sword, player)) {
+            score += 5;
+        }
+        return score;
+    }
+
+    public static int lightningScoreTest(LightingDecorator lightning, Player player, int score) {
+        if (lightningTest(lightning, player)) {
+            score += 5;
+        }
         return score;
     }
 

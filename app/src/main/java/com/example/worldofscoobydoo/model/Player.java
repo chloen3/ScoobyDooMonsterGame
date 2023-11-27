@@ -200,6 +200,19 @@ public class Player implements Observer,PowerUp,Weapon {
         running = false;
     }
 
+    public void notifyObserversLightning(TextView text) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                running = true;
+                text.setText("");
+            }
+        }, 500);
+        Weapon weapon = new LightingDecorator(player);
+        text.setText(weapon.weapon());
+        running = false;
+    }
+
     public boolean isRunning() {
         return running;
     }
