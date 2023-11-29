@@ -168,4 +168,12 @@ public class InitialConfiguration extends AppCompatActivity {
         MovementFast mvm = new MovementFast(test);
         return mvm.toString().equals(mv.toString()) && difficulty == 1.0;
     }
+
+    public static MediaPlayer getMySong() {
+        return mySong;
+    }
+
+    public static void setMySong(MediaPlayer song) {
+        mySong = song;
+    }
 }

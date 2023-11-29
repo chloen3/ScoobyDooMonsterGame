@@ -402,6 +402,9 @@ public class Screen2 extends AppCompatActivity {
     }
 
     private void stopMusic() {
+        if (InitialConfiguration.getMySong() != null
+                && InitialConfiguration.getMySong().isPlaying()) {
+            InitialConfiguration.getMySong().pause(); // Pause the music
         if (InitialConfiguration.checkSongNotNull() && InitialConfiguration.checkSongPlaying()) {
             InitialConfiguration.pauseSong(); // Pause the music
         }

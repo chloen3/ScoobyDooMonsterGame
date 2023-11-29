@@ -177,6 +177,9 @@ public class Screen3 extends AppCompatActivity {
     }
 
     private void stopMusic() {
+        if (InitialConfiguration.getMySong() != null
+                && InitialConfiguration.getMySong().isPlaying()) {
+            InitialConfiguration.getMySong().pause(); // Pause the music
         if (InitialConfiguration.checkSongNotNull() && InitialConfiguration.checkSongPlaying()) {
             InitialConfiguration.pauseSong(); // Pause the music
         }
@@ -411,6 +414,11 @@ public class Screen3 extends AppCompatActivity {
         ImageView spriteImg = findViewById(R.id.imageView_3);
         if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemyDead) {
             //stop the music
+            if (InitialConfiguration.getMySong() != null
+                    && InitialConfiguration.getMySong().isPlaying()) {
+                InitialConfiguration.getMySong().stop();
+                InitialConfiguration.getMySong().release();
+                InitialConfiguration.setMySong(null);
             if (InitialConfiguration.checkSongNotNull()
                     && InitialConfiguration.checkSongPlaying()) {
                 InitialConfiguration.stopSong();
