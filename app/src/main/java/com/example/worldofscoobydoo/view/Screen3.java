@@ -178,8 +178,9 @@ public class Screen3 extends AppCompatActivity {
     }
 
     private void stopMusic() {
-        if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
-            InitialConfiguration.mySong.pause(); // Pause the music
+        if (InitialConfiguration.getMySong() != null
+                && InitialConfiguration.getMySong().isPlaying()) {
+            InitialConfiguration.getMySong().pause(); // Pause the music
         }
     }
 
@@ -488,10 +489,11 @@ public class Screen3 extends AppCompatActivity {
         ImageView spriteImg = findViewById(R.id.imageView_3);
         if (checkExit(spriteImg.getX(), spriteImg.getY()) && enemyDead) {
             //stop the music
-            if (InitialConfiguration.mySong != null && InitialConfiguration.mySong.isPlaying()) {
-                InitialConfiguration.mySong.stop();
-                InitialConfiguration.mySong.release();
-                InitialConfiguration.mySong = null;
+            if (InitialConfiguration.getMySong() != null
+                    && InitialConfiguration.getMySong().isPlaying()) {
+                InitialConfiguration.getMySong().stop();
+                InitialConfiguration.getMySong().release();
+                InitialConfiguration.setMySong(null);
             }
             // Cancel the countdown timer
             if (scoreCountdownTimer != null) {
