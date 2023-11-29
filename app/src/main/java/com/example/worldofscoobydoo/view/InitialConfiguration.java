@@ -33,6 +33,25 @@ public class InitialConfiguration extends AppCompatActivity {
         this.sprite = sprite;
     }
 
+    public static void stopSong() {
+        mySong.stop();
+    }
+    public static void pauseSong() {
+        mySong.pause();
+    }
+    public static boolean checkSongPlaying() {
+        return mySong.isPlaying();
+    }
+    public static boolean checkSongNotNull() {
+        return (mySong != null);
+    }
+    public static void releaseSong() {
+        mySong.release();
+    }
+    public static void setSongNull() {
+        mySong = null;
+    }
+
     /** @noinspection checkstyle:Indentation*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {

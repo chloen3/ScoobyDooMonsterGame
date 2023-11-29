@@ -3,7 +3,6 @@ import android.os.CountDownTimer;
 
 
 public class CountDownTimerUtil {
-
     public static CountDownTimer startCountdownTimer(int initialScore,
                                                      CountdownTimerCallback callback) {
         return new CountDownTimer(initialScore * 1000, 1000) {

@@ -27,7 +27,6 @@ import com.example.worldofscoobydoo.viewModel.MovementSlow;
 import com.example.worldofscoobydoo.viewModel.MovementStrategy;
 import com.example.worldofscoobydoo.viewModel.MovementSuper;
 import com.example.worldofscoobydoo.viewModel.Renderer;
-import android.media.MediaPlayer;
 import android.graphics.drawable.ColorDrawable;
 
 import android.os.CountDownTimer;
@@ -41,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
     private boolean swordFlag = false;
     private double difficulty;
     private String sprite;
-    private int score = 100;
+    private int score;
     private TextView scoreTextView;
     private Button pauseButton;
     private Button resumeButton;
@@ -73,7 +72,6 @@ public class GameActivity extends AppCompatActivity {
     private View pauseMenuView;
     private Dialog pauseMenuDialog;
     private Button muteButton;
-    private MediaPlayer mySong;
     private Button exitButton;
     private ImageView enemyCollide;
     private boolean enemy1Dead = false;
@@ -190,6 +188,7 @@ public class GameActivity extends AppCompatActivity {
         difficulty = instance.getDifficulty();
         sprite = instance.getSprite();
         sword = findViewById(R.id.swordImageView);
+        score = 100;
 
         if (difficulty == .5) {
             movementStrategy = new MovementSlow(movementObservable);
@@ -250,6 +249,145 @@ public class GameActivity extends AppCompatActivity {
                     break;
                 default:
                     return false;
+        ImageView spriteImg = findViewById(R.id.imageView);
+        TextView difficultyReceiver = findViewById(R.id.health_status);
+        ImageView enemy1Img = findViewById(R.id.enemy1Screen1);
+        ImageView enemy2Img = findViewById(R.id.enemy2Screen1);
+        ImageView sword = findViewById(R.id.swordImageView);
+
+        user.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int key, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    float futureX;
+                    float futureY;
+                    switch (key) {
+                        case KeyEvent.KEYCODE_Q:
+                            if (swordFlag && checkEnemyCollide(spriteImg.getX(),
+                                    spriteImg.getY())) {
+                                // Perform the action when 'Q' is pressed and a sword is available
+                                enemyCollide.setImageDrawable(null);
+                                // Assuming this removes the enemy image
+                                // Add any additional logic for handling the enemy death
+                                if (enemyCollide == enemy1Img) {
+                                    enemy1Dead = true;
+                                }
+                                if (enemyCollide == enemy2Img) {
+                                    enemy2Dead = true;
+                                }
+                                score = score + 50;
+                                updateScore(score);
+                            }
+                            return true; // Consume the key event for 'Q'
+                        case KeyEvent.KEYCODE_DPAD_UP:
+                            futureX = spriteImg.getX();
+                            futureY = spriteImg.getY() - 80;
+                            if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    collisionHandling();
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                    notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    powerUpHandling();
+                                }
+                                movementStrategy.moveUp(spriteImg);
+                                instance.moveUp();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
+                            }
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_DOWN:
+                            futureX = spriteImg.getX();
+                            futureY = spriteImg.getY() + 80;
+                            if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    collisionHandling();
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                    notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    powerUpHandling();
+                                }
+                                movementStrategy.moveDown(spriteImg, screenHeight);
+                                instance.moveDown();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
+                            }
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_LEFT:
+                            futureX = spriteImg.getX() - 80;
+                            futureY = spriteImg.getY();
+                            if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    collisionHandling();
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                    notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    powerUpHandling();
+                                }
+                                movementStrategy.moveLeft(spriteImg);
+                                instance.moveLeft();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
+                            }
+                            break;
+                        case KeyEvent.KEYCODE_DPAD_RIGHT:
+                            futureX = spriteImg.getX() + 80;
+                            futureY = spriteImg.getY();
+                            if (!checkCollision(futureX, futureY)) {
+                                if (checkEnemyCollide(futureX, futureY)) {
+                                    collisionHandling();
+                                    by10 = true;
+                                    difficultyReceiver.setText(String.valueOf(health));
+                                    instance.setHealth(String.valueOf(health));
+                                    notification();
+                                }
+                                if (checkPowerUp(futureX, futureY) && flag) {
+                                    powerUpHandling();
+                                }
+                                movementStrategy.moveRight(spriteImg, screenWidth);
+                                instance.moveRight();
+                                instance.setX(futureX);
+                                instance.setY(futureY);
+                                if (swordFlag) {
+                                    sword.setX(futureX);
+                                    sword.setY(futureY);
+                                }
+                            }
+                            break;
+                        default:
+                            return false;
+                    }
+                    if (checkSword(futureX, futureY) && !swordFlag) {
+                        notification3();
+                        swordFlag = true;
+                    }
+
+                    enemy1.movement(movementCount, enemy1Img, movementBox1);
+                    movementCount = enemy1.setCount(movementCount);
+                    enemy2.movement(movementCount2, enemy2Img, movementBox2);
+                    movementCount2 = enemy2.setCount(movementCount2);
+                    exitHandling();
+                    return true;
                 }
 
                 handleEnemyMovement();
@@ -363,6 +501,31 @@ public class GameActivity extends AppCompatActivity {
             instance.setHealth(String.valueOf(health));
             // Pass the remaining time in seconds to Screen2
             startActivity(nextScreen);
+        }
+    }
+    private void powerUpHandling() {
+        instance.setTracker1(false);
+        movementStrategy = new MovementSuper(movementObservable);
+        ImageView powerUp = findViewById(R.id.speedPowerUp);
+        powerUp.setImageDrawable(null);
+        score += 20;
+        notification2();
+        flag = false;
+    }
+    private void collisionHandling() {
+        if (difficulty == .5) {
+            health = health - 10;
+        } else if (difficulty == .75) {
+            health = health - 6;
+        } else {
+            health = health - 4;
+        }
+        //check for game over
+        if (health <= 0) {
+            Intent intent = new Intent(GameActivity.this,
+                    EndScreen.class);
+            instance.setScore(0);
+            startActivity(intent);
         }
     }
     private void updateScore(int score) {
@@ -520,6 +683,8 @@ public class GameActivity extends AppCompatActivity {
         if (InitialConfiguration.getMySong() != null
                 && InitialConfiguration.getMySong().isPlaying()) {
             InitialConfiguration.getMySong().pause(); // Pause the music
+        if (InitialConfiguration.checkSongNotNull() && InitialConfiguration.checkSongPlaying()) {
+            InitialConfiguration.pauseSong(); // Pause the music
         }
     }
 
@@ -566,17 +731,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public static boolean swordTest(SwordClassDecorator sword, Player player) {
-        if (sword.getX() == player.getX() && sword.getY() == player.getY()) {
-            return true;
-        }
-        return false;
+        return (sword.getX() == player.getX() && sword.getY() == player.getY());
     }
 
     public static boolean lightningTest(LightingDecorator lightning, Player player) {
-        if (lightning.getX() == player.getX() && lightning.getY() == player.getY()) {
-            return true;
-        }
-        return false;
+        return (lightning.getX() == player.getX() && lightning.getY() == player.getY());
     }
 
     public static int swordScoreTest(SwordClassDecorator sword, Player player, int score) {
